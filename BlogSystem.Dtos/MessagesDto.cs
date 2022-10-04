@@ -9,8 +9,8 @@ namespace BlogSystem.Dtos
         public string Email { get; set; }
         public string Tel { get; set; }
         public string Content { get; set; }
-        public string IsRead { get; set; }
-        public string IsRemoved { get; set; }
+        public bool IsRead { get; set; }
+        public bool IsRemoved { get; set; }
         public DateTime CreateTime { get; set; }
         public DateTime UpdateTime { get; set; }
     }

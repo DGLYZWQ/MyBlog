@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlogSystem.Dtos
 {
-    class RolesDto
+    public class RolesDto
     {
         public Guid Id { get; set; }
         public string Title { get; set; }
