@@ -13,6 +13,7 @@ namespace BlogSystem.MVCSite
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            AutofacConfig.Register();
         }
     }
 }
