@@ -1,17 +1,17 @@
-﻿
+﻿@model PagedList.IPagedList<BlogSystem.MVCSite.Areas.Backend.Data.Roles.RolesListViewModel>
 @{
     ViewBag.Title = "权限管理列表";
     Layout = "~/Areas/Backend/Views/Shared/BackendLayout.cshtml";
     string search = ViewBag.Search;
 }
-
+@using PagedList.Mvc
 <h2>权限管理列表</h2>
 
-<div class="row" >
+<div class="row">
     <div class="col-md-6">
         @using (Html.BeginForm("List", "RolesBackend", FormMethod.Get, new {@class = "input-group"}))
         {
-            @Html.TextBox("Search",search,new{@class="form-control"})
+            @Html.TextBox("Search", search, new {@class = "form-control"})
             <span class="input-group-btn">
                 <button class="btn btn-primary" type="submit">
                     <i class="lnr lnr-magnifier"></i>
@@ -21,13 +21,13 @@
         }
     </div>
     <div class="col-md-3">
-        @Html.ActionLink("新增权限","Add","RolesBackend",new{ @class="btn btn-success"})
+        @Html.ActionLink("新增权限", "Add", "RolesBackend", new {@class = "btn btn-success"})
     </div>
 
 </div>
 <div class="row" style="margin-top: 15px;">
     <div class="col-md-12">
-        
+
         <div class="panel">
             <div class="panel-heading">
                 <h3>权限管理列表</h3>
@@ -43,7 +43,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
+                    @*<tr>
                         <td>1</td>
                         <td>超级管理员</td>
                         <td>2022-10-06</td>
@@ -51,21 +51,44 @@
                             @Html.ActionLink("修改", "Edit", "RolesBackend", new {}, new {@class = "btn btn-warning"})
                             @Html.ActionLink("删除", "Delete", "RolesBackend", new { }, new { @class = "btn btn-danger" })
                         </td>
-                    </tr>
+                    </tr>*@
+                    @for (var i = 0; i < Model.Count; i++)
+                    {
+                        <tr>
+                            <td>@(i + 1)</td>
+                            <td>@Model[i].Title</td>
+                            <td>@Model[i].UpdateTime</td>
+                            <td>
+                                @Html.ActionLink("修改", "Edit", "RolesBackend", new {Model[i].Id}, new {@class = "btn btn-warning"})
+                                @Html.ActionLink("删除", "Delete", "RolesBackend", new {Model[i].Id}, new {@class = "btn btn-danger"})
+                            </td>
+                        </tr>
+                    }
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
-<div class="row">
-    <ul class="pagination">
-        <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">2<span class="sr-only">(current)</span></a></li>
-        <li><a href="#">3<span class="sr-only">(current)</span></a ></li>
-        <li><a href="#">4<span class="sr-only">(current)</span></a></li>
-        <li><a href="#">5<span class="sr-only">(current)</span></a></li>
-        <li><a href="#" aria-label="Next"><span aria-hidden="true">&gt;&gt;</span></a></li>
-    </ul>
+<div class="pagination">
+    @Html.PagedListPager(Model, page => Url.Action("List", new { page }))
 </div>
+@*<div class="row">
+    <ul class="pagination" style="margin-left: 15px;">
+        @for (var page = 1; page <= total; page++)
+        {
+            if (page == ViewBag.PageIndex)
+            {
+                <li class="active">
+                    <a href="@Url.Action("List","RolesBackend",new{page = page})">@page</a>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <a href="@Url.Action("List","RolesBackend",new{page = page})">@page</a>
+                </li>
+            }
+        }
+    </ul>
+</div>*@
