@@ -34,12 +34,11 @@ namespace BlogSystem.BLL
         }
 
 
-        public async Task<int> EditUsersAsync(Guid id, string email, string password, string nickname, string avatar, string image, Guid rolesId)
+        public async Task<int> EditUsersAsync(Guid id, string password, string nickname, string avatar, string image, Guid rolesId)
         {
             var data = await _dal.QueryAsync(id);
             if (data == null)
                 return -1;
-            data.Email = email;
             if (image != null)
                 data.Image = image;
             data.NickName = nickname;

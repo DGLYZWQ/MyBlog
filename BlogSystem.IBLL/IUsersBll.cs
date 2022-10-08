@@ -10,7 +10,7 @@ namespace BlogSystem.IBLL
         Task<int> AddUsersAsync(string email, string password, string nickname, string avatar, string image,
             Guid rolesId);
 
-        Task<int> EditUsersAsync(Guid id, string email, string password, string nickname, string avatar, string image,
+        Task<int> EditUsersAsync(Guid id, string password, string nickname, string avatar, string image,
             Guid rolesId);
 
         Task<int> DeleteUsersAsync(Guid id);

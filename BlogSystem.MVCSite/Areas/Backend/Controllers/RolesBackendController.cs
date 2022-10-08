@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -27,7 +28,7 @@ namespace BlogSystem.MVCSite.Areas.Backend.Controllers
             //注册日志
             ILog log = LogManager.GetLogger(typeof(RolesBackendController));
             //(1) 得到数据总条数
-            var count = await _rolesBll.GetRolesCountAsync(Search);
+            //var count = await _rolesBll.GetRolesCountAsync(Search);
 
             //(3) 设置每页要展示条数
             var pageSize = PageConfig.GetPageSize();
@@ -50,6 +51,83 @@ namespace BlogSystem.MVCSite.Areas.Backend.Controllers
             ViewBag.PageIndex = page;
             IPagedList<RolesListViewModel> pages = list.ToPagedList(page, PageConfig.GetPageSize());
             return View(pages);
+        }
+
+        [HttpGet]
+        public ActionResult Add()
+        {
+            return View(new AddRolesViewModel());
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Add(AddRolesViewModel roles)
+        {
+            if (ModelState.IsValid)
+            {
+                //验证合法，在这执行新增操作
+                int rs = await _rolesBll.AddRolesAsync(roles.Title);
+                if (rs > 0)
+                {
+                    Response.Write("<script>alert('新增成功');location.href='../../../Backend/RolesBackend/List'</script>");
+                }
+                else
+                {
+                    return View(roles);
+                }
+            }
+
+            return View(roles);
+        }
+
+        /// <summary>
+        /// 做唯一验证的
+        /// </summary>
+        /// <param name="Title"></param>
+        /// <returns></returns>
+        public async Task<JsonResult> CheckRolesTitle(string Title)
+        {
+            var rs = await _rolesBll.IsExistsAsync(Title);
+            return Json(!rs, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Edit(Guid id)
+        {
+            var data = await _rolesBll.GetRolesAsync(id);
+            return View(new EditRolesViewModel()
+            {
+                Id = data.Id,
+                Title = data.Title
+            });
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Edit(EditRolesViewModel roles)
+        {
+            if (ModelState.IsValid)
+            {
+                var rs = await _rolesBll.EditRolesAsync(roles.Id, roles.Title);
+                if (rs > 0)
+                {
+                    Response.Write("<script>alert('编辑成功');location.href='../../../Backend/RolesBackend/List'</script>");
+                }
+            }
+
+            return View(roles);
+        }
+
+        [HttpGet]
+        public async Task Delete(Guid id)
+        {
+            var rs = await _rolesBll.DeleteRolesAsync(id);
+            if (rs > 0)
+            {
+                Response.Write("<script>alert('删除成功');location.href='../../../Backend/RolesBackend/List'</script>");
+            }
+            else
+            {
+                Response.Write("<script>alert('删除失败');location.href='../../../Backend/RolesBackend/List'</script>");
+            }
         }
     }
 }
