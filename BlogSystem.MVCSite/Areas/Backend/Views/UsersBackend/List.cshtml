@@ -40,7 +40,6 @@
                             <th>序号</th>
                             <th>电子邮件</th>
                             <th>昵称</th>
-                            <th>头像</th>
                             <th>缩略图</th>
                             <th>权限名称</th>
                             <th>修改时间</th>
@@ -54,8 +53,9 @@
                             <td>@(i + 1)</td>
                             <td>@Model[i].Email</td>
                             <td>@Model[i].NickName</td>
-                            <td>@Model[i].Image</td>
-                            <td>@Model[i].Avatar</td>
+                            <td>
+                                <img src="~/Upload/Users/@Model[i].Image" />
+                            </td>
                             <td>@Model[i].RolesTitle</td>
                             <td>@Model[i].UpdateTime</td>
                             <td>

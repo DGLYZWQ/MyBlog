@@ -49,6 +49,9 @@
     <Reference Include="Autofac.Integration.Mvc, Version=6.1.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.Mvc5.6.1.0\lib\net472\Autofac.Integration.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="CodeCarvings.Piczard, Version=1.2.3.0, Culture=neutral, PublicKeyToken=88d00d4422733d60, processorArchitecture=MSIL">
+      <HintPath>..\packages\CodeCarvings.Piczard.1.2.3.3\lib\CodeCarvings.Piczard.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -194,6 +197,7 @@
     <Compile Include="Areas\Backend\Data\Roles\AddRolesViewModel.cs" />
     <Compile Include="Areas\Backend\Data\Roles\EditRolesViewModel.cs" />
     <Compile Include="Areas\Backend\Data\Roles\RolesListViewModel.cs" />
+    <Compile Include="Areas\Backend\Data\Users\AddUsersViewModel.cs" />
     <Compile Include="Areas\Backend\Data\Users\UsersListViewModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -228,6 +232,7 @@
     <Content Include="Areas\Backend\Views\RolesBackend\Add.cshtml" />
     <Content Include="Areas\Backend\Views\RolesBackend\Edit.cshtml" />
     <Content Include="Areas\Backend\Views\UsersBackend\List.cshtml" />
+    <Content Include="Areas\Backend\Views\UsersBackend\Add.cshtml" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -240,6 +245,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\" />
     <Folder Include="Models\" />
+    <Folder Include="Upload\Users\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BlogSystem.BLL\BlogSystem.BLL.csproj">
