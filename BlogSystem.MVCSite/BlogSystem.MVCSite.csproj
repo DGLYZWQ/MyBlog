@@ -192,12 +192,16 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Backend\BackendAreaRegistration.cs" />
     <Compile Include="Areas\Backend\Common\PageConfig.cs" />
+    <Compile Include="Areas\Backend\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Backend\Controllers\LoginController.cs" />
     <Compile Include="Areas\Backend\Controllers\RolesBackendController.cs" />
     <Compile Include="Areas\Backend\Controllers\UsersBackendController.cs" />
+    <Compile Include="Areas\Backend\Data\Login\LoginViewModel.cs" />
     <Compile Include="Areas\Backend\Data\Roles\AddRolesViewModel.cs" />
     <Compile Include="Areas\Backend\Data\Roles\EditRolesViewModel.cs" />
     <Compile Include="Areas\Backend\Data\Roles\RolesListViewModel.cs" />
     <Compile Include="Areas\Backend\Data\Users\AddUsersViewModel.cs" />
+    <Compile Include="Areas\Backend\Data\Users\EditUsersViewModel.cs" />
     <Compile Include="Areas\Backend\Data\Users\UsersListViewModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -233,6 +237,9 @@
     <Content Include="Areas\Backend\Views\RolesBackend\Edit.cshtml" />
     <Content Include="Areas\Backend\Views\UsersBackend\List.cshtml" />
     <Content Include="Areas\Backend\Views\UsersBackend\Add.cshtml" />
+    <Content Include="Areas\Backend\Views\UsersBackend\Edit.cshtml" />
+    <Content Include="Areas\Backend\Views\Login\SignIn.cshtml" />
+    <Content Include="Areas\Backend\Views\Home\Index.cshtml" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

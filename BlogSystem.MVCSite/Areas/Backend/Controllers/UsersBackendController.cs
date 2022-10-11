@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Net.Mime;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Async;
 using BlogSystem.IBLL;
 using BlogSystem.MVCSite.Areas.Backend.Common;
 using BlogSystem.MVCSite.Areas.Backend.Data.Users;
@@ -66,7 +68,7 @@ namespace BlogSystem.MVCSite.Areas.Backend.Controllers
                 //获取表单传递过来的数据，并且实现新增功能
                 var file = Request.Files["MyPhoto"];
 
-                var names = UploadFiles(file); //得到上传图片的名称
+                var names = UploadFiles(file, @"../../../Upload/Users/"); //得到上传图片的名称
 
                 var rs = await _users_bll.AddUsersAsync(model.Email, model.Password, model.NickName, names[0],
                     names[1], model.RolesId);
@@ -102,7 +104,7 @@ namespace BlogSystem.MVCSite.Areas.Backend.Controllers
             }
         }
 
-        public string[] UploadFiles(HttpPostedFileBase file)
+        public string[] UploadFiles(HttpPostedFileBase file,string url)
         {
             if (!file.FileName.Equals(""))
             {
@@ -110,16 +112,16 @@ namespace BlogSystem.MVCSite.Areas.Backend.Controllers
                 var newName = DateTime.Now.ToString("yyyyMMddHHmmss")
                               + r.Next(1000, 10000)
                               + file.FileName.Substring(file.FileName.LastIndexOf('.'));
-                var path = Server.MapPath(@"../../Upload/Users/" + newName);
+                var path = Server.MapPath(url + newName);
 
                 file.SaveAs(path); // 保存的正常大小的图片
 
                 ImageProcessingJob job = new ImageProcessingJob(); //实例化第三方缩略图插件
-                job.Filters.Add(new FixedResizeConstraint(24, 24));
+                job.Filters.Add(new FixedResizeConstraint(36, 36));
                 //202207221511161234_sm.png
                 var sm_name = newName.Substring(0, newName.LastIndexOf('.'))
                               + "_sm" + newName.Substring(newName.LastIndexOf('.'));
-                var sm_path = Server.MapPath(@"../../Upload/Users/" + sm_name);
+                var sm_path = Server.MapPath(url + sm_name);
                 job.SaveProcessedImageToFileSystem(path, sm_path);
                 return new string[] {newName, sm_name};
             }
@@ -132,6 +134,71 @@ namespace BlogSystem.MVCSite.Areas.Backend.Controllers
         {
             var rs = await _users_bll.IsExists(Email);
             return Json(!rs, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Edit(Guid id)
+        {
+            var data = await _users_bll.GetUsersById(id);
+
+            await BindRoles(data.RolesId);
+
+            return View(new EditUsersViewModel()
+            {
+                Id = data.Id,
+                Email = data.Email,
+                Password = data.Password,
+                NickName = data.NickName,
+                Avatar = data.Avatar,
+                RolesId = data.RolesId,
+                Image = data.Image
+            });
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Edit(EditUsersViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var file = Request.Files["MyPhoto"];
+                var rs = -1;
+                if (file.FileName != "" && file.FileName != null) //修改头像时
+                {
+                    var names = UploadFiles(file, @"../../../Upload/Users/");
+                    rs = await _users_bll.EditUsersAsync(model.Id, model.Email, model.Password, model.NickName,
+                        names[0], names[1], model.RolesId);
+                }
+                else
+                {
+                    rs = await _users_bll.EditUsersAsync(model.Id, model.Email, model.Password, model.NickName,
+                        model.Avatar, model.Image, model.RolesId);
+                }
+
+                if (rs > 0)
+                {
+                    return Content("<script>alert('修改成功');location.href='../../../Backend/UsersBackend/List'</script>");
+                }
+            }
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Delete(Guid id)
+        {
+            var rs = await _users_bll.DeleteUsersAsync(id);
+            if (rs > 0)
+            {
+                return Content("<script>alert('删除成功');location.href='../../../Backend/UsersBackend/List'</script>");
+            }
+            else if(rs == -2)
+            {
+                return Content("<script>alert('数据传输丢失，请稍后再试');location.href='../../../Backend/UsersBackend/List'</script>");
+            }
+            else
+            {
+                return Content("<script>alert('删除失败');location.href='../../../Backend/UsersBackend/List'</script>");
+            }
         }
     }
 }
