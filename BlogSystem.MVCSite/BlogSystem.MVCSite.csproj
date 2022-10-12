@@ -150,6 +150,8 @@
     <Content Include="Areas\Backend\assets\img\user3.png" />
     <Content Include="Areas\Backend\assets\img\user4.png" />
     <Content Include="Areas\Backend\assets\img\user5.png" />
+    <Content Include="Areas\Backend\assets\scripts\getLeftMenu.js" />
+    <Content Include="Areas\Backend\assets\scripts\getUserInfo.js" />
     <Content Include="Areas\Backend\assets\scripts\klorofil-common.js" />
     <Content Include="Areas\Backend\assets\vendor\bootstrap\css\bootstrap-theme.css" />
     <Content Include="Areas\Backend\assets\vendor\bootstrap\css\bootstrap-theme.min.css" />
@@ -193,16 +195,22 @@
     <Compile Include="Areas\Backend\BackendAreaRegistration.cs" />
     <Compile Include="Areas\Backend\Common\PageConfig.cs" />
     <Compile Include="Areas\Backend\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Backend\Controllers\LayoutController.cs" />
     <Compile Include="Areas\Backend\Controllers\LoginController.cs" />
     <Compile Include="Areas\Backend\Controllers\RolesBackendController.cs" />
+    <Compile Include="Areas\Backend\Controllers\SystemMenuBackendController.cs" />
     <Compile Include="Areas\Backend\Controllers\UsersBackendController.cs" />
     <Compile Include="Areas\Backend\Data\Login\LoginViewModel.cs" />
     <Compile Include="Areas\Backend\Data\Roles\AddRolesViewModel.cs" />
     <Compile Include="Areas\Backend\Data\Roles\EditRolesViewModel.cs" />
     <Compile Include="Areas\Backend\Data\Roles\RolesListViewModel.cs" />
+    <Compile Include="Areas\Backend\Data\SystemMenu\AddSystemMenuViewModel.cs" />
+    <Compile Include="Areas\Backend\Data\SystemMenu\EditSystemMenuViewModel.cs" />
+    <Compile Include="Areas\Backend\Data\SystemMenu\SystemMenuListViewModel.cs" />
     <Compile Include="Areas\Backend\Data\Users\AddUsersViewModel.cs" />
     <Compile Include="Areas\Backend\Data\Users\EditUsersViewModel.cs" />
     <Compile Include="Areas\Backend\Data\Users\UsersListViewModel.cs" />
+    <Compile Include="Filter\AdminAuthorizeAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -240,6 +248,9 @@
     <Content Include="Areas\Backend\Views\UsersBackend\Edit.cshtml" />
     <Content Include="Areas\Backend\Views\Login\SignIn.cshtml" />
     <Content Include="Areas\Backend\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Backend\Views\SystemMenuBackend\List.cshtml" />
+    <Content Include="Areas\Backend\Views\SystemMenuBackend\Add.cshtml" />
+    <Content Include="Areas\Backend\Views\SystemMenuBackend\Edit.cshtml" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

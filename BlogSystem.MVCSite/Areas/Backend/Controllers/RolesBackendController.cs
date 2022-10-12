@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using BlogSystem.IBLL;
 using BlogSystem.MVCSite.Areas.Backend.Common;
 using BlogSystem.MVCSite.Areas.Backend.Data.Roles;
+using BlogSystem.MVCSite.Filter;
 using log4net;
 using log4net.Core;
 using PagedList;

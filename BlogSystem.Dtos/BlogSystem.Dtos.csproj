@@ -48,7 +48,9 @@
     <Compile Include="MessagesDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RolesDto.cs" />
+    <Compile Include="SystemMenuDto.cs" />
     <Compile Include="UsersDto.cs" />
+    <Compile Include="WebMenuDto.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

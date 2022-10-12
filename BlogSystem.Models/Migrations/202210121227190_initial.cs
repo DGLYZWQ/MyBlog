@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Initial : DbMigration
+    public partial class initial : DbMigration
     {
         public override void Up()
         {
@@ -50,8 +50,8 @@
                         NickName = c.String(nullable: false, maxLength: 50, unicode: false),
                         Email = c.String(nullable: false, maxLength: 100, unicode: false),
                         Password = c.String(nullable: false, maxLength: 30, unicode: false),
-                        Avatar = c.String(nullable: false, maxLength: 255, unicode: false),
-                        Image = c.String(nullable: false, maxLength: 255, unicode: false),
+                        Avatar = c.String(maxLength: 255, unicode: false),
+                        Image = c.String(maxLength: 255, unicode: false),
                         BlogCount = c.Int(nullable: false),
                         CategoryCount = c.Int(nullable: false),
                         FollowsCount = c.Int(nullable: false),
@@ -125,6 +125,36 @@
                     })
                 .PrimaryKey(t => t.Id);
             
+            CreateTable(
+                "dbo.SystemMenus",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false),
+                        Title = c.String(nullable: false, maxLength: 255, unicode: false),
+                        Link = c.String(nullable: false, maxLength: 255, unicode: false),
+                        Icon = c.String(maxLength: 255, unicode: false),
+                        ParentId = c.Guid(nullable: false),
+                        CreateTime = c.DateTime(nullable: false),
+                        UpdateTime = c.DateTime(nullable: false),
+                        IsRemoved = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.WebMenus",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false),
+                        Title = c.String(nullable: false, maxLength: 255, unicode: false),
+                        Link = c.String(nullable: false, maxLength: 255, unicode: false),
+                        Icon = c.String(maxLength: 255, unicode: false),
+                        ParentId = c.Guid(nullable: false),
+                        CreateTime = c.DateTime(nullable: false),
+                        UpdateTime = c.DateTime(nullable: false),
+                        IsRemoved = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
         }
         
         public override void Down()
@@ -137,6 +167,8 @@
             DropIndex("dbo.Users", new[] { "RolesId" });
             DropIndex("dbo.Blogs", new[] { "CategoryId" });
             DropIndex("dbo.Blogs", new[] { "UsersId" });
+            DropTable("dbo.WebMenus");
+            DropTable("dbo.SystemMenus");
             DropTable("dbo.Messages");
             DropTable("dbo.DataShows");
             DropTable("dbo.Comments");

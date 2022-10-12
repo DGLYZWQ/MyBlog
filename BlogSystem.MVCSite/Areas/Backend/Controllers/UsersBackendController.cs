@@ -9,6 +9,7 @@ using System.Web.Mvc.Async;
 using BlogSystem.IBLL;
 using BlogSystem.MVCSite.Areas.Backend.Common;
 using BlogSystem.MVCSite.Areas.Backend.Data.Users;
+using BlogSystem.MVCSite.Filter;
 using CodeCarvings.Piczard;
 using PagedList;
 

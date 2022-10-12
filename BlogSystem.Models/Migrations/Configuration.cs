@@ -14,16 +14,10 @@
 
         protected override void Seed(BlogSystem.Models.BlogSystemContext context)
         {
-            if (!context.Roles.Any())
-            {
-                context.Roles.AddOrUpdate(new Roles[]
-                {
-                    new Roles() { Title = "管理员"},
-                    new Roles() { Title = "用户"}
-                });
+            //  This method will be called after migrating to the latest version.
 
-                context.SaveChanges();
-            }
+            //  You can use the DbSet<T>.AddOrUpdate() helper extension method
+            //  to avoid creating duplicate seed data.
         }
     }
 }

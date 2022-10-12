@@ -48,7 +48,9 @@
     <Compile Include="IDataShowDal.cs" />
     <Compile Include="IMessagesDal.cs" />
     <Compile Include="IRolesDal.cs" />
+    <Compile Include="ISystemMenuDal.cs" />
     <Compile Include="IUsersDal.cs" />
+    <Compile Include="IWebMenuDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

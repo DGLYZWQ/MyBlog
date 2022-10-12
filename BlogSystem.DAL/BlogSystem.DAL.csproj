@@ -55,7 +55,9 @@
     <Compile Include="MessagesDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RolesDal.cs" />
+    <Compile Include="SystemMenuDal.cs" />
     <Compile Include="UsersDal.cs" />
+    <Compile Include="WebMenuDal.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BlogSystem.IDAL\BlogSystem.IDAL.csproj">

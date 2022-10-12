@@ -7,7 +7,7 @@ namespace BlogSystem.Models
     {
         public BlogSystemContext():base("con")
         {
-            
+
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -24,6 +24,8 @@ namespace BlogSystem.Models
         public virtual DbSet<Messages> Messages { get; set; }
         public virtual DbSet<DataShow> DataShow { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
+        public virtual DbSet<SystemMenu> SystemMenu { get; set; }
+        public virtual DbSet<WebMenu> WebMenu { get; set; }
 
     }
 }
