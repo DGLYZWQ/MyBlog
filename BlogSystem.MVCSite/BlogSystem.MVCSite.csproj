@@ -194,12 +194,17 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Backend\BackendAreaRegistration.cs" />
     <Compile Include="Areas\Backend\Common\PageConfig.cs" />
+    <Compile Include="Areas\Backend\Controllers\AdminsPermissionBackendController.cs" />
     <Compile Include="Areas\Backend\Controllers\HomeController.cs" />
     <Compile Include="Areas\Backend\Controllers\LayoutController.cs" />
     <Compile Include="Areas\Backend\Controllers\LoginController.cs" />
     <Compile Include="Areas\Backend\Controllers\RolesBackendController.cs" />
     <Compile Include="Areas\Backend\Controllers\SystemMenuBackendController.cs" />
     <Compile Include="Areas\Backend\Controllers\UsersBackendController.cs" />
+    <Compile Include="Areas\Backend\Data\AdminsPermission\AddAdminsPermissionViewModel.cs" />
+    <Compile Include="Areas\Backend\Data\AdminsPermission\DeleteAdminsPermissionViewModel.cs" />
+    <Compile Include="Areas\Backend\Data\Layout\LeftMenuListViewModel.cs" />
+    <Compile Include="Areas\Backend\Data\Layout\UsersInfoViewModel.cs" />
     <Compile Include="Areas\Backend\Data\Login\LoginViewModel.cs" />
     <Compile Include="Areas\Backend\Data\Roles\AddRolesViewModel.cs" />
     <Compile Include="Areas\Backend\Data\Roles\EditRolesViewModel.cs" />
@@ -251,6 +256,7 @@
     <Content Include="Areas\Backend\Views\SystemMenuBackend\List.cshtml" />
     <Content Include="Areas\Backend\Views\SystemMenuBackend\Add.cshtml" />
     <Content Include="Areas\Backend\Views\SystemMenuBackend\Edit.cshtml" />
+    <Content Include="Areas\Backend\Views\AdminsPermissionBackend\List.cshtml" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

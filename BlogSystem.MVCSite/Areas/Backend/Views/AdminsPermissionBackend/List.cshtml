@@ -1,0 +1,88 @@
+﻿@using BlogSystem.MVCSite.Areas.Backend.Data.SystemMenu
+
+@{
+    ViewBag.Title = "管理员权限列表";
+    Layout = "~/Areas/Backend/Views/Shared/BackendLayout.cshtml";
+
+    SelectList rolesList = ViewBag.Roles;
+    List<SystemMenuListViewModel> haveList = ViewBag.HaveList == null ? new List<SystemMenuListViewModel>() : ViewBag.HaveList;
+    List<SystemMenuListViewModel> noHave = ViewBag.NoHave == null ? new List<SystemMenuListViewModel>() : ViewBag.NoHave;
+}
+
+<div class="row" style="margin-bottom: 10px;">
+
+    @using (Html.BeginForm("List", "AdminsPermissionManager", FormMethod.Post))
+    {
+        <div class="col-md-3">
+            @Html.DropDownList("Id", rolesList, new { @class = "form-control input-lg" })
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary btn-lg">确定</button>
+        </div>
+    }
+
+</div>
+<div class="row">
+
+    <div class="col-md-5">
+
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <h3>已拥有权限</h3>
+                </div>
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm("Delete", "AdminsPermissionBackend", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        <button class="btn btn-danger" type="submit">移除</button>
+                    </div>
+                    <input type="hidden" value="@ViewBag.RolesId" id="have" name="RolesId" />
+                    foreach (var item in haveList)
+                    {
+                        <div class="form-group" style="padding-top: 5px;">
+                            <label class="fancy-checkbox">
+                                <input type="checkbox" name="SystemMenuId" value="@item.Id" />
+                                <span style="font-size: 20px">@item.Title</span>
+                            </label>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-5">
+
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <h3>未拥有权限</h3>
+                </div>
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm("Add", "AdminsPermissionBackend", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        <button class="btn btn-success" type="submit">添加</button>
+                    </div>
+                    <input type="hidden" value="@ViewBag.RolesId" id="noHave" name="RolesId" />
+                    foreach (var item in noHave)
+                    {
+                        <div class="form-group" style="padding-top: 5px;">
+                            <label class="fancy-checkbox">
+                                <input type="checkbox" name="SystemMenuId" value="@item.Id" />
+                                <span style="font-size: 20px">@item.Title</span>
+                            </label>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+
+</div>
+

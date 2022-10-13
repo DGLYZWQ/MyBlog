@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAdminsPermissionBll.cs" />
     <Compile Include="IBlogBll.cs" />
     <Compile Include="ICategoryBll.cs" />
     <Compile Include="ICommentsBll.cs" />

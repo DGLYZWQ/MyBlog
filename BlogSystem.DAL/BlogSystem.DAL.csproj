@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminsPermissionDal.cs" />
     <Compile Include="BaseDAL.cs" />
     <Compile Include="BlogDal.cs" />
     <Compile Include="CategoryDal.cs" />

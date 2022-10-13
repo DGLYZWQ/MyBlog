@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminsPermission.cs" />
     <Compile Include="BaseEntity.cs" />
     <Compile Include="Blog.cs" />
     <Compile Include="BlogSystemContext.cs" />
@@ -64,6 +65,10 @@
     <Compile Include="Migrations\202210121227190_initial.cs" />
     <Compile Include="Migrations\202210121227190_initial.designer.cs">
       <DependentUpon>202210121227190_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202210131037323_AdminPermission.cs" />
+    <Compile Include="Migrations\202210131037323_AdminPermission.designer.cs">
+      <DependentUpon>202210131037323_AdminPermission.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -79,6 +84,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202210121227190_initial.resx">
       <DependentUpon>202210121227190_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202210131037323_AdminPermission.resx">
+      <DependentUpon>202210131037323_AdminPermission.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

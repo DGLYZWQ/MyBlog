@@ -26,6 +26,7 @@ namespace BlogSystem.Models
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<SystemMenu> SystemMenu { get; set; }
         public virtual DbSet<WebMenu> WebMenu { get; set; }
+        public virtual DbSet<AdminsPermission> AdminsPermission { get; set; }
 
     }
 }
