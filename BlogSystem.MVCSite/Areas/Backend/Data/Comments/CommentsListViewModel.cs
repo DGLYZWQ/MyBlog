@@ -1,16 +1,14 @@
 ﻿using System;
 
-namespace BlogSystem.Dtos
+namespace BlogSystem.MVCSite.Areas.Backend.Data.Comments
 {
-    public class CommentsDto
+    public class CommentsListViewModel
     {
         public Guid Id { get; set; }
         public string Content { get; set; }
-        public Guid BlogId { get; set; }
         public string BlogName { get; set; }
+        public Guid BlogId { get; set; }
         public bool IsChecked { get; set; }
-        public bool IsRemoved { get; set; }
-        public DateTime CreateTime { get; set; }
         public DateTime UpdateTime { get; set; }
     }
 }

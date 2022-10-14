@@ -9,6 +9,7 @@ namespace BlogSystem.Dtos
         public string Content { get; set; }
         public Guid UsersId { get; set; }
         public Guid CategoryId { get; set; }
+        public string CategoryName { get; set; }
         public int Views { get; set; }
         public int Comments { get; set; }
         public bool IsPublic { get; set; }

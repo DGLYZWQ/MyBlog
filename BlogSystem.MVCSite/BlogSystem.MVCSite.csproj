@@ -195,17 +195,26 @@
     <Compile Include="Areas\Backend\BackendAreaRegistration.cs" />
     <Compile Include="Areas\Backend\Common\PageConfig.cs" />
     <Compile Include="Areas\Backend\Controllers\AdminsPermissionBackendController.cs" />
+    <Compile Include="Areas\Backend\Controllers\BlogsBackendController.cs" />
+    <Compile Include="Areas\Backend\Controllers\CategoryBackendController.cs" />
+    <Compile Include="Areas\Backend\Controllers\CommentsBackendController.cs" />
     <Compile Include="Areas\Backend\Controllers\HomeController.cs" />
     <Compile Include="Areas\Backend\Controllers\LayoutController.cs" />
     <Compile Include="Areas\Backend\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Backend\Controllers\MessagesBackendController.cs" />
     <Compile Include="Areas\Backend\Controllers\RolesBackendController.cs" />
     <Compile Include="Areas\Backend\Controllers\SystemMenuBackendController.cs" />
     <Compile Include="Areas\Backend\Controllers\UsersBackendController.cs" />
     <Compile Include="Areas\Backend\Data\AdminsPermission\AddAdminsPermissionViewModel.cs" />
     <Compile Include="Areas\Backend\Data\AdminsPermission\DeleteAdminsPermissionViewModel.cs" />
+    <Compile Include="Areas\Backend\Data\Blogs\BlogsListViewModel.cs" />
+    <Compile Include="Areas\Backend\Data\Category\CategoryListViewModel.cs" />
+    <Compile Include="Areas\Backend\Data\Category\EditCategoryViewModel.cs" />
+    <Compile Include="Areas\Backend\Data\Comments\CommentsListViewModel.cs" />
     <Compile Include="Areas\Backend\Data\Layout\LeftMenuListViewModel.cs" />
     <Compile Include="Areas\Backend\Data\Layout\UsersInfoViewModel.cs" />
     <Compile Include="Areas\Backend\Data\Login\LoginViewModel.cs" />
+    <Compile Include="Areas\Backend\Data\Messages\MessagesListViewModel.cs" />
     <Compile Include="Areas\Backend\Data\Roles\AddRolesViewModel.cs" />
     <Compile Include="Areas\Backend\Data\Roles\EditRolesViewModel.cs" />
     <Compile Include="Areas\Backend\Data\Roles\RolesListViewModel.cs" />
@@ -215,6 +224,7 @@
     <Compile Include="Areas\Backend\Data\Users\AddUsersViewModel.cs" />
     <Compile Include="Areas\Backend\Data\Users\EditUsersViewModel.cs" />
     <Compile Include="Areas\Backend\Data\Users\UsersListViewModel.cs" />
+    <Compile Include="Areas\Backend\Data\Category\AddCategoryViewModel.cs" />
     <Compile Include="Filter\AdminAuthorizeAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -257,6 +267,12 @@
     <Content Include="Areas\Backend\Views\SystemMenuBackend\Add.cshtml" />
     <Content Include="Areas\Backend\Views\SystemMenuBackend\Edit.cshtml" />
     <Content Include="Areas\Backend\Views\AdminsPermissionBackend\List.cshtml" />
+    <Content Include="Areas\Backend\Views\BlogsBackend\List.cshtml" />
+    <Content Include="Areas\Backend\Views\CategoryBackend\List.cshtml" />
+    <Content Include="Areas\Backend\Views\CategoryBackend\Add.cshtml" />
+    <Content Include="Areas\Backend\Views\CategoryBackend\Edit.cshtml" />
+    <Content Include="Areas\Backend\Views\CommentsBackend\List.cshtml" />
+    <Content Include="Areas\Backend\Views\MessagesBackend\List.cshtml" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

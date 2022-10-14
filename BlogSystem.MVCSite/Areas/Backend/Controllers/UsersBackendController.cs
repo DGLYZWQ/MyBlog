@@ -69,7 +69,7 @@ namespace BlogSystem.MVCSite.Areas.Backend.Controllers
                 //获取表单传递过来的数据，并且实现新增功能
                 var file = Request.Files["MyPhoto"];
 
-                var names = UploadFiles(file, @"../../../Upload/Users/"); //得到上传图片的名称
+                var names = UploadFiles(file, @"../../Upload/Users/"); //得到上传图片的名称
 
                 var rs = await _users_bll.AddUsersAsync(model.Email, model.Password, model.NickName, names[0],
                     names[1], model.RolesId);

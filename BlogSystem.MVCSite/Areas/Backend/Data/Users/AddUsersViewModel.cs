@@ -18,10 +18,6 @@ namespace BlogSystem.MVCSite.Areas.Backend.Data.Users
         public string Avatar { get; set; } //缩略图
         [StringLength(255), Column(TypeName = "varchar")]
         public string Image { get; set; }  //正常头像
-        public int BlogCount { get; set; }
-        public int CategoryCount { get; set; }
-        public int FollowsCount { get; set; }
-        public int FansCount { get; set; }
 
         [Display(Name = "权限编号")]
         [ForeignKey(nameof(Roles))]

@@ -24,7 +24,7 @@
 
                     <div class="form-group">
                         <label for="Passowrd">密码：</label>
-                        @Html.TextBoxFor(r => r.Password, new { @class = "form-control" })
+                        @Html.PasswordFor(r => r.Password, new { @class = "form-control" })
                         <span class="text-danger">@Html.ValidationMessage("Password")</span>
                     </div>
 

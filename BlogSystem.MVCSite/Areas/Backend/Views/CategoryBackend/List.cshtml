@@ -1,0 +1,71 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<BlogSystem.MVCSite.Areas.Backend.Data.Category.CategoryListViewModel>
+@{
+    ViewBag.Title = "类别管理列表";
+    Layout = "~/Areas/Backend/Views/Shared/BackendLayout.cshtml";
+    string search = ViewBag.Search;
+}
+
+<h2>类别管理列表</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        @using (Html.BeginForm("List", "CategoryBackend", FormMethod.Get, new { @class = "input-group" }))
+        {
+            @Html.TextBox("Search", search, new { @class = "form-control" })
+            <span class="input-group-btn">
+                <button class="btn btn-primary" type="submit">
+                    <i class="lnr lnr-magnifier"></i>
+                    搜索
+                </button>
+            </span>
+        }
+    </div>
+    <div class="col-md-3">
+        @Html.ActionLink("新增类别", "Add", "CategoryBackend", new { @class = "btn btn-success" })
+    </div>
+
+</div>
+<div class="row" style="margin-top: 15px;">
+    <div class="col-md-12">
+
+        <div class="panel">
+            <div class="panel-heading">
+                @*<h3>类别管理列表</h3>*@
+            </div>
+            <div class="panel-body">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>类别名称</th>
+                            <th>类别描述</th>
+                            <th>修改时间</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (var i = 0; i < Model.Count; i++)
+                        {
+                            <tr>
+                                <td>@(i + 1)</td>
+                                <td>@Model[i].Title</td>
+                                <td>@Model[i].Description</td>
+                                <td>@Model[i].UpdateTime</td>
+                                <td>
+                                    @Html.ActionLink("修改", "Edit", "CategoryBackend", new { Model[i].Id }, new { @class = "btn btn-warning" })
+                                    @Html.ActionLink("删除", "Delete", "CategoryBackend", new { Model[i].Id }, new { @class = "btn btn-danger" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="pagination">
+    @Html.PagedListPager(Model, page => Url.Action("List", new { page }))
+</div>
+
+
