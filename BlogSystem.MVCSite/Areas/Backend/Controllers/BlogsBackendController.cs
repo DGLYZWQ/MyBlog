@@ -31,6 +31,8 @@ namespace BlogSystem.MVCSite.Areas.Backend.Controllers
                 {
                     Id = item.Id,
                     Title = item.Title,
+                    Views = item.Views,
+                    Comments = item.Comments,
                     //CategoryName = await GetCategoryName(item.CategoryId),
                     IsPublic = item.IsPublic,
                     UpdateTime = item.UpdateTime,

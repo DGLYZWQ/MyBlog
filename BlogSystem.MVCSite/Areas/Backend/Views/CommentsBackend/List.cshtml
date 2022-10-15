@@ -47,7 +47,7 @@
                                 <td>@(i + 1)</td>
                                 <td>@Model[i].Content</td>
                                 <td>@Model[i].BlogName</td>
-                                <td>@Model[i].IsChecked</td>
+                                <td>@(Model[i].IsChecked == false ? "是" : "否" )</td>
                                 <td>@Model[i].UpdateTime</td>
                                 <td>
                                     @Html.ActionLink("待审核", "Check", "CommentsBackend", new { Model[i].Id }, new { @class = "btn btn-warning" })

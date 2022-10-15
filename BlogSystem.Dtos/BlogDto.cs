@@ -8,6 +8,7 @@ namespace BlogSystem.Dtos
         public string Title { get; set; }
         public string Content { get; set; }
         public Guid UsersId { get; set; }
+        public string UserName { get; set; }
         public Guid CategoryId { get; set; }
         public string CategoryName { get; set; }
         public int Views { get; set; }

@@ -214,6 +214,7 @@
     <Compile Include="Areas\Backend\Data\Layout\LeftMenuListViewModel.cs" />
     <Compile Include="Areas\Backend\Data\Layout\UsersInfoViewModel.cs" />
     <Compile Include="Areas\Backend\Data\Login\LoginViewModel.cs" />
+    <Compile Include="Areas\Backend\Data\Login\RegisterViewModel.cs" />
     <Compile Include="Areas\Backend\Data\Messages\MessagesListViewModel.cs" />
     <Compile Include="Areas\Backend\Data\Roles\AddRolesViewModel.cs" />
     <Compile Include="Areas\Backend\Data\Roles\EditRolesViewModel.cs" />
@@ -273,6 +274,7 @@
     <Content Include="Areas\Backend\Views\CategoryBackend\Edit.cshtml" />
     <Content Include="Areas\Backend\Views\CommentsBackend\List.cshtml" />
     <Content Include="Areas\Backend\Views\MessagesBackend\List.cshtml" />
+    <Content Include="Areas\Backend\Views\Login\SignUp.cshtml" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

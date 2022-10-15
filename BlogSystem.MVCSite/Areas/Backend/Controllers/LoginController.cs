@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using BlogSystem.BLL;
 using BlogSystem.IBLL;
 using BlogSystem.MVCSite.Areas.Backend.Data.Login;
 
@@ -15,6 +16,35 @@ namespace BlogSystem.MVCSite.Areas.Backend.Controllers
         {
             _usersSvc = usersSvc;
         }
+
+
+        [HttpGet]
+        public ActionResult SignUp()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> SignUp(RegisterViewModel model)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                var data = await _usersSvc.Register(model.Email, model.Password);
+                if (data != null)
+                {
+                    return RedirectToAction("SignIn", "Login");
+                }
+            }
+            return View(model);
+            
+            
+            //return Content("<script>alert('注册成功');location.href='../../../Backend/Login/SignIn'</script>");
+        }
+
+
+
+
         [HttpGet]
         public ActionResult SignIn()
         {

@@ -14,6 +14,7 @@ namespace BlogSystem.IBLL
             Guid rolesId);
 
         Task<int> DeleteUsersAsync(Guid id);
+        Task<int> Register(string email, string password);
         Task<UsersDto> LoginAsync(string email, string password);
         Task<List<UsersDto>> GetAllUsersAsync();
         Task<List<UsersDto>> GetUsersByNickName(string nickname);

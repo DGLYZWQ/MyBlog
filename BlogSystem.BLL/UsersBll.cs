@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Data.SqlTypes;
 using System.Linq;
 using System.Threading.Tasks;
+using BlogSystem.DAL;
 using BlogSystem.Dtos;
 using BlogSystem.IBLL;
 using BlogSystem.IDAL;
@@ -68,6 +69,15 @@ namespace BlogSystem.BLL
             return -2;
         }
 
+        public async Task<int> Register(string email, string password)
+        {
+            return await _dal.AddAsync(new Users()
+            {
+                Email = email,
+                Password = password
+            });
+        }
+
         public async Task<UsersDto> LoginAsync(string email, string password)
         {
             return await _dal.Query(user => user.Email.Equals(email) && user.Password.Equals(password))
@@ -83,6 +93,7 @@ namespace BlogSystem.BLL
                     UpdateTime = u.UpdateTime
                 }).FirstOrDefaultAsync();
         }
+
 
         public async Task<List<UsersDto>> GetAllUsersAsync()
         {
