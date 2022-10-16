@@ -30,19 +30,27 @@ namespace BlogSystem.MVCSite.Areas.Backend.Controllers
 
             if (!ModelState.IsValid)
             {
-                var data = await _usersSvc.Register(model.Email, model.Password);
-                if (data != null)
-                {
-                    return RedirectToAction("SignIn", "Login");
-                }
+                await _usersSvc.RegisterAsync(model.Email, model.Password ,model.RolesId);
+                //return Content("<script>alert('注册成功');location.href='../../../Backend/Login/SignIn'</script>");    
+                return RedirectToAction("SignIn", "Login");
             }
             return View(model);
-            
-            
-            //return Content("<script>alert('注册成功');location.href='../../../Backend/Login/SignIn'</script>");
         }
 
+        //public ActionResult Register(RegisterViewModel admin)
+        //{
+        //    if (admin != null)
+        //    {
+        //        db.Entry(admin).State = System.Data.Entity.EntityState.Added;
+        //        db.RegisterViewModel.Add(admin);
+        //    }
 
+        //    db.Users.Add(admin);
+        //    return View();
+        //}
+
+            
+        
 
 
         [HttpGet]

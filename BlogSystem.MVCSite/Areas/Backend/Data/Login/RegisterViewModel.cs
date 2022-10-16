@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace BlogSystem.MVCSite.Areas.Backend.Data.Login
 {
@@ -15,5 +16,6 @@ namespace BlogSystem.MVCSite.Areas.Backend.Data.Login
         [Required]
         [Compare(nameof(Password))]
         public string ConfirmPassword { get; set; }
+        public Guid RolesId { get; set; }
     }
 }

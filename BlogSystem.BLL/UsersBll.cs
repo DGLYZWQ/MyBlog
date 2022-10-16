@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.SqlTypes;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using BlogSystem.DAL;
 using BlogSystem.Dtos;
@@ -69,13 +70,17 @@ namespace BlogSystem.BLL
             return -2;
         }
 
-        public async Task<int> Register(string email, string password)
+        public async Task RegisterAsync(string email, string password,Guid rolesId)
         {
-            return await _dal.AddAsync(new Users()
-            {
-                Email = email,
-                Password = password
-            });
+              await _dal.AddAsync( new Users()
+                {
+                    Email = email,
+                    Password = password,
+                    NickName = "Admin",
+                    Avatar = "default.jpg",
+                    Image = "default.jpg",
+                    RolesId = rolesId
+              });
         }
 
         public async Task<UsersDto> LoginAsync(string email, string password)
