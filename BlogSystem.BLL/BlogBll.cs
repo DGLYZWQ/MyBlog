@@ -19,12 +19,13 @@ namespace BlogSystem.BLL
             _dal = dal;
         }
 
-        public async Task<int> AddBlogAsync(string title, string content)
+        public async Task<int> AddBlogAsync(string title, string content,Guid categoryId)
         {
             return await _dal.AddAsync(new Blog()
             {
                 Title = title,
-                Content = content
+                Content = content,
+                CategoryId = categoryId
             });
         }
 
@@ -38,7 +39,18 @@ namespace BlogSystem.BLL
             data.Content = content;
             data.UpdateTime = DateTime.Now;
             return await _dal.EditAsync(data);
+        }
 
+        public async Task<int> EditAdminBlogAsync(Guid id, Guid categoryId, bool isPublic)
+        {
+            var data = await _dal.QueryAsync(id);
+            if (data == null)
+                return -1;
+
+            data.CategoryId = categoryId;
+            data.IsPublic = isPublic;
+            data.UpdateTime = DateTime.Now;
+            return await _dal.EditAsync(data);
         }
 
         public async Task<int> DeleteBlogAsync(Guid id)

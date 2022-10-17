@@ -57,8 +57,8 @@
                                 <td>@(Model[i].IsPublic ? "是" : "否") </td>
                                 <td>@Model[i].UpdateTime</td>
                                 <td>
-                                    @Html.ActionLink("修改", "Edit", "UsersBackend", new { Model[i].Id }, new { @class = "btn btn-warning" })
-                                    @Html.ActionLink("删除", "Delete", "UsersBackend", new { Model[i].Id }, new { @class = "btn btn-danger" })
+                                    @Html.ActionLink("修改", "Edit", "BlogsBackend", new { Model[i].Id }, new { @class = "btn btn-warning" })
+                                    @Html.ActionLink("删除", "Delete", "BlogsBackend", new { Model[i].Id }, new { @class = "btn btn-danger" })
                                 </td>
                             </tr>
                         }

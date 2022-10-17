@@ -51,5 +51,74 @@ namespace BlogSystem.MVCSite.Areas.Backend.Controllers
             var data = await _category_bll.GetCategoryByIdAsync(categoryId);
             return data.Title;
         }
+
+        [HttpGet]
+        public async Task<ActionResult> Add()
+        {
+           // await BindCategory(Guid.Empty);
+            ;
+            return View(new AddNoticeViewModel());
+        }
+
+        public async Task BindCategory(Guid id)
+        {
+            var category = await _category_bll.GetCategoryByIdAsync(id);
+            if (id == Guid.Empty)
+            {
+                SelectList categoryList = new SelectList(category.Title,"Id","Title","Description");
+                ViewBag.CategoryName = categoryList;
+            }
+            else
+            {
+                SelectList categoryList = new SelectList(category.Title, "Id","Title","Description",id);
+                ViewBag.CategoryName = categoryList;
+            }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Add(AddNoticeViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var rs = await _blog_bll.AddBlogAsync(model.Title, model.Content,model.CategoryId);
+                if (rs > 0)
+                {
+                    return Content("<script>alert('');location.href='../../../Backend/BlogsBackend/List'</script>");
+                }
+            }
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Edit(Guid id)
+        {
+            var data = await _blog_bll.GetBlogByIdAsync(id);
+
+            //await BindRoles(data.CategoryId);
+
+            return View(new EditBlogViewModel()
+            {
+                BlogName = data.Title,
+                BlogId = data.Id,
+                CategoryId = data.CategoryId,
+                IsPublic = data.IsPublic
+            });
+        }
+
+
+        [HttpPost]
+        public async Task<ActionResult> Edit(EditBlogViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                //var rs = await _blog_bll.EditAdminBlogAsync(model.BlogId, model.CategoryId, model.IsPublic);
+                return Content("<script>alert('修改成功');location.href='../../../Backend/BlogsBackend/List'</script>");
+            }
+
+            return View(model);
+        }
+
+
     }
 }
