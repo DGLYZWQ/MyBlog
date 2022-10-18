@@ -964,9 +964,9 @@ ul.activity-list > li {
       margin-left: 0.1em;
       font-size: .8em; }
   .easy-pie-chart#system-load {
-    width: 130px; }
+    width: 65px; }
     .easy-pie-chart#system-load .percent {
-      line-height: 128px; }
+      line-height: 65px; }
 
 /********************************
  * AUTHENTICATION FORMS, PAGE
@@ -978,10 +978,10 @@ ul.activity-list > li {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
-  width: 70%;
-  height: 450px;
+  width: 20%;
+  height: 400px;
   margin: 0 auto;
-    background-color: #fff; }
+  background-color: #fff; }
   .auth-box:before {
     display: inline-block;
     vertical-align: middle;
@@ -997,11 +997,11 @@ ul.activity-list > li {
     *vertical-align: auto;
     *zoom: 1;
     *display: inline;
-    width: 99%;
+    width: 60%;
     vertical-align: middle; }
   .auth-box .left {
     float: left;
-    width: 42%;
+    width: 50%;
     height: 100%;
     padding: 0 30px;
     text-align: center; }
@@ -1016,7 +1016,7 @@ ul.activity-list > li {
       height: 100%; }
   .auth-box .right {
     float: right;
-    width: 58%;
+    width: 50%;
     height: 100%;
     position: relative;
     background-image: url("../../assets/img/login-bg.jpg");
@@ -1054,8 +1054,8 @@ ul.activity-list > li {
   .auth-box .header {
     margin-bottom: 30px; }
   .auth-box .lead {
-    margin-top: 5px;
-    font-size: 18px;
+    margin-top: 0px;
+    font-size: 30px;
     text-align: center; }
   .auth-box .form-auth-small .btn {
     margin-top: 20px; }

@@ -185,6 +185,39 @@
     <Content Include="Areas\Backend\assets\vendor\toastr\toastr.js" />
     <Content Include="Areas\Backend\assets\vendor\toastr\toastr.min.css" />
     <Content Include="Areas\Backend\assets\vendor\toastr\toastr.min.js" />
+    <Content Include="Contents\css\animate.css" />
+    <Content Include="Contents\css\bootstrap.css" />
+    <Content Include="Contents\css\bootstrap.min.css" />
+    <Content Include="Contents\css\flexslider.css" />
+    <Content Include="Contents\css\icomoon.css" />
+    <Content Include="Contents\css\main.css" />
+    <Content Include="Contents\css\style.css" />
+    <Content Include="Contents\fonts\bootstrap\glyphicons-halflings-regular.svg" />
+    <Content Include="Contents\fonts\icomoon\icomoon.svg" />
+    <Content Include="Contents\images\img-1.jpg" />
+    <Content Include="Contents\images\img-2.jpg" />
+    <Content Include="Contents\images\img-3.jpg" />
+    <Content Include="Contents\images\img-4.jpg" />
+    <Content Include="Contents\images\img-5.jpg" />
+    <Content Include="Contents\images\img-6.jpg" />
+    <Content Include="Contents\images\img_bg_1.jpg" />
+    <Content Include="Contents\images\img_bg_2.jpg" />
+    <Content Include="Contents\images\img_bg_3.jpg" />
+    <Content Include="Contents\images\loc.png" />
+    <Content Include="Contents\js\bootstrap.min.js" />
+    <Content Include="Contents\js\google_map.js" />
+    <Content Include="Contents\js\jquery.easing.1.3.js" />
+    <Content Include="Contents\js\jquery.flexslider-min.js" />
+    <Content Include="Contents\js\jquery.min.js" />
+    <Content Include="Contents\js\jquery.waypoints.min.js" />
+    <Content Include="Contents\js\main.js" />
+    <Content Include="Contents\js\modernizr-2.6.2.min.js" />
+    <Content Include="Contents\js\respond.min.js" />
+    <Content Include="Contents\vendor\font-awesome\css\font-awesome.css" />
+    <Content Include="Contents\vendor\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Contents\vendor\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Contents\vendor\linearicons\fonts\Linearicons-Free.svg" />
+    <Content Include="Contents\vendor\linearicons\style.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
@@ -228,6 +261,7 @@
     <Compile Include="Areas\Backend\Data\Users\EditUsersViewModel.cs" />
     <Compile Include="Areas\Backend\Data\Users\UsersListViewModel.cs" />
     <Compile Include="Areas\Backend\Data\Category\AddCategoryViewModel.cs" />
+    <Compile Include="Controllers\FrontHomeController.cs" />
     <Compile Include="Filter\AdminAuthorizeAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -279,7 +313,25 @@
     <Content Include="Areas\Backend\Views\Login\SignUp.cshtml" />
     <Content Include="Areas\Backend\Views\BlogsBackend\Add.cshtml" />
     <Content Include="Areas\Backend\Views\BlogsBackend\Edit.cshtml" />
+    <Content Include="Contents\fonts\bootstrap\glyphicons-halflings-regular.eot" />
+    <Content Include="Contents\fonts\bootstrap\glyphicons-halflings-regular.ttf" />
+    <Content Include="Contents\fonts\bootstrap\glyphicons-halflings-regular.woff" />
+    <Content Include="Contents\fonts\bootstrap\glyphicons-halflings-regular.woff2" />
+    <Content Include="Contents\fonts\icomoon\icomoon.eot" />
+    <Content Include="Contents\fonts\icomoon\icomoon.ttf" />
+    <Content Include="Contents\fonts\icomoon\icomoon.woff" />
+    <Content Include="Contents\vendor\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Contents\vendor\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Contents\vendor\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Contents\vendor\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Contents\vendor\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Contents\vendor\linearicons\fonts\Linearicons-Free.eot" />
+    <Content Include="Contents\vendor\linearicons\fonts\Linearicons-Free.ttf" />
+    <Content Include="Contents\vendor\linearicons\fonts\Linearicons-Free.woff" />
+    <Content Include="Contents\vendor\linearicons\fonts\Linearicons-Free.woff2" />
     <None Include="packages.config" />
+    <Content Include="Views\Share\FrontLayout.cshtml" />
+    <Content Include="Views\FrontHome\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -289,7 +341,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Models\" />
     <Folder Include="Upload\Users\" />
   </ItemGroup>
