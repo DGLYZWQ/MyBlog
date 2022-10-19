@@ -332,6 +332,12 @@
     <None Include="packages.config" />
     <Content Include="Views\Share\FrontLayout.cshtml" />
     <Content Include="Views\FrontHome\Login.cshtml" />
+    <Content Include="Views\FrontHome\Register.cshtml" />
+    <Content Include="Views\FrontHome\ForgetPassword.cshtml" />
+    <Content Include="Views\FrontHome\ChangePassword.cshtml" />
+    <Content Include="Views\FrontHome\Index.cshtml" />
+    <Content Include="Views\FrontHome\ContactUs.cshtml" />
+    <Content Include="Views\FrontHome\AboutUs.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
