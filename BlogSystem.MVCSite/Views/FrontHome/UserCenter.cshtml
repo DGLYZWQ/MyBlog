@@ -1,0 +1,134 @@
+﻿@model PagedList.IPagedList<BlogSystem.MVCSite.Areas.Backend.Data.Blogs.BlogsListViewModel>
+@using PagedList.Mvc;
+@{
+    Layout = null;
+    var category = ViewBag.BlogCategroy as List<BlogSystem.Dtos.BlogCategoryDto>;
+   
+    int focount = ViewBag.focuscount;
+    bool isfocus = ViewBag.isFocus;
+    var blogUser = ViewBag.blogUser as BlogSystem.Dtos.UsersDto;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>用户中心</title>
+    <link href="~/Areas/Backend/assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- Flexslider  -->
+
+    <link rel="stylesheet" href="~/Contents/css/bootstrap.css">
+    <style>
+        body {
+            background-color: #efefef;
+        }
+        a {
+            color: #808080;
+            text-decoration: none;
+        }
+        .sx {
+            border-right: 1px solid #808080;
+        }
+       
+    </style>
+</head>
+<body>
+    <div class="container">
+        <hr />
+        <div class="row">
+            <div class="col-md-3 col-md-offset-1">
+                <div class="panel" style="text-align:center;padding-bottom:15px;">
+                    <h2 id="fh5co-logo" style="font-weight:200;font-size:15px;text-align:center">
+                        <p><img src="~/Upload/Users/@blogUser.Image" class="img-circle" width="80" height="80" /></p>
+                        <a href="/FrontHome/UserCenter?id=@blogUser.Id" style="color:black;text-decoration:none"><h3>@blogUser.Email</h3></a>
+                        <a href="javascript:;" style="text-decoration:none"><h3>@(blogUser.Intro)</h3></a>
+
+                    </h2>
+                    <div class="row">
+                        <div class="col-md-4 sx">
+                            <h4>@Model.Count()</h4>
+                            <h4>博客</h4>
+                        </div>
+                        <div class="col-md-3 sx">
+                            <h4>@category.Count()</h4>
+                            <h4>分类</h4>
+                        </div>
+                        <div class="col-md-4">
+                            <h4>@focount</h4>
+                            <h4>关注</h4>
+                        </div>
+                    </div>
+                     
+                </div>
+                <div class="panel">
+                    <div class="panel-body">
+                        <h3>博客分类</h3>
+
+                    </div>
+                    <ul class="list-group">
+                        @{ foreach (var item in category)
+                            {
+                <li class="list-group-item" style="border-width:0px"><a href="/FrontHome/UserCenter?id=@blogUser.Id&cid=@item.CategoryId" style="text-decoration:none">@item.CategoryName (@(item.Count))</a></li> } }
+                    </ul>
+                </div>
+                @{ 
+                    var u = Context.Session["user"] as BlogSystem.Dtos.UsersDto;
+                    if (u!=null&&u.Id.ToString()==Request["id"])
+                    {
+                         <div class="panel">
+                    
+                    <ul class="list-group">
+                <li class="list-group-item" style="border-width:0px"><a href="/FrontHome/EditBlog" style="text-decoration:none"><h4><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;写博客</h4></a></li>                
+                <li class="list-group-item" style="border-width:0px"><a href="/FrontHome/MyBlog" style="text-decoration:none"><h4><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;我的博客</h4></a></li> 
+                <li class="list-group-item" style="border-width:0px"><a href="/FrontHome/UpdateInfo" style="text-decoration:none"><h4><span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;修改资料</h4></a></li> 
+                    </ul>
+                </div>
+                    }
+                }
+            </div>
+            <div class="col-md-8">
+                <div class="panel" style="padding-top:15px;">
+                    @{ if (!string.IsNullOrWhiteSpace(blogUser.Avatar))
+                                    {
+                        <div id="myCarousel" class="carousel slide">
+
+                            <!-- 轮播（Carousel）项目 -->
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <img src="~/Upload/Users/@blogUser.Avatar" width="100%" style="height:300px" alt="First slide">
+                                </div>
+
+                            </div>
+
+                        </div> } }
+
+                    @{ foreach (var item in Model)
+                        {
+                <div class="media">
+                    <div class="media-left">
+
+                    </div>
+
+                    <div class="media-body">
+                        <a href="/FrontHome/BlogDetail?id=@item.Id" style="text-decoration: none;">
+                            <h3 class="media-heading" style="color:#377f7f">@item.Title</h3>
+                            <h4 style="color:#efefef;"><small>时间：@item.UpdateTime</small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>分类：@item.CategoryName</small></h4>
+                            <p style="padding-top:5px; color: #808080;">@item.Content</p>
+
+                        </a>
+                    </div>
+
+                </div>
+                                <hr /> } }
+
+                    <div class="pagination">
+                        @Html.PagedListPager(Model, page => Url.Action("UserCenter", new { id=Request["id"],page }))
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

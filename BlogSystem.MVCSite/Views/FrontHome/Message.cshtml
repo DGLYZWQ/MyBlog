@@ -1,0 +1,47 @@
+﻿@model PagedList.IPagedList<BlogSystem.Dtos.UserMsgDto>
+@using PagedList.Mvc;
+ 
+
+@{ 
+    ViewBag.Title = "My Blog";
+    string search = ViewBag.Search;
+    Layout = "~/Views/Share/FrontLayout.cshtml";
+    }
+ 
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">主页</a> <span class="navbar-brand">></span><span class="navbar-brand">消息中心</span>
+        </div>
+        @Html.Partial("_Top")
+    </div>
+</nav>
+<div class="row">
+    <div class="col-md-9" style="padding:25px">
+        @{ 
+            foreach(var item in Model)
+            {
+                 <div class="media">
+            <div class="media-left">
+
+            </div>
+           
+            <div class="media-body">
+                        <div class="page-header" style="margin-top:0px;padding-bottom:15px;">
+                            <span style="padding-top:5px;">@item.Contents</span>
+                            <h4 style="float:right"><small>@item.CreateTime.ToString("yyyy-MM-dd")</small></h4> 
+                        </div>
+                      
+            </div>
+          
+        </div>
+            }
+        }
+       
+    <div class="pagination">
+        @Html.PagedListPager(Model, page => Url.Action("Message", new { page }))
+    </div>
+
+    </div>
+     @Html.Partial("_Right")
+</div>

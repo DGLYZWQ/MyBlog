@@ -1,0 +1,75 @@
+﻿@model  BlogSystem.Dtos.BlogDto
+@{
+    ViewBag.Title = "EditBlog";
+    //Layout = "~/Views/Share/FrontLayout.cshtml";
+}
+<link href="/Contents/font-awesome.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/Contents/css/bootstrap.css">
+<link href="~/Contents/summernote/summernote.css" rel="stylesheet" />
+<div class="container">
+    <h2>@(string.IsNullOrWhiteSpace(Request["id"])?"添加博客": "编辑博客")</h2>
+
+    <form role="form" action="/FrontHome/EditBlog" method="post">
+        <input type="hidden" name="id" value="@Request["id"]" />
+        <div class="form-inline" style="margin-top:25px;">
+
+            <div class="form-group">
+                <div><label for="name">博客标题</label></div>
+                <input type="text" class="form-control" name="Title" style="width:360px" placeholder="请输入博客标题" value="@Model.Title" required>
+            </div>
+            <div class="form-group" style="padding-left:200px;">
+                <div> <label for="name">博客分类</label></div>
+                <input type="hidden" id="Content" name="Content" />
+                @Html.DropDownList("CategoryId", ViewBag.SelectList as IEnumerable<SelectListItem>, new { @class = "form-control", @style = "width:200px" })
+            </div>
+
+
+
+        </div>
+        <div class="form-group" style="margin-top:15px;">
+            <label for="name">正文内容</label>
+            
+            <div class="summernote">@Html.Raw(Model.Content)</div>
+        </div>
+
+        <button type="submit" class="btn btn-info">发布博客</button>
+    </form>
+</div>
+<!-- jQuery -->
+<script src="~/Contents/js/jquery.min.js"></script>
+<script src="~/Contents/js/bootstrap.min.js"></script>
+<script src="~/Contents/summernote/summernote.min.js"></script>
+<script src="~/Contents/summernote/summernote-zh-CN.js"></script>
+<script>
+    $(function () {
+        $('.summernote').summernote({
+            toolbar: [//定制工具栏，格式:['自定义分组名',['规定组内元素列表',]],
+                ['font-name', ['fontname']],
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font-size', ['fontsize']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['height', ['height']],
+                ['action', ['undo', 'redo']]],
+            height: 200,
+            minHeight: 100,
+            maxHeight: 200,
+            lang: 'zh-CN',
+            onImageUpload: function (files, editor, $editable) {
+                sendFile(files[0], editor, $editable);
+            }, onfocus: function () {
+                if ($.trim($('.summernote').code()) == '')
+                    $('.summernote').code('');
+            }
+        });
+        $(".btn").click(function () {
+            var msg = $.trim($('.summernote').code());
+            if (msg == '' || msg == '请输入评论') {
+                alert('请输入正文内容');
+                return false;
+            }
+            $("#Content").val(msg);
+            return true;
+        })
+    })
+</script>

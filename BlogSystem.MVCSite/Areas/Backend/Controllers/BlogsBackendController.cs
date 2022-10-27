@@ -33,7 +33,7 @@ namespace BlogSystem.MVCSite.Areas.Backend.Controllers
                     Title = item.Title,
                     Views = item.Views,
                     Comments = item.Comments,
-                    //CategoryName = await GetCategoryName(item.CategoryId),
+                    CategoryName = await GetCategoryName(item.CategoryId),
                     IsPublic = item.IsPublic,
                     UpdateTime = item.UpdateTime,
                 };
@@ -49,14 +49,15 @@ namespace BlogSystem.MVCSite.Areas.Backend.Controllers
         public async Task<string> GetCategoryName(Guid categoryId)
         {
             var data = await _category_bll.GetCategoryByIdAsync(categoryId);
-            return data.Title;
+            return data?.Title;
         }
 
         [HttpGet]
         public async Task<ActionResult> Add()
         {
-           // await BindCategory(Guid.Empty);
-            ;
+            // await BindCategory(Guid.Empty);
+            var clist = await _category_bll.GetAllAsync();
+            ViewBag.Category = new SelectList(clist.ToList(), "Id", "Title");
             return View(new AddNoticeViewModel());
         }
 
@@ -80,12 +81,16 @@ namespace BlogSystem.MVCSite.Areas.Backend.Controllers
         {
             if (ModelState.IsValid)
             {
-                var rs = await _blog_bll.AddBlogAsync(model.Title, model.Content,model.CategoryId);
+                BlogSystem.Dtos.UsersDto dto = Session["admin"] as BlogSystem.Dtos.UsersDto;
+                if (dto == null) dto = new UsersDto();
+                var rs = await _blog_bll.AddBlogAsync(model.Title, model.Content,model.CategoryId,dto.Id,true);
                 if (rs > 0)
                 {
-                    return Content("<script>alert('');location.href='../../../Backend/BlogsBackend/List'</script>");
+                    return Content("<script>alert('添加成功');location.href='/Backend/BlogsBackend/List'</script>");
                 }
             }
+            var clist = await _category_bll.GetAllAsync();
+            ViewBag.Category = new SelectList(clist.ToList(), "Id", "Title",model.CategoryId);
 
             return View(model);
         }
@@ -96,6 +101,8 @@ namespace BlogSystem.MVCSite.Areas.Backend.Controllers
             var data = await _blog_bll.GetBlogByIdAsync(id);
 
             //await BindRoles(data.CategoryId);
+            var clist = await _category_bll.GetAllAsync();
+            ViewBag.Category = new SelectList(clist.ToList(), "Id", "Title",data.CategoryId);
 
             return View(new EditBlogViewModel()
             {
@@ -112,8 +119,8 @@ namespace BlogSystem.MVCSite.Areas.Backend.Controllers
         {
             if (ModelState.IsValid)
             {
-                //var rs = await _blog_bll.EditAdminBlogAsync(model.BlogId, model.CategoryId, model.IsPublic);
-                return Content("<script>alert('修改成功');location.href='../../../Backend/BlogsBackend/List'</script>");
+                var rs = await _blog_bll.EditAdminBlogAsync(model.BlogId, model.CategoryId, model.IsPublic);
+                return Content("<script>alert('修改成功');location.href='/Backend/BlogsBackend/List'</script>");
             }
 
             return View(model);

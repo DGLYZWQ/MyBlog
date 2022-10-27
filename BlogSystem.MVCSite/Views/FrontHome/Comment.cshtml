@@ -1,0 +1,74 @@
+﻿@model List<BlogSystem.Dtos.CommentsDto>
+@using PagedList.Mvc;
+ 
+
+@{ 
+    ViewBag.Title = "评论列表";
+  
+    Layout = "~/Views/Share/FrontLayout.cshtml";
+    
+    }
+
+<style>
+    a {
+        color: #808080;
+        text-decoration: none;
+    }
+    .content
+    {
+        text-indent:24px;
+    }
+    .h3{
+        text-indent:24px;
+    }
+    .content1
+    {
+        padding-left:24px;
+    }
+    
+</style>
+<div class="row" role="navigation">
+    <div class="panel content1">
+        <a class="navbar-brand" href="/FrontHome/BlogDetail?id=@Request["id"]"><h2><</h2></a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-9" style="padding:25px">
+         <h3 class="h3">评论列表</h3>
+        <hr />
+        @{ 
+                int i = 1;
+                foreach(var item in Model)
+                {
+                 <div class="media">
+            <div class="media-left">
+
+            </div>
+           
+            <div class="media-body">
+              
+            <div class="page-header" style="margin-top:0px;">
+                        <h4><small>#@(i++)</small>&nbsp;&nbsp;<small>@item.UpdateTime</small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>@item.UserName</small></h4>
+                  <p style="padding-top:5px;padding-left:30px;">@item.Content</p>
+            </div>
+
+
+
+            </div>
+
+
+        </div>
+            }
+        }
+    <form role="form" action="/FrontHome/CommentPost" method="post">
+        <input type="hidden" name="blogId" value="@Request.QueryString["id"]" />
+        <div class="form-group">
+            <label for="name">发表评论</label>
+           <textarea class="form-control" placeholder="请输入你要评论的内容..." name="msg" rows="10" cols="10" required></textarea>
+        </div>
+       
+        <button type="submit" class="btn btn-info">提交评论</button>
+    </form>
+    </div>
+     
+</div>

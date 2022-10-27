@@ -29,5 +29,6 @@ namespace BlogSystem.Models
         public int Views { get; set; }
         public int Comments { get; set; }
         public bool IsPublic { get; set; }
+        public bool IsAdmin { get; set; }
     }
 }

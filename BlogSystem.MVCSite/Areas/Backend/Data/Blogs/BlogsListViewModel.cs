@@ -13,6 +13,7 @@ namespace BlogSystem.MVCSite.Areas.Backend.Data.Blogs
         public string CategoryName { get; set; }
         public Guid CategoryId { get; set; }
         public string UserName { get; set; }
+        public string Content { get; set; }
         public Guid UsersId { get; set; }
 
         public int Views { get; set; }

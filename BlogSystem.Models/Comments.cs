@@ -14,6 +14,7 @@ namespace BlogSystem.Models
         public string Content { get; set; }
         [ForeignKey(nameof(Blog))]
         public Guid BlogId { get; set; }
+        public Guid UserId { get; set; }
 
         public Blog Blog { get; set; }
         public bool IsChecked { get; set; }

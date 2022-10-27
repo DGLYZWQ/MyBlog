@@ -23,6 +23,7 @@ namespace BlogSystem.IDAL
         Task<bool> IsExistsAsync(Expression<Func<T, bool>> whereLambda);
 
         Task<int> GetCountsAsync(Expression<Func<T,bool>> whereLambda);
+        int GetCounts(Expression<Func<T, bool>> whereLambda);
 
         IQueryable<T> QueryByPage(int pageSize, int pageIndex, Expression<Func<T, bool>> whereLambda, bool isAsc);
     }

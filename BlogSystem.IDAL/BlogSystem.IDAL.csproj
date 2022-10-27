@@ -51,6 +51,9 @@
     <Compile Include="IRolesDal.cs" />
     <Compile Include="ISystemMenuDal.cs" />
     <Compile Include="IUsersDal.cs" />
+    <Compile Include="IUserFocusDal.cs" />
+    <Compile Include="IUserMsgDal.cs" />
+    <Compile Include="IViewsDal.cs" />
     <Compile Include="IWebMenuDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

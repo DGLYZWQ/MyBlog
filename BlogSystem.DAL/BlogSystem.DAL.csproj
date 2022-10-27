@@ -58,6 +58,9 @@
     <Compile Include="RolesDal.cs" />
     <Compile Include="SystemMenuDal.cs" />
     <Compile Include="UsersDal.cs" />
+    <Compile Include="UserFocusDal.cs" />
+    <Compile Include="UserMsgDal.cs" />
+    <Compile Include="ViewsDal.cs" />
     <Compile Include="WebMenuDal.cs" />
   </ItemGroup>
   <ItemGroup>

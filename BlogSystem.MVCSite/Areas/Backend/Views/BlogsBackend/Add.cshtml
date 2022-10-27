@@ -22,10 +22,7 @@
 
                     <div class="form-group">
                         <label for="CategoryId">类别：</label>
-                        <select class="form-control">
-                            <option value="cheese">公告</option>
-                            <option value="tomatoes">C#</option>
-                        </select>
+                        @Html.DropDownList("CategoryId", ViewBag.Category as IEnumerable<SelectListItem>, new { @class = "form-control" })
                     </div>
 
                         @*<div class="form-group">
@@ -36,7 +33,7 @@
 
                         <div>
                             <label for="Content">正文：</label>
-                            <textarea class="form-control" placeholder="请自觉遵守国家有关互联网信息服务的法律、法规，文明使用网络。" rows="4"></textarea>
+                            <textarea class="form-control" name="Content" placeholder="请自觉遵守国家有关互联网信息服务的法律、法规，文明使用网络。" rows="4"></textarea>
                             <span class="text-danger">@Html.ValidationMessage("Content")</span>
                         </div>
 

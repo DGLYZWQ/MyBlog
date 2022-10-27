@@ -49,10 +49,20 @@
                                 <td>@Model[i].Name</td>
                                 <td>@Model[i].Email</td>
                                 <td>@Model[i].Content</td>
-                                <td>@(Model[i].IsRead == false ? "未读" : "已读")</td>
+                                <td>
+                                    @{ 
+                                        if(Model[i].IsRead)
+                                        {
+                                            <span>已读</span>
+                                        }
+                                        else { 
+                                            <a href="Check?id=@Model[i].Id">未读</a>
+                                        }
+                                    }
+                                </td>
                                 <td>@Model[i].UpdateTime</td>
                                 <td>
-                                    @Html.ActionLink("修改", "Edit", "MessagesBackend", new { Model[i].Id }, new { @class = "btn btn-warning" })
+                                    @*@Html.ActionLink("修改", "Edit", "MessagesBackend", new { Model[i].Id }, new { @class = "btn btn-warning" })*@
                                     @Html.ActionLink("删除", "Delete", "MessagesBackend", new { Model[i].Id }, new { @class = "btn btn-danger" })
                                 </td>
                             </tr>

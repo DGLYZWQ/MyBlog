@@ -49,6 +49,8 @@
     <Compile Include="IMessagesBll.cs" />
     <Compile Include="IRolesBll.cs" />
     <Compile Include="ISystemMenuBll.cs" />
+    <Compile Include="IUserFocusBll.cs" />
+    <Compile Include="IUserMsgBll.cs" />
     <Compile Include="IUsersBll.cs" />
     <Compile Include="IWebMenuBll.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

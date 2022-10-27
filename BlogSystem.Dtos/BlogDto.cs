@@ -19,4 +19,11 @@ namespace BlogSystem.Dtos
         public DateTime UpdateTime { get; set; }
 
     }
+
+    public class BlogCategoryDto
+    {
+        public Guid CategoryId { get; set; }
+        public string CategoryName { get; set; }
+        public int Count { get; set; }
+    }
 }

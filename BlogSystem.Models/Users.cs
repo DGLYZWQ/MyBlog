@@ -25,6 +25,7 @@ namespace BlogSystem.Models
         [ForeignKey(nameof(Roles))]
         public Guid RolesId { get; set; }
         public Roles Roles { get; set; }
+        public string Intro { get; set; }
 
     }
 }

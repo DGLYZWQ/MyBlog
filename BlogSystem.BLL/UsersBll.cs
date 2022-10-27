@@ -61,6 +61,23 @@ namespace BlogSystem.BLL
             data.RolesId = rolesId;
             return await _dal.EditAsync(data);
         }
+        public async Task<int> UpdateInfo(Guid id, string email, string password, string nickname, string avatar, string image,string intro)
+        {
+            
+            var data = await _dal.QueryAsync(id);
+            if (data == null)
+                return -1;
+            data.Email = email;
+            if (image != null)
+                data.Image = image;
+            data.NickName = nickname;
+            data.Password = password;
+            if (avatar != null)
+                data.Avatar = avatar;
+            if(!string.IsNullOrWhiteSpace(intro))
+            data.Intro = intro;
+            return await _dal.EditAsync(data);
+        }
 
         public async Task<int> DeleteUsersAsync(Guid id)
         {
@@ -70,17 +87,23 @@ namespace BlogSystem.BLL
             return -2;
         }
 
-        public async Task RegisterAsync(string email, string password,Guid rolesId)
+        public async Task RegisterAsync(string email, string password,Guid rolesId, string nickName= "Admin")
         {
               await _dal.AddAsync( new Users()
                 {
                     Email = email,
                     Password = password,
-                    NickName = "Admin",
-                    Avatar = "default.jpg",
+                    NickName = nickName,
+                    Avatar = "defaultbg.jpg",
                     Image = "default.jpg",
                     RolesId = rolesId
               });
+        }
+        public async Task<int> ResetPwd(string email, string password)
+        {
+            var info =await _dal.Query(u => u.Email == email).FirstAsync();
+            info.Password = password;
+            return await _dal.EditAsync(info);
         }
 
         public async Task<UsersDto> LoginAsync(string email, string password)
@@ -136,6 +159,10 @@ namespace BlogSystem.BLL
         {
             return await _dal.IsExistsAsync(ur => ur.Email.Equals(email));
         }
+        public async Task<bool> IsExists(string email, Guid id)
+        {
+            return await _dal.IsExistsAsync(ur => ur.Email.Equals(email) && ur.Id != id);
+        }
 
         public async Task<UsersDto> GetUsersByEmail(string email)
         {
@@ -166,7 +193,29 @@ namespace BlogSystem.BLL
                     Password = data.Password,
                     Avatar = data.Avatar,
                     RolesId = data.RolesId,
-                    UpdateTime = data.UpdateTime
+                    UpdateTime = data.UpdateTime,
+                    Intro=data.Intro
+                };
+            }
+
+            return null;
+        }
+        public UsersDto GetUsers(Guid id)
+        {
+            var data = _dal.Query().Where(x=>x.Id==id).FirstOrDefault();
+            if (data != null)
+            {
+                return new UsersDto()
+                {
+                    Id = data.Id,
+                    Email = data.Email,
+                    Image = data.Image,
+                    NickName = data.NickName,
+                    Password = data.Password,
+                    Avatar = data.Avatar,
+                    RolesId = data.RolesId,
+                    UpdateTime = data.UpdateTime,
+                    Intro = data.Intro
                 };
             }
 

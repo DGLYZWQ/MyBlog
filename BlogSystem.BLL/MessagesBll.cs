@@ -61,7 +61,8 @@ namespace BlogSystem.BLL
                     Email = c.Email,
                     Tel = c.Tel,
                     Content = c.Content,
-                    UpdateTime = c.UpdateTime
+                    UpdateTime = c.UpdateTime,
+                    IsRead=c.IsRead
                 }).ToListAsync();
         }
 
@@ -94,6 +95,29 @@ namespace BlogSystem.BLL
                     Content = data.Content,
                     UpdateTime = data.UpdateTime
                 };
+        }
+        public async Task<int> Read(Guid id, bool isRead)
+        {
+            var data = await _dal.QueryAsync(id);
+            if (data == null)
+                return -1;
+            data.IsRead = isRead;
+            data.UpdateTime = DateTime.Now;
+            return await _dal.EditAsync(data);
+        }
+
+        public int GetNoReadCounts()
+        {
+            return _dal.GetCounts(x => !x.IsRead);
+        }
+        public async Task<int> GetViewsCount(DateTime start, DateTime end)
+        {
+            return await _dal.GetCountsAsync(x => x.CreateTime >= start && x.CreateTime <= end);
+        }
+
+        public async Task<int> GetViewsAllCount()
+        {
+            return await _dal.GetCountsAsync(x => !x.IsRemoved);
         }
     }
 }

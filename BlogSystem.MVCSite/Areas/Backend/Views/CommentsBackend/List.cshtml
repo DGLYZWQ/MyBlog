@@ -47,10 +47,19 @@
                                 <td>@(i + 1)</td>
                                 <td>@Model[i].Content</td>
                                 <td>@Model[i].BlogName</td>
-                                <td>@(Model[i].IsChecked == false ? "是" : "否" )</td>
+                                <td>@(Model[i].IsChecked? "是" : "否" )</td>
                                 <td>@Model[i].UpdateTime</td>
                                 <td>
-                                    @Html.ActionLink("待审核", "Check", "CommentsBackend", new { Model[i].Id }, new { @class = "btn btn-warning" })
+                                   @{ 
+                                       if(Model[i].IsChecked)
+                                       {
+                                           <a href="#" class = "btn btn-success" >已审核</a>
+                                       }
+                                       else
+                                       { 
+                                            @Html.ActionLink("待审核", "Check", "CommentsBackend", new { Model[i].Id }, new { @class = "btn btn-warning" })
+                                       }
+                                   }
                                     @Html.ActionLink("删除", "Delete", "CommentsBackend", new { Model[i].Id }, new { @class = "btn btn-danger" })
                                 </td>
                             </tr>

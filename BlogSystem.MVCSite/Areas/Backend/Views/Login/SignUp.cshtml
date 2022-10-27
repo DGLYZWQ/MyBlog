@@ -1,7 +1,5 @@
-﻿
-@{
-    Layout = null;
-}
+﻿@model BlogSystem.MVCSite.Areas.Backend.Data.Login.RegisterViewModel
+@{ Layout = null; }
 
 <!DOCTYPE html>
 
@@ -39,23 +37,25 @@
                             </div>
                             @using (Html.BeginForm("SignUp", "Login", FormMethod.Post, new { @class = "form-auth-small" }))
                             {
-                                <div class="form-group">
-                                    <label for="signin-email" class="control-label sr-only">Email</label>
-                                    <input type="email" class="form-control" id="signin-email" placeholder="请输入电子邮件" name="Email">
-                                </div>
-                                <div class="form-group">
-                                    <label for="signin-password" class="control-label sr-only">Password</label>
-                                    <input type="password" class="form-control" id="signin-password" placeholder="请输入密码" name="Password">
-                                </div>
+                <div class="form-group">
+                    <label for="signin-email" class="control-label sr-only">Email</label>
+                    <input type="email" class="form-control" id="signin-email" placeholder="请输入电子邮件" value="@Model.Email" name="Email">
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
                                 <div class="form-group">
                                     <label for="signin-password" class="control-label sr-only">Password</label>
-                                    <input type="password" class="form-control" id="signin-password" placeholder="请确认密码" name="Password">
+                                    <input type="password" class="form-control" id="signin-password" placeholder="请输入密码" value="@Model.Password" name="Password">
+                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-lg btn-block">REGISTER</button>
-                                <div class="bottom">
-                                    <span class="helper-text"><i class="fa fa-lock"></i> <a href="#">Forgot password?</a></span>
-                                </div>
-                            }
+                                                <div class="form-group">
+                                                    <label for="signin-password" class="control-label sr-only">Password</label>
+                                                    <input type="password" class="form-control" id="signin-password" value="@Model.ConfirmPassword" placeholder="请确认密码" name="ConfirmPassword">
+                                                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                                                </div>
+                                                                <button type="submit" class="btn btn-primary btn-lg btn-block">REGISTER</button>
+                                                                                <div class="bottom">
+                                                                                    <span class="helper-text"><i class="fa fa-lock"></i> <a href="ForgetPwd">Forgot password?</a></span>
+                                                                                </div>}
                         </div>
                     </div>
                     <div class="right">
@@ -71,5 +71,9 @@
         </div>
     </div>
     <!-- END WRAPPER -->
+    <script src="~/Areas/Backend/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Areas/Backend/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.js"></script>
 </body>
 </html>

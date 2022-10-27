@@ -8,6 +8,7 @@ namespace BlogSystem.Dtos
         public string NickName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public string Intro { get; set; }
         public Guid RolesId { get; set; }
         public string Avatar { get; set; }
         public string Image { get; set; }

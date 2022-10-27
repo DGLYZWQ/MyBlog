@@ -1,0 +1,51 @@
+﻿@model PagedList.IPagedList<BlogSystem.MVCSite.Areas.Backend.Data.Blogs.BlogsListViewModel>
+@using PagedList.Mvc;
+ 
+
+@{ 
+    ViewBag.Title = "My Blog";
+    string search = ViewBag.Search;
+    Layout = "~/Views/Share/FrontLayout.cshtml";
+    var category = ViewBag.Category as BlogSystem.Dtos.CategoryDto;
+    }
+ 
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/FrontHome/Index">主页</a> <span class="navbar-brand">></span><span class="navbar-brand">分类</span>
+            <span class="navbar-brand">></span><span class="navbar-brand">@(category?.Description)</span><span class="navbar-brand">></span><span class="navbar-brand">@(category?.Title)</span>
+        </div>
+        @Html.Partial("_Top")
+    </div>
+</nav>
+<div class="row">
+    <div class="col-md-9" style="padding:25px">
+        @{ 
+            foreach(var item in Model)
+            {
+                 <div class="media">
+            <div class="media-left">
+
+            </div>
+           
+            <div class="media-body">
+                <a href="/FrontHome/BlogDetail?id=@item.Id">
+                    <h2 class="media-heading" style="color:#377f7f">@item.Title</h2>
+                    <p style="padding-top:5px; color: #808080;">@item.Content</p>
+                    <div class="page-header" style="margin-top:0px;">
+                        <h4><small>@item.UserName</small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>@item.UpdateTime</small></h4>
+                    </div>
+                      </a>
+            </div>
+          
+        </div>
+            }
+        }
+       
+    <div class="pagination">
+        @Html.PagedListPager(Model, page => Url.Action("CategoryBlogList", new { cid=Request["cid"],page }))
+    </div>
+
+    </div>
+     @Html.Partial("_Right")
+</div>

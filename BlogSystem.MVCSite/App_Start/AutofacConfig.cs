@@ -35,6 +35,8 @@ namespace BlogSystem.MVCSite
             //(5)实现
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
 
+            
+
         }
     }
 }

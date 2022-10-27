@@ -15,6 +15,7 @@ namespace BlogSystem.Models
             base.OnModelCreating(modelBuilder);
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+             
         }
 
         public virtual DbSet<Users> Users { get; set; }
@@ -26,6 +27,9 @@ namespace BlogSystem.Models
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<SystemMenu> SystemMenu { get; set; }
         public virtual DbSet<WebMenu> WebMenu { get; set; }
+        public virtual DbSet<Views> Views { get; set; }
+        public virtual DbSet<UserFocus> UserFocus { get; set; }
+        public virtual DbSet<UserMsg> UserMsg { get; set; }
         public virtual DbSet<AdminsPermission> AdminsPermission { get; set; }
 
     }

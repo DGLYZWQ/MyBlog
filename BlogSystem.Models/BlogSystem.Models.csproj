@@ -59,6 +59,9 @@
     <Compile Include="Blog.cs" />
     <Compile Include="BlogSystemContext.cs" />
     <Compile Include="Category.cs" />
+    <Compile Include="UserFocus.cs" />
+    <Compile Include="UserMsg.cs" />
+    <Compile Include="Views.cs" />
     <Compile Include="Comments.cs" />
     <Compile Include="DataShow.cs" />
     <Compile Include="Messages.cs" />

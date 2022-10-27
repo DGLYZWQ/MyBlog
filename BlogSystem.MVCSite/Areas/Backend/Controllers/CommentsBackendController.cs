@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -42,6 +43,24 @@ namespace BlogSystem.MVCSite.Areas.Backend.Controllers
             ViewBag.PageIndex = page;
             IPagedList<CommentsListViewModel> pages = list.ToPagedList(page, PageConfig.GetPageSize());
             return View(pages);
+        }
+        public async Task<ActionResult> Check(Guid id)
+        {
+            var rs = await _comments_bll.Check(id,true);
+            if (rs > 0)
+            {
+                return Content("<script>alert('审核成功');location.href='/Backend/CommentsBackend/List'</script>");
+            }
+            return View();
+        }
+        public async Task<ActionResult> Delete(Guid id)
+        {
+            var rs = await _comments_bll.DeleteCommentAsync(id);
+            if (rs > 0)
+            {
+                return Content("<script>alert('删除成功');location.href='/Backend/CommentsBackend/List'</script>");
+            }
+            return View();
         }
     }
 }

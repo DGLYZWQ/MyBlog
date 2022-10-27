@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -42,6 +43,15 @@ namespace BlogSystem.MVCSite.Areas.Backend.Controllers
             ViewBag.PageIndex = page;
             IPagedList<MessagesListViewModel> pages = list.ToPagedList(page, PageConfig.GetPageSize());
             return View(pages);
+        }
+        public async Task<ActionResult> Check(Guid id)
+        {
+            var rs = await _messages_bll.Read(id, true);
+            if (rs > 0)
+            {
+                return Content("<script>alert('已标记为已读');location.href='/Backend/MessagesBackend/List'</script>");
+            }
+            return View();
         }
     }
 }

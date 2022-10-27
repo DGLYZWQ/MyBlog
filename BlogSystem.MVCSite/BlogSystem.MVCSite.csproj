@@ -138,6 +138,7 @@
     <Content Include="Areas\Backend\assets\css\bootstrap.min.css" />
     <Content Include="Areas\Backend\assets\css\demo.css" />
     <Content Include="Areas\Backend\assets\css\main.css" />
+    <Content Include="Areas\Backend\assets\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Areas\Backend\assets\img\apple-icon.png" />
     <Content Include="Areas\Backend\assets\img\favicon.png" />
     <Content Include="Areas\Backend\assets\img\login-bg.jpg" />
@@ -166,6 +167,7 @@
     <Content Include="Areas\Backend\assets\vendor\chartist\css\chartist.min.css" />
     <Content Include="Areas\Backend\assets\vendor\chartist\js\chartist.js" />
     <Content Include="Areas\Backend\assets\vendor\chartist\js\chartist.min.js" />
+    <Content Include="Areas\Backend\assets\vendor\echarts.min.js" />
     <Content Include="Areas\Backend\assets\vendor\font-awesome\css\font-awesome.css" />
     <Content Include="Areas\Backend\assets\vendor\font-awesome\css\font-awesome.min.css" />
     <Content Include="Areas\Backend\assets\vendor\font-awesome\fonts\fontawesome-webfont.svg" />
@@ -193,6 +195,8 @@
     <Content Include="Contents\css\main.css" />
     <Content Include="Contents\css\style.css" />
     <Content Include="Contents\fonts\bootstrap\glyphicons-halflings-regular.svg" />
+    <Content Include="Contents\fonts\fontawesome-webfont.svg" />
+    <Content Include="Contents\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Contents\fonts\icomoon\icomoon.svg" />
     <Content Include="Contents\images\img-1.jpg" />
     <Content Include="Contents\images\img-2.jpg" />
@@ -213,6 +217,11 @@
     <Content Include="Contents\js\main.js" />
     <Content Include="Contents\js\modernizr-2.6.2.min.js" />
     <Content Include="Contents\js\respond.min.js" />
+    <Content Include="Contents\font-awesome.min.css" />
+    <Content Include="Contents\summernote\summernote-bs3.css" />
+    <Content Include="Contents\summernote\summernote-zh-CN.js" />
+    <Content Include="Contents\summernote\summernote.css" />
+    <Content Include="Contents\summernote\summernote.min.js" />
     <Content Include="Contents\vendor\font-awesome\css\font-awesome.css" />
     <Content Include="Contents\vendor\font-awesome\css\font-awesome.min.css" />
     <Content Include="Contents\vendor\font-awesome\fonts\fontawesome-webfont.svg" />
@@ -266,6 +275,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\dtos\RegisterViewModel.cs" />
+    <Compile Include="Models\dtos\UpdateUsersDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -329,6 +340,20 @@
     <Content Include="Contents\vendor\linearicons\fonts\Linearicons-Free.ttf" />
     <Content Include="Contents\vendor\linearicons\fonts\Linearicons-Free.woff" />
     <Content Include="Contents\vendor\linearicons\fonts\Linearicons-Free.woff2" />
+    <Content Include="Areas\Backend\Views\Login\ForgetPwd.cshtml" />
+    <Content Include="Areas\Backend\assets\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Areas\Backend\assets\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Areas\Backend\assets\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Areas\Backend\assets\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Contents\fonts\fontawesome-webfont.eot" />
+    <Content Include="Contents\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Contents\fonts\fontawesome-webfont.woff" />
+    <Content Include="Contents\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Contents\fonts\FontAwesome.otf" />
+    <Content Include="Contents\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Contents\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Contents\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Contents\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="packages.config" />
     <Content Include="Views\Share\FrontLayout.cshtml" />
     <Content Include="Views\FrontHome\Login.cshtml" />
@@ -338,6 +363,18 @@
     <Content Include="Views\FrontHome\Index.cshtml" />
     <Content Include="Views\FrontHome\ContactUs.cshtml" />
     <Content Include="Views\FrontHome\AboutUs.cshtml" />
+    <Content Include="Views\Shared\_Top.cshtml" />
+    <Content Include="Views\FrontHome\Category.cshtml" />
+    <Content Include="Views\Shared\_Right.cshtml" />
+    <Content Include="Views\FrontHome\CategoryBlogList.cshtml" />
+    <Content Include="Views\FrontHome\FocusBlogList.cshtml" />
+    <Content Include="Views\FrontHome\BlogDetail.cshtml" />
+    <Content Include="Views\FrontHome\Comment.cshtml" />
+    <Content Include="Views\FrontHome\Message.cshtml" />
+    <Content Include="Views\FrontHome\MyBlog.cshtml" />
+    <Content Include="Views\FrontHome\EditBlog.cshtml" />
+    <Content Include="Views\FrontHome\UserCenter.cshtml" />
+    <Content Include="Views\FrontHome\UpdateInfo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -347,7 +384,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
     <Folder Include="Upload\Users\" />
   </ItemGroup>
   <ItemGroup>

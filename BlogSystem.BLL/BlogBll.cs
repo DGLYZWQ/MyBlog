@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using BlogSystem.Dtos;
@@ -13,23 +14,32 @@ namespace BlogSystem.BLL
     public class BlogBll : IBlogBll
     {
         private IBlogDal _dal;
+        private ICommentsDal _commentsDal;
+        private IViewsDal _viewsDal;
+        private IUserFocusDal _focusDal;
 
-        public BlogBll(IBlogDal dal)
+        public BlogBll(IBlogDal dal, ICommentsDal commentsDal, IViewsDal viewsDal, IUserFocusDal focusDal)
         {
             _dal = dal;
+            _commentsDal = commentsDal;
+            _viewsDal = viewsDal;
+            _focusDal = focusDal;
         }
 
-        public async Task<int> AddBlogAsync(string title, string content,Guid categoryId)
+        public async Task<int> AddBlogAsync(string title, string content,Guid categoryId, Guid userId, bool isAdmin=false)
         {
             return await _dal.AddAsync(new Blog()
             {
                 Title = title,
                 Content = content,
-                CategoryId = categoryId
+                CategoryId = categoryId,
+                IsAdmin=isAdmin,
+                UsersId=userId,
+                IsPublic=true
             });
         }
 
-        public async Task<int> EditBlogAsync(Guid id,string title, string content)
+        public async Task<int> EditBlogAsync(Guid id,string title, Guid categoryId, string content)
         {
             var data = await _dal.QueryAsync(id);
             if (data == null)
@@ -38,6 +48,7 @@ namespace BlogSystem.BLL
             data.Title = title;
             data.Content = content;
             data.UpdateTime = DateTime.Now;
+            data.CategoryId = categoryId;
             return await _dal.EditAsync(data);
         }
 
@@ -73,18 +84,146 @@ namespace BlogSystem.BLL
                     UpdateTime = c.UpdateTime
                 }).ToListAsync();
         }
+        public async Task<List<BlogDto>> GetFocusListAsync(Guid uid,string search)
+        {
+            var flowlist = _focusDal.Query(x => x.UserId == uid).ToList() ;
+            if(flowlist.Any())
+            {
+                var uids = flowlist.Select(x => x.BeUserId);
+                var query = _dal.Query(x => x.IsPublic);
+                query = query.Where(x => uids.Contains(x.UsersId));
+                if (!string.IsNullOrWhiteSpace(search))
+                {
+                    query = query.Where(c => c.Title.Contains(search));
+                }
+                var list = await query.OrderByDescending(x => x.IsAdmin)
+                    .ThenByDescending(c => c.UpdateTime)
+                    .Select(c => new BlogDto
+                    {
+                        Id = c.Id,
+                        Title = c.Title,
+                        Content = c.Content,
+                        UpdateTime = c.UpdateTime,
+                        IsPublic = c.IsPublic,
+                        CategoryId = c.CategoryId,
+                        UsersId = c.UsersId
+                    //Comments=_commentsDal.GetCounts(x=>x.BlogId==c.Id),
+                    //Views=_viewsDal.GetCounts(x=>x.BlogId==c.Id)
+                }).ToListAsync();
+                list.ForEach(item =>
+                {
+                    item.Comments = _commentsDal.GetCounts(x => x.BlogId == item.Id);
+                    item.Views = _viewsDal.GetCounts(x => x.BlogId == item.Id);
+                });
+                return list;
+            }
 
+            return await Task.FromResult(new List<BlogDto>());
+           
+        }
+        public async Task<List<BlogCategoryDto>> GetCategroyGroupAsync(Guid uid)
+        {
+            var query = _dal.Query(x=>x.IsPublic);
+            query = query.Where(x => x.UsersId==uid);
+             
+            var list = await query.GroupBy(x=>x.CategoryId)
+                .Select(c => new BlogCategoryDto
+                {
+                   CategoryId=c.Key,
+                   Count=c.Count(),
+                   
+                }).ToListAsync();
+           
+            return list;
+
+        }
         public async Task<List<BlogDto>> GetDataByTitleAsync(string title)
         {
-            return await _dal.Query(c => c.Title.Contains(title))
-                .OrderByDescending(c => c.UpdateTime)
+            var list =await _dal.Query(c => c.Title.Contains(title)).OrderByDescending(x=>x.IsAdmin)
+                .ThenByDescending(c => c.UpdateTime)
                 .Select(c => new BlogDto
                 {
                     Id = c.Id,
                     Title = c.Title,
                     Content = c.Content,
-                    UpdateTime = c.UpdateTime
+                    UpdateTime = c.UpdateTime,
+                    IsPublic = c.IsPublic,
+                    CategoryId = c.CategoryId,
+                    UsersId = c.UsersId
+                    //Comments=_commentsDal.GetCounts(x=>x.BlogId==c.Id),
+                    //Views=_viewsDal.GetCounts(x=>x.BlogId==c.Id)
                 }).ToListAsync();
+            list.ForEach(item =>
+            {
+                item.Comments = _commentsDal.GetCounts(x => x.BlogId == item.Id);
+                item.Views = _viewsDal.GetCounts(x => x.BlogId == item.Id);
+            });
+            return list;
+        }
+        public async Task<List<BlogDto>> GetMyBlogListAsync(Guid userId,string cid,string title)
+        {
+            var query = _dal.Query(x => x.IsPublic);
+            query = query.Where(x => x.UsersId == userId);
+            if (!string.IsNullOrWhiteSpace(title))
+            {
+
+                query = query.Where(c => c.Title.Contains(title));
+            }
+            if (!string.IsNullOrWhiteSpace(cid))
+            {
+                var id = Guid.Parse(cid);
+
+                query = query.Where(c => c.CategoryId==id);
+            }
+            var list = await query.OrderByDescending(x => x.UpdateTime)
+                .Select(c => new BlogDto
+                {
+                    Id = c.Id,
+                    Title = c.Title,
+                    Content = c.Content,
+                    UpdateTime = c.UpdateTime,
+                    IsPublic = c.IsPublic,
+                    CategoryId = c.CategoryId,
+                    UsersId = c.UsersId
+                    //Comments=_commentsDal.GetCounts(x=>x.BlogId==c.Id),
+                    //Views=_viewsDal.GetCounts(x=>x.BlogId==c.Id)
+                }).ToListAsync();
+            list.ForEach(item =>
+            {
+                item.Comments = _commentsDal.GetCounts(x => x.BlogId == item.Id);
+                item.Views = _viewsDal.GetCounts(x => x.BlogId == item.Id);
+            });
+            return list;
+        }
+        public async Task<List<BlogDto>> GetDataByCategoryTitleAsync(Guid cid,string title)
+        {
+            var query = _dal.Query(x => x.IsPublic);
+            query = query.Where(x => x.CategoryId == cid);
+            if (!string.IsNullOrWhiteSpace(title))
+            {
+
+                query = query.Where(c => c.Title.Contains(title));
+            }
+            var list = await query.OrderByDescending(x => x.IsAdmin)
+                .ThenByDescending(c => c.UpdateTime)
+                .Select(c => new BlogDto
+                {
+                    Id = c.Id,
+                    Title = c.Title,
+                    Content = c.Content,
+                    UpdateTime = c.UpdateTime,
+                    IsPublic = c.IsPublic,
+                    CategoryId = c.CategoryId,
+                    UsersId=c.UsersId
+                    //Comments=_commentsDal.GetCounts(x=>x.BlogId==c.Id),
+                    //Views=_viewsDal.GetCounts(x=>x.BlogId==c.Id)
+                }).ToListAsync();
+            list.ForEach(item =>
+            {
+                item.Comments = _commentsDal.GetCounts(x => x.BlogId == item.Id);
+                item.Views = _viewsDal.GetCounts(x => x.BlogId == item.Id);
+            });
+            return list;
         }
 
         public async Task<BlogDto> GetBlogByIdAsync(Guid id)
@@ -95,7 +234,11 @@ namespace BlogSystem.BLL
                     Id = data.Id,
                     Title = data.Title,
                     Content = data.Content,
-                    UpdateTime = data.UpdateTime
+                    UpdateTime = data.UpdateTime,
+                    IsPublic=data.IsPublic,
+                    CategoryId=data.CategoryId,
+                    UsersId=data.UsersId,
+                    
                 };
         }
 
@@ -115,7 +258,46 @@ namespace BlogSystem.BLL
                     Title = b.Title,
                     Content = b.Content,
                     UpdateTime = b.UpdateTime
-                }).Take(4).ToListAsync();
+                }).Take(4).ToListAsync().ConfigureAwait(false);
+        }
+        public async Task<List<BlogDto>> GetDataByRandom4()
+        {
+            return await _dal.Query()
+                .OrderBy(a=>Guid.NewGuid()).Take(4)
+                .Select(b => new BlogDto
+                {
+                    Id = b.Id,
+                    Title = b.Title,
+                    Content = b.Content,
+                    UpdateTime = b.UpdateTime
+                }).ToListAsync().ConfigureAwait(false);
+        }
+
+        public async Task<int> GetViewsCount(DateTime start, DateTime end)
+        {
+            return await _viewsDal.GetCountsAsync(x=>x.CreateTime>=start&&x.CreateTime<=end);
+        }
+
+        public async Task<int> GetViewsAllCount()
+        {
+            return await _viewsDal.GetCountsAsync(x => !x.IsRemoved);
+        }
+        public async Task Click(Guid id,string ip,string uid)
+        {
+            var blog = await _dal.QueryAsync(id);
+            blog.Views += 1;
+            await _dal.EditAsync(blog);
+            var viewinfo = new Views
+            {
+                IP = ip,
+                BlogId = id,
+                
+            };
+            if(!string.IsNullOrWhiteSpace(uid))
+            {
+                viewinfo.UserId = Guid.Parse(uid);
+            }
+            await _viewsDal.AddAsync(viewinfo);
         }
     }
 }

@@ -1,0 +1,93 @@
+﻿@model BlogSystem.Dtos.BlogDto
+@using PagedList.Mvc;
+ 
+
+@{ 
+    ViewBag.Title = "My Blog";
+    string search = ViewBag.Search;
+    Layout = "~/Views/Share/FrontLayout.cshtml";
+    var category = ViewBag.BlogCategroy as List<BlogSystem.Dtos.BlogCategoryDto>;
+    int fcount= ViewBag.fanscount;
+    int focount = ViewBag.focuscount;
+    bool isfocus = ViewBag.isFocus;
+    var blogUser = ViewBag.blogUser as BlogSystem.Dtos.UsersDto;
+    int commentcounts = ViewBag.comments;
+    }
+ 
+<style>
+    a {
+        color: #808080;
+        text-decoration: none;
+    }
+    .content
+    {
+        text-indent:24px;
+    }
+    .h1{
+        text-indent:24px;
+    }
+    .content1
+    {
+        padding-left:24px;
+    }
+    
+</style>
+<div class="row" role="navigation">
+    <div class="panel content1">
+        <a class="navbar-brand" href="javascript:history.go(-1)"><h2><</h2></a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-9" style="padding:25px">
+         <h1 class="h1">@Model.Title</h1>
+        <hr />
+        <div class="content1">
+            @Html.Raw(Model.Content.Replace("\r\n","<br>").Replace("\r", "<br>").Replace("\n", "<br>"))
+        </div>
+        <h2 class="content1">
+            <a href="/FrontHome/Comment?id=@Model.Id"><span class="glyphicon glyphicon-comment"></span>&nbsp;@commentcounts</a>
+        </h2>
+    </div>
+    <div class="col-md-3">
+        
+        <div class="panel panel-default">
+            <div class="panel-body">
+                 <h3 id="fh5co-logo" style="font-weight:100;font-size:15px;text-align:center">
+    <p><img src="~/Upload/Users/@blogUser.Image" class="img-circle" width="50" height="50" /></p>
+    <a href="/FrontHome/UserCenter?id=@blogUser.Id"><h3>@blogUser.Email</h3></a>
+</h3>  
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item" style="border-width:0px;text-align:center;margin-top:0px">
+                    @{ 
+                        if(isfocus)
+                        {
+                            <a href="#" class="btn btn-info">已关注</a>
+                        }
+                        else
+                        {
+                            <a href="/FrontHome/Focus?uid=@blogUser.Id&bid=@Model.Id" class="btn btn-info">+关注</a>
+                        }
+                    }
+                    
+                </li>
+                <li  class="list-group-item" style="border-width:0px;text-align:center;margin-top:0px">
+                    <h5>粉丝：@fcount</h5>
+                    <h5>关注：@focount</h5>
+                </li>
+            </ul>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h3>博客分类</h3>
+               
+            </div>
+            <ul class="list-group">
+                @{ foreach (var item in category)
+                    {
+            <li class="list-group-item" style="border-width:0px" ><a  href="/FrontHome/UserCenter?id=@blogUser.Id&cid=@item.CategoryId">@item.CategoryName (@(item.Count))</a></li>
+ } }
+            </ul>
+        </div>
+    </div>
+</div>

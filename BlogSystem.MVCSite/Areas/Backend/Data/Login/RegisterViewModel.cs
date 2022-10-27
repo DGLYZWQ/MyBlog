@@ -14,7 +14,7 @@ namespace BlogSystem.MVCSite.Areas.Backend.Data.Login
         [StringLength(16, MinimumLength = 6, ErrorMessage = "密码长度不正确")]
         public string Password { get; set; }
         [Required]
-        [Compare(nameof(Password))]
+        [Compare(nameof(Password),ErrorMessage ="两次密码输入不一致")]
         public string ConfirmPassword { get; set; }
         public Guid RolesId { get; set; }
     }

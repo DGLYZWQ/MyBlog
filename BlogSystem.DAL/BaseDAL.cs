@@ -65,6 +65,10 @@ namespace BlogSystem.DAL
         {
             return await _db.Set<T>().Where(whereLambda).CountAsync();
         }
+        public  int GetCounts(Expression<Func<T, bool>> whereLambda)
+        {
+            return _db.Set<T>().Where(whereLambda).Count();
+        }
 
         public IQueryable<T> QueryByPage(int pageSize, int pageIndex, Expression<Func<T, bool>> whereLambda, bool isAsc)
         {

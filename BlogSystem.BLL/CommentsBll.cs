@@ -13,17 +13,32 @@ namespace BlogSystem.BLL
     public class CommentsBll : ICommentsBll
     {
         private ICommentsDal _dal;
-
-        public CommentsBll(ICommentsDal dal)
+        private IUserMsgDal _msgdal;
+        private IUsersDal _usersDal;
+        private IBlogDal _blogDal;
+        public CommentsBll(ICommentsDal dal, IUserMsgDal msgdal, IUsersDal usersDal, IBlogDal blogDal)
         {
             _dal = dal;
+            _msgdal = msgdal;
+            _usersDal = usersDal;
+            _blogDal = blogDal;
         }
 
-        public async Task<int> AddCommentAsync(string content)
+        public async Task<int> AddCommentAsync(Guid blogId, Guid userId, string content)
         {
-           return await _dal.AddAsync(new Comments()
+            var u = await _usersDal.QueryAsync(userId);
+            var blog = await _blogDal.QueryAsync(blogId);
+            
+            await _msgdal.AddAsync(new UserMsg
+            {
+                UserId = blog.UsersId,
+                Contents = $"{u.Email}评论了你的博客《{blog.Title}》"
+            });
+            return await _dal.AddAsync(new Comments()
            {
-               Content = content
+               Content = content,
+               BlogId=blogId,
+               UserId=userId
            });
         }
 
@@ -54,7 +69,22 @@ namespace BlogSystem.BLL
                     Id = c.Id,
                     BlogId = c.BlogId,
                     Content = c.Content,
-                    UpdateTime = c.UpdateTime
+                    UpdateTime = c.UpdateTime,
+                    IsChecked=c.IsChecked
+                }).ToListAsync();
+        }
+        public async Task<List<CommentsDto>> GetAllAsync(Guid blogId)
+        {
+            return await _dal.Query(x=>x.BlogId==blogId)
+                .OrderByDescending(c => c.UpdateTime)
+                .Select(c => new CommentsDto()
+                {
+                    Id = c.Id,
+                    BlogId = c.BlogId,
+                    Content = c.Content,
+                    UpdateTime = c.UpdateTime,
+                    IsChecked = c.IsChecked,
+                    UserId=c.UserId
                 }).ToListAsync();
         }
 
@@ -90,6 +120,28 @@ namespace BlogSystem.BLL
         {
             var data = _dal.Query(c => c.Content.Contains(content));
             return !(await data.AnyAsync());
+        }
+        public async Task<int> Check(Guid id,bool isCheck)
+        {
+            var data = await _dal.QueryAsync(id);
+            if (data == null)
+                return -1;
+            data.IsChecked = isCheck;
+            data.UpdateTime = DateTime.Now;
+            return await _dal.EditAsync(data);
+        }
+        public async Task<int> GetCount(DateTime start, DateTime end)
+        {
+            return await _dal.GetCountsAsync(x => x.CreateTime >= start && x.CreateTime <= end);
+        }
+
+        public async Task<int> GetAllCount()
+        {
+            return await _dal.GetCountsAsync(x => !x.IsRemoved);
+        }
+        public async Task<int> GetCount(Guid blogId)
+        {
+            return await _dal.GetCountsAsync(x => x.BlogId==blogId);
         }
     }
 }

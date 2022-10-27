@@ -1,21 +1,32 @@
-﻿
-@{
-    Layout = null;
-}
+﻿@model BlogSystem.MVCSite.Models.dtos.RegisterViewModel
+@{ Layout = null; }
 
 <!DOCTYPE html>
 
 <html>
 <div class="vid-container">
     <div class="inner-container">
-        <div class="box">
-            <h1>找回密码</h1>
-            <input type="email" placeholder="请输入邮箱地址" />
-            <button>确定</button>
-            
-        </div>
+        <form method="post" action="/FrontHome/register">
+            <div class="box">
+                <h1>My Blog</h1>
+                <span class="text-danger" style="float:right">@Html.ValidationMessage("Email")</span>
+                @Html.TextBoxFor(r => r.Email, new { @placeholder = "请输入邮箱地址" })<span class="text-danger" style="float:right">@Html.ValidationMessage("Password")</span>
+                <input type="password" placeholder="密码" name="Password" />  <span class="text-danger" style="float:right">@Html.ValidationMessage("ConfirmPassword")</span>
+                <input type="password" placeholder="确认密码" name="ConfirmPassword" />
+                <button>注册</button>
+
+            </div>
+        </form>
     </div>
 </div>
+<!-- jQuery -->
+<script src="~/Areas/Backend/assets/vendor/jquery/jquery.min.js"></script>
+<script src="~/Areas/Backend/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+ 
+ 
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.js"></script>
+
 <style>
     body {
         padding: 0;
@@ -39,7 +50,7 @@
 
     .inner-container {
         width: 500px;
-        height: 340px;
+        height: 500px;
         position: relative;
         top: calc(50vh - 200px);
         left: calc(50vw - 200px);
@@ -62,15 +73,13 @@
         width: 100%;
         font-family: Helvetica;
         color: #fff;
-        background: rgba(0, 0, 0, 0.13);
         padding: 30px 0px;
     }
 
         .box h1 {
             text-align: center;
             margin: 35px 20px;
-            font-size: 30px;
-            font-family: "SimHei";
+            font-size: 40px;
         }
 
         .box input {
@@ -81,9 +90,8 @@
             padding: 15px;
             background: #fff;
             font-size: 15px;
-            color: #fff;
-            border:1px solid;
-            border-radius:25px;
+            border: 0px solid;
+            border-radius: 25px;
         }
 
             .box input:focus,
@@ -121,3 +129,4 @@
             }
 </style>
 </html>
+

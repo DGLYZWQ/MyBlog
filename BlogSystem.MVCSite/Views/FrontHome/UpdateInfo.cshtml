@@ -1,0 +1,59 @@
+﻿@model  BlogSystem.MVCSite.Models.dtos.UpdateUsersDto
+@{
+    ViewBag.Title = "EditBlog";
+    //Layout = "~/Views/Share/FrontLayout.cshtml";
+}
+<link href="/Contents/font-awesome.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/Contents/css/bootstrap.css">
+<link href="~/Contents/summernote/summernote.css" rel="stylesheet" />
+<div class="container">
+    <h2>修改资料</h2>
+
+    <form role="form" action="/FrontHome/UpdateInfo" method="post" enctype = "multipart/form-data">
+        <input type="hidden" name="id" value="@Model.Id" />
+        <div class="form-group">
+            <label for="MyPhoto">头像：</label>
+            <img src="~/Upload/Users/@Model.Image" width="50" height="50" />
+            @Html.HiddenFor(x => x.Image)
+            @Html.HiddenFor(x => x.Avatar)
+            <input type="file" name="MyPhoto" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="NickName">昵称：</label>
+            @Html.TextBoxFor(r => r.NickName, new { @class = "form-control" })
+            <span class="text-danger">@Html.ValidationMessage("NickName")</span>
+        </div>
+        <div class="form-group">
+            <label for="Passowrd">密码：</label>
+            @Html.PasswordFor(r => r.Password, new { @class = "form-control" })
+            <span class="text-danger">@Html.ValidationMessage("Password")</span>
+        </div>
+        <div class="form-group">
+            <label for="Email">电子邮箱：</label>
+            @Html.TextBoxFor(r => r.Email, new { @class = "form-control" })
+            <span class="text-danger">@Html.ValidationMessage("Email")</span>
+        </div>
+        <div class="form-group">
+            <label for="Email">简介：</label>
+            @Html.TextAreaFor(r => r.Intro, new { @class = "form-control" })
+            
+        </div>
+        <div class="form-group">
+            <label for="Avatar">主页图片展示：</label>
+            <img src="~/Upload/Users/@Model.Avatar" width="150" height="50" />
+            <input type="file" name="Avatar" class="form-control" />
+        </div>
+
+
+
+
+
+
+        <button type="submit" class="btn btn-info">提交修改</button>
+    </form>
+</div>
+<!-- jQuery -->
+<script src="~/Contents/js/jquery.min.js"></script>
+<script src="~/Contents/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.js"></script>
