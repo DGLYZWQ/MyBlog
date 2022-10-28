@@ -14,14 +14,14 @@
 body {
   font-family: "SimHei", Arial, sans-serif;
   font-weight: 300;
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1.6;
   color: rgba(0, 0, 0, 0.5);
   background: whitesmoke;
 }
 @media screen and (max-width: 992px) {
   body {
-    font-size: 16px;
+    font-size: 18px;
   }
 }
 
@@ -220,7 +220,7 @@ figure figcaption {
 #fh5co-aside .fh5co-footer {
   position: absolute;
   bottom: 40px;
-  font-size: 14px;
+  font-size: 19px;
   text-align: center;
   width: 100%;
   font-weight: 400;
@@ -799,7 +799,7 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
   display: table-cell;
   vertical-align: middle;
   color: #228896;
-  font-size: 40px;
+  font-size: 50px;
   height: 100px;
 }
 @media screen and (max-width: 1200px) {
@@ -819,7 +819,7 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
   font-weight: 500;
   margin-bottom: 20px;
   color: rgba(0, 0, 0, 0.8);
-  font-size: 14px;
+  font-size: 25px;
   letter-spacing: .2em;
   text-transform: uppercase;
 }
@@ -837,7 +837,7 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
 }
 
 .fh5co-heading {
-  font-size: 18px;
+  font-size: 50px;
   margin-bottom: 2em;
   font-weight: 500;
   text-transform: uppercase;
