@@ -28,6 +28,7 @@
     }
     .content1
     {
+        font-size: 19px;
         padding-left:24px;
     }
     
@@ -45,17 +46,17 @@
             @Html.Raw(Model.Content.Replace("\r\n","<br>").Replace("\r", "<br>").Replace("\n", "<br>"))
         </div>
         <h2 class="content1">
-            <a href="/FrontHome/Comment?id=@Model.Id"><span class="glyphicon glyphicon-comment"></span>&nbsp;@commentcounts</a>
+            <a href="/FrontHome/Comment?id=@Model.Id" style="font-size:23px"><span class="glyphicon glyphicon-comment" style="font-size: 20px;"></span>&nbsp;@commentcounts</a>
         </h2>
     </div>
     <div class="col-md-3">
         
-        <div class="panel panel-default">
+        <div class="panel panel-group">
             <div class="panel-body">
-                 <h3 id="fh5co-logo" style="font-weight:100;font-size:15px;text-align:center">
-    <p><img src="~/Upload/Users/@blogUser.Image" class="img-circle" width="50" height="50" /></p>
-    <a href="/FrontHome/UserCenter?id=@blogUser.Id"><h3>@blogUser.Email</h3></a>
-</h3>  
+                <h3 id="fh5co-logo" style="font-weight:100;font-size:15px;text-align:center">
+                    <p><img src="~/Upload/Users/@blogUser.Image" class="img-circle" width="50" height="50" /></p>
+                    <a href="/FrontHome/UserCenter?id=@blogUser.Id"><h3>@blogUser.NickName</h3></a>
+                </h3>
             </div>
             <ul class="list-group">
                 <li class="list-group-item" style="border-width:0px;text-align:center;margin-top:0px">
@@ -77,7 +78,7 @@
                 </li>
             </ul>
         </div>
-        <div class="panel panel-default">
+        <div class="panel panel-group">
             <div class="panel-body">
                 <h3>博客分类</h3>
                
