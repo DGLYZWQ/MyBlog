@@ -204,19 +204,22 @@
             series: [
                 {
                     name: '浏览量',
-                    type: 'line', smooth: true,
+                    type: 'line', smooth: false,
+                    color:'#4095E5',
                     stack: 'Total',
                     data: [@(string.Join(",",data.ydatas1))]
                 },
                 {
                     name: '评论数',
-                    type: 'line', smooth: true,
+                    type: 'line', smooth: false,
+                    color:'#18D197',
                     stack: 'Total',
                     data: [@(string.Join(",",data.ydatas2))]
                 },
                 {
                     name: '留言数',
-                    type: 'line', smooth: true,
+                    type: 'line', smooth: false,
+                    color:'#FE7831',
                     stack: 'Total',
                     data: [@(string.Join(",",data.ydatas1))]
                 } 

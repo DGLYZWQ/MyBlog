@@ -54,7 +54,17 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
                                 <i class="lnr lnr-alarm"></i>
-                                <span class="badge bg-danger">@count</span>
+                                   @{
+                                       if (count > 0)
+                                       {
+                                           <span class="badge bg-danger">@count</span>
+                                       }
+                                       else
+                                       {
+                                           <span class="badge bg-danger hidden">@count</span>
+                                       }
+                                   }
+                                    @*<span class="badge bg-danger">@count</span>*@
                             </a>
                             <ul class="dropdown-menu notifications">
                                 <li><a href="#" class="notification-item"><span class="dot bg-danger"></span>你有@(count)条未读消息</a></li>
@@ -69,7 +79,7 @@
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img  src="~/Upload/Users/@(dto?.Image)" class="img-circle" alt="@(dto?.Email)"> <span>@(dto?.Email)</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img  src="~/Upload/Users/@(dto?.Image)" class="img-circle" alt="@(dto?.Email)"> <span>@(dto?.NickName)</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#"><i class="lnr lnr-user"></i> <span>个人资料</span></a></li>
                                 <li><a href="/Backend/Home/Logout"><i class="lnr lnr-exit"></i> <span>退出登录</span></a></li>

@@ -53,5 +53,14 @@ namespace BlogSystem.MVCSite.Areas.Backend.Controllers
             }
             return View();
         }
+        public async Task<ActionResult> Delete(Guid id)
+        {
+            var rs = await _messages_bll.DeleteMessageAsync(id);
+            if (rs > 0)
+            {
+                return Content("<script>alert('删除成功');location.href='/Backend/MessagesBackend/List'</script>");
+            }
+            return View();
+        }
     }
 }

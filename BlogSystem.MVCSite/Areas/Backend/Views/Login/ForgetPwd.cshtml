@@ -1,7 +1,5 @@
 ﻿@model BlogSystem.MVCSite.Areas.Backend.Data.Login.RegisterViewModel
-@{
-    Layout = null;
-}
+@{ Layout = null; }
 
 <!DOCTYPE html>
 
@@ -35,7 +33,7 @@
                         <div class="content">
                             <div class="header">
                                 <div class="logo text-center"><img src="~/Areas/Backend/assets/img/logo-dark.png" alt="Klorofil Logo"></div>
-                                <p class="lead">Forgot password</p>
+                                <p class="lead">忘记密码</p>
                             </div>
                             @using (Html.BeginForm("ForgetPwd", "Login", FormMethod.Post, new { @class = "form-auth-small" }))
                             {
@@ -45,28 +43,28 @@
                             @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
 
                         </div>
-                <div class="form-group">
-                    <label for="signin-password" class="control-label sr-only">Password</label>
-                    <input type="password" class="form-control" id="signin-password" placeholder="请输入密码" name="Password" value="@Model.Password">
-                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                </div>
-                <div class="form-group">
-                    <label for="signin-password" class="control-label sr-only">Password</label>
-                    <input type="password" class="form-control" id="signin-password" placeholder="请确认密码" name="ConfirmPassword" value="@Model.ConfirmPassword">
-                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                                        <div class="form-group">
+                                            <label for="signin-password" class="control-label sr-only">Password</label>
+                                            <input type="password" class="form-control" id="signin-password" placeholder="请输入密码" name="Password" value="@Model.Password">
+                                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="signin-password" class="control-label sr-only">Password</label>
+                                                            <input type="password" class="form-control" id="signin-password" placeholder="请确认密码" name="ConfirmPassword" value="@Model.ConfirmPassword">
+                                                            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
 
-                </div>
-                                                                <button type="submit" class="btn btn-primary btn-lg btn-block">ResetPassword</button>
-                                                                                <div class="bottom">
-                                                                                    <span class="helper-text"><i class="fa fa-lock"></i> <a href="SignIn">Sign In</a></span>
-                                                                                </div>}
+                                                        </div>
+                                                                        <button type="submit" class="btn btn-primary btn-lg btn-block">重设密码</button>
+                                                                                        <div class="bottom">
+                                                                                            <span class="helper-text"><i class="fa fa-lock"></i> <a href="SignIn">登录</a></span>
+                                                                                        </div>}
                         </div>
                     </div>
                     <div class="right">
                         <div class="overlay"></div>
                         <div class="content text">
-                            <h1 class="heading">Free Bootstrap dashboard template</h1>
-                            <p>by The Develovers</p>
+                            <h1 class="heading">My Blog后台管理系统</h1>
+                            <p>by Dev</p>
                         </div>
                     </div>
                     <div class="clearfix"></div>
