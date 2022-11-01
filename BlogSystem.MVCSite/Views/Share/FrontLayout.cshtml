@@ -53,8 +53,8 @@
                     var userBll = System.Web.Mvc.DependencyResolver.Current.GetService<BlogSystem.IBLL.IUsersBll>();
                     var user = userBll.GetUsers(u.Id);
                      <h3 id="fh5co-logo" style="font-weight:100;font-size:25px">
-                         <p><img src="~/Upload/Users/@user.Image" class="img-circle" width="80" height="80" /></p>
-            <a href="/FrontHome/UserCenter?id=@u.Id">@user.Email</a></h3>
+                         <p><img src="~/Upload/Users/@user.Image" class="img-circle" width="70" height="70" /></p>
+            <a href="/FrontHome/UserCenter?id=@u.Id">@user.NickName</a></h3>
                 }
             }
            
