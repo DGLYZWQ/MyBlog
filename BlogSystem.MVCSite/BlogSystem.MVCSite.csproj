@@ -236,7 +236,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Backend\BackendAreaRegistration.cs" />
     <Compile Include="Areas\Backend\Common\PageConfig.cs" />
-    <Compile Include="Areas\Backend\Controllers\AdminsPermissionBackendController.cs" />
     <Compile Include="Areas\Backend\Controllers\BlogsBackendController.cs" />
     <Compile Include="Areas\Backend\Controllers\CategoryBackendController.cs" />
     <Compile Include="Areas\Backend\Controllers\CommentsBackendController.cs" />
@@ -245,7 +244,6 @@
     <Compile Include="Areas\Backend\Controllers\LoginController.cs" />
     <Compile Include="Areas\Backend\Controllers\MessagesBackendController.cs" />
     <Compile Include="Areas\Backend\Controllers\RolesBackendController.cs" />
-    <Compile Include="Areas\Backend\Controllers\SystemMenuBackendController.cs" />
     <Compile Include="Areas\Backend\Controllers\UsersBackendController.cs" />
     <Compile Include="Areas\Backend\Data\AdminsPermission\AddAdminsPermissionViewModel.cs" />
     <Compile Include="Areas\Backend\Data\AdminsPermission\DeleteAdminsPermissionViewModel.cs" />
@@ -311,10 +309,6 @@
     <Content Include="Areas\Backend\Views\UsersBackend\Edit.cshtml" />
     <Content Include="Areas\Backend\Views\Login\SignIn.cshtml" />
     <Content Include="Areas\Backend\Views\Home\Index.cshtml" />
-    <Content Include="Areas\Backend\Views\SystemMenuBackend\List.cshtml" />
-    <Content Include="Areas\Backend\Views\SystemMenuBackend\Add.cshtml" />
-    <Content Include="Areas\Backend\Views\SystemMenuBackend\Edit.cshtml" />
-    <Content Include="Areas\Backend\Views\AdminsPermissionBackend\List.cshtml" />
     <Content Include="Areas\Backend\Views\BlogsBackend\List.cshtml" />
     <Content Include="Areas\Backend\Views\CategoryBackend\List.cshtml" />
     <Content Include="Areas\Backend\Views\CategoryBackend\Add.cshtml" />

@@ -41,20 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IAdminsPermissionDal.cs" />
     <Compile Include="IBaseDAL.cs" />
     <Compile Include="IBlogDal.cs" />
     <Compile Include="ICategoryDal.cs" />
     <Compile Include="ICommentsDal.cs" />
-    <Compile Include="IDataShowDal.cs" />
     <Compile Include="IMessagesDal.cs" />
     <Compile Include="IRolesDal.cs" />
-    <Compile Include="ISystemMenuDal.cs" />
     <Compile Include="IUsersDal.cs" />
     <Compile Include="IUserFocusDal.cs" />
     <Compile Include="IUserMsgDal.cs" />
     <Compile Include="IViewsDal.cs" />
-    <Compile Include="IWebMenuDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
