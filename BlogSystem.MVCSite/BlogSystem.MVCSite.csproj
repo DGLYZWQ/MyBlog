@@ -151,8 +151,6 @@
     <Content Include="Areas\Backend\assets\img\user3.png" />
     <Content Include="Areas\Backend\assets\img\user4.png" />
     <Content Include="Areas\Backend\assets\img\user5.png" />
-    <Content Include="Areas\Backend\assets\scripts\getLeftMenu.js" />
-    <Content Include="Areas\Backend\assets\scripts\getUserInfo.js" />
     <Content Include="Areas\Backend\assets\scripts\klorofil-common.js" />
     <Content Include="Areas\Backend\assets\vendor\bootstrap\css\bootstrap-theme.css" />
     <Content Include="Areas\Backend\assets\vendor\bootstrap\css\bootstrap-theme.min.css" />

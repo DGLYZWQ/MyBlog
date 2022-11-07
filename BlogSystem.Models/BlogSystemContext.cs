@@ -23,14 +23,10 @@ namespace BlogSystem.Models
         public virtual DbSet<Comments> Comments { get; set; }
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<Messages> Messages { get; set; }
-        public virtual DbSet<DataShow> DataShow { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
-        public virtual DbSet<SystemMenu> SystemMenu { get; set; }
-        public virtual DbSet<WebMenu> WebMenu { get; set; }
         public virtual DbSet<Views> Views { get; set; }
         public virtual DbSet<UserFocus> UserFocus { get; set; }
         public virtual DbSet<UserMsg> UserMsg { get; set; }
-        public virtual DbSet<AdminsPermission> AdminsPermission { get; set; }
 
     }
 }
