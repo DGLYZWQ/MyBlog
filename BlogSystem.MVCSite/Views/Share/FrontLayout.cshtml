@@ -41,30 +41,31 @@
     <div id="fh5co-page">
         <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
         <aside id="fh5co-aside" role="complementary" class="border js-fullheight">
-            @{ 
-                var u =Context.Session["user"] as BlogSystem.Dtos.UsersDto;
-               
-                if (u==null)
+            @{
+                var u = Context.Session["user"] as BlogSystem.Dtos.UsersDto;
+
+                if (u == null)
                 {
-                     <h1 id="fh5co-logo" style="font-weight:400"><a href="/FrontHome/Index">My Blog</a></h1>
+                    <h1 id="fh5co-logo" style="font-weight:400"><a href="/FrontHome/Index">My Blog</a></h1>
                 }
                 else
                 {
                     var userBll = System.Web.Mvc.DependencyResolver.Current.GetService<BlogSystem.IBLL.IUsersBll>();
                     var user = userBll.GetUsers(u.Id);
-                     <h3 id="fh5co-logo" style="font-weight:100;font-size:25px">
-                         <p><img src="~/Upload/Users/@user.Image" class="img-circle" width="70" height="70" /></p>
-            <a href="/FrontHome/UserCenter?id=@u.Id">@user.NickName</a></h3>
+                    <h3 id="fh5co-logo" style="font-weight:100;font-size:25px">
+                        <p><img src="~/Upload/Users/@user.Image" class="img-circle" width="70" height="70" /></p>
+                        <a href="/FrontHome/UserCenter?id=@u.Id">@user.NickName</a>
+                    </h3>
                 }
             }
-           
+
             <nav id="fh5co-main-menu" role="navigation">
                 <ul id="navList" style="font-size: 25px">
-                        <li><a href="../FrontHome/Index">主页</a></li>
-                        <li><a href="../FrontHome/Category">分类</a></li>
-                        <li><a href="../FrontHome/FocusBlogList">关注</a></li>
-                        <li><a href="../FrontHome/AboutUs">关于我们</a></li>
-                        <li><a href="../FrontHome/ContactUs">联系我们</a></li>
+                    <li><a href="../FrontHome/Index">主页</a></li>
+                    <li><a href="../FrontHome/Category">分类</a></li>
+                    <li><a href="../FrontHome/FocusBlogList">关注</a></li>
+                    <li><a href="../FrontHome/AboutUs">关于我们</a></li>
+                    <li><a href="../FrontHome/ContactUs">联系我们</a></li>
                 </ul>
             </nav>
 
