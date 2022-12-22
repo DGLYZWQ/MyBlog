@@ -346,6 +346,9 @@
     <Content Include="Contents\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Contents\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Contents\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Areas\Backend\Views\Home\AdminInfo.cshtml" />
+    <Content Include="Areas\Backend\Views\Home\HowToUse.cshtml" />
+    <Content Include="Areas\Backend\Views\Home\FAQ.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Share\FrontLayout.cshtml" />
     <Content Include="Views\FrontHome\Login.cshtml" />

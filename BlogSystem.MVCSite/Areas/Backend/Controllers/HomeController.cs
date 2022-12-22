@@ -71,6 +71,21 @@ namespace BlogSystem.MVCSite.Areas.Backend.Controllers
             Session.Remove("admin");
             return Redirect("/Backend/Login/SignIn");
         }
+
+        public async Task<ActionResult> AdminInfo()
+        {
+            return View();
+        }
+
+        public async Task<ActionResult> HowToUse()
+        {
+            return View();
+        }
+
+        public async Task<ActionResult> FAQ()
+        {
+            return View();
+        }
     }
 
     public class IndexDto
