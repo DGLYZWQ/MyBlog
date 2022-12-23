@@ -462,6 +462,11 @@ namespace BlogSystem.MVCSite.Controllers
         {
             return View();
         }
+
+        public ActionResult About()
+        {
+            return View();
+        }
         public ActionResult Exit()
         {
             Session.Remove("user");

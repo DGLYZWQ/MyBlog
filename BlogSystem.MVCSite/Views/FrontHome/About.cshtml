@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewBag.Title = "About";
+    Layout = "~/Views/Share/FrontLayout.cshtml";
+}
+
+<div class="layout">
+    <h1 style="font-size: 60px"> My Blog</h1>
+    <div class="markdown">
+        <p style="font-size: 30px;">用它构建你的博客网站</p>
+        <p style="font-size: 30px;">带给你简单而愉悦的使用体验</p>
+    </div>
+    <div class="markdown">
+
+    </div>
+    <a href="#">
+        <button type="button" class="btn">快速上手</button>
+    </a>
+</div>
+
+<div class="features" data-cols="3">
+    <div class="features-item">
+        <i>🚀</i>
+        <h3>更好的编译性能</h3>
+        <p>
+            通过结合使用 Umi 4 MFSU、esbuild、SWC、持久缓存等方案，带来比 dumi 1.x 更快的编译速度
+        </p>
+    </div>
+    <div class="features-item">
+        <i>🔍</i>
+        <h3>内置全文搜索</h3>
+        <p>
+            不需要接入任何三方服务，标题、正文、demo 等内容均可被搜索，支持多关键词搜索，且不会带来产物体积的增加
+        </p>
+    </div>
+    <div class="features-item">
+        <i>🎨</i>
+        <h3>全新主题系统</h3>
+        <p>
+            为主题包增加插件、国际化等能力的支持，且参考 Docusaurus 为主题用户提供局部覆盖能力，更强更易用
+        </p>
+    </div>
+    <div class="features-item">
+        <i>💡</i>
+        <h3>继续为组件研发而生</h3>
+        <p>
+            通过结合使用 Umi 4 MFSU、esbuild、SWC、持久缓存等方案，带来比 dumi 1.x 更快的编译速度
+        </p>
+    </div>
+    <div class="features-item">
+        <i>🚥</i>
+        <h3>约定式路由增强</h3>
+        <p>
+            不需要接入任何三方服务，标题、正文、demo 等内容均可被搜索，支持多关键词搜索，且不会带来产物体积的增加
+        </p>
+    </div>
+    <div class="features-item">
+        <i>📈</i>
+        <h3>数据看板</h3>
+        <p>
+            为主题包增加插件、国际化等能力的支持，且参考 Docusaurus 为主题用户提供局部覆盖能力，更强更易用
+        </p>
+    </div>
+</div>
+
+
+
+<style>
+    .layout {
+        margin: -50px -10px 0;
+        padding: 80px 0;
+        text-align: center;
+        background-color: #f9f9f9;
+    }
+    .markdown {
+        color: #454d64;
+        padding: 10px 0 0 0;
+        line-height: 1.6;
+    }
+    .features {
+        margin: 5px auto 48px;
+        max-width: 1392px;
+        padding: 0 24px;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+    .features-item {
+        width: 31.4%;
+        margin: 12px 10px;
+        float: left;
+    }
+    .features-item i {
+        font-size: 64px;
+        font-style: normal;
+    }
+    .features-item p {
+        margin: 12px 0;
+        color: #4f5866;
+        font-size: 16px;
+        line-height: 1.475;
+    }
+    .btn {
+        padding: 30px 32px;
+        height: 54px;
+        color: #ffffff;
+        font-size: 18px;
+        background: #73B4BD;
+        border: 1px solid;
+        border-radius: 22px;
+        box-sizing: border-box;
+        cursor: pointer;
+        outline: none;
+        transition: all .3s;
+    }
+</style>

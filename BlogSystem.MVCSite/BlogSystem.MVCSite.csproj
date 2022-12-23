@@ -196,6 +196,9 @@
     <Content Include="Contents\fonts\fontawesome-webfont.svg" />
     <Content Include="Contents\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Contents\fonts\icomoon\icomoon.svg" />
+    <Content Include="Contents\images\1.jpg" />
+    <Content Include="Contents\images\2.jpg" />
+    <Content Include="Contents\images\3.jpg" />
     <Content Include="Contents\images\img-1.jpg" />
     <Content Include="Contents\images\img-2.jpg" />
     <Content Include="Contents\images\img-3.jpg" />
@@ -370,6 +373,7 @@
     <Content Include="Views\FrontHome\EditBlog.cshtml" />
     <Content Include="Views\FrontHome\UserCenter.cshtml" />
     <Content Include="Views\FrontHome\UpdateInfo.cshtml" />
+    <Content Include="Views\FrontHome\About.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
