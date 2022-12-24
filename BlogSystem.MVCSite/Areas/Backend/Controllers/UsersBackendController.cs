@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.Net.Mime;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -71,7 +73,7 @@ namespace BlogSystem.MVCSite.Areas.Backend.Controllers
 
                 var names = UploadFiles(file, @"../../Upload/Users/"); //得到上传图片的名称
 
-                var rs = await _users_bll.AddUsersAsync(model.Email, model.Password, model.NickName, names[0],
+                var rs = await _users_bll.AddUsersAsync(model.Email, GetMD5String(model.Password), model.NickName, names[0],
                     names[1], model.RolesId);
                 if (rs > 0)
                 {
@@ -201,5 +203,28 @@ namespace BlogSystem.MVCSite.Areas.Backend.Controllers
                 return Content("<script>alert('删除失败');location.href='../../../Backend/UsersBackend/List'</script>");
             }
         }
+        /// <summary>
+        /// 密码加密（MD5)
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public string GetMD5String(string str)
+        {
+            //1.创建md5对象
+            MD5 md5 = MD5.Create();
+            //2.把要加密的字符转换为字节数组
+            byte[] buffer = Encoding.UTF8.GetBytes(str);
+            //3.把字节数组当中的所有字节进行加密，之后保存到新的字节数组当中
+            byte[] newBuffer = md5.ComputeHash(buffer);
+            //4.把加密后的字节数组转换为字符串
+            var substring = new StringBuilder();
+            foreach (var item in newBuffer)
+            {
+                substring.Append(item.ToString("x2"));
+            }
+
+            return substring.ToString();
+        }
+
     }
 }
