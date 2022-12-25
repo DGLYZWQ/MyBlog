@@ -13,6 +13,7 @@ using PagedList;
 
 namespace BlogSystem.MVCSite.Areas.Backend.Controllers
 {
+    [AdminAuthorize]
     public class RolesBackendController : Controller
     {
         // GET : Backend/RolesBackend

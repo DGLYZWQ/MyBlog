@@ -12,6 +12,7 @@ using PagedList;
 
 namespace BlogSystem.MVCSite.Areas.Backend.Controllers
 {
+    [AdminAuthorize]
     public class HomeController : Controller
     {
         private IBlogBll _blogBll;

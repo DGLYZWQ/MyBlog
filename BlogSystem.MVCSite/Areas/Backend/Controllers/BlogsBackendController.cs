@@ -7,10 +7,12 @@ using BlogSystem.Dtos;
 using BlogSystem.IBLL;
 using BlogSystem.MVCSite.Areas.Backend.Common;
 using BlogSystem.MVCSite.Areas.Backend.Data.Blogs;
+using BlogSystem.MVCSite.Filter;
 using PagedList;
 
 namespace BlogSystem.MVCSite.Areas.Backend.Controllers
 {
+    [AdminAuthorize]
     public class BlogsBackendController : Controller
     {
         private IBlogBll _blog_bll;

@@ -7,10 +7,12 @@ using System.Web.UI.WebControls.Expressions;
 using BlogSystem.Dtos;
 using BlogSystem.MVCSite.Areas.Backend.Common;
 using BlogSystem.MVCSite.Areas.Backend.Data.Messages;
+using BlogSystem.MVCSite.Filter;
 using PagedList;
 
 namespace BlogSystem.MVCSite.Areas.Backend.Controllers
 {
+    [AdminAuthorize]
     public class MessagesBackendController : Controller
     {
         private IMessagesBll _messages_bll;

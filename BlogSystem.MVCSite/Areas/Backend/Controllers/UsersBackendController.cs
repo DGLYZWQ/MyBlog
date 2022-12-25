@@ -17,6 +17,7 @@ using PagedList;
 
 namespace BlogSystem.MVCSite.Areas.Backend.Controllers
 {
+    [AdminAuthorize]
     public class UsersBackendController : Controller
     {
         private IUsersBll _users_bll;

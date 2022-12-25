@@ -6,10 +6,12 @@ using BlogSystem.IBLL;
 using BlogSystem.MVCSite.Areas.Backend.Common;
 using BlogSystem.MVCSite.Areas.Backend.Data.Category;
 using BlogSystem.MVCSite.Areas.Backend.Views.CategoryBackend;
+using BlogSystem.MVCSite.Filter;
 using PagedList;
 
 namespace BlogSystem.MVCSite.Areas.Backend.Controllers
 {
+    [AdminAuthorize]
     public class CategoryBackendController : Controller
     {
         private ICategoryBll _category_bll;
