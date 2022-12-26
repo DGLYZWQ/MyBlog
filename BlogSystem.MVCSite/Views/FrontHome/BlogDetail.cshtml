@@ -30,6 +30,7 @@
     {
         font-size: 19px;
         padding-left:24px;
+        line-height: 1.75;
     }
     
 </style>
@@ -46,7 +47,7 @@
             @Html.Raw(Model.Content.Replace("\r\n","<br>").Replace("\r", "<br>").Replace("\n", "<br>"))
         </div>
         <h2 class="content1">
-            <a href="/FrontHome/Comment?id=@Model.Id" style="font-size:23px"><span class="glyphicon glyphicon-comment" style="font-size: 20px;"></span>&nbsp;@commentcounts</a>
+            <a href="/FrontHome/Comment?id=@Model.Id" style="font-size: 23px; "><span class="glyphicon glyphicon-comment" style="font-size: 20px;"></span>&nbsp;@commentcounts</a>
         </h2>
     </div>
     <div class="col-md-3">

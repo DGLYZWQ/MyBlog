@@ -140,6 +140,7 @@
     <Content Include="Areas\Backend\assets\css\main.css" />
     <Content Include="Areas\Backend\assets\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Areas\Backend\assets\img\apple-icon.png" />
+    <Content Include="Areas\Backend\assets\img\background-pic.jpg" />
     <Content Include="Areas\Backend\assets\img\favicon.png" />
     <Content Include="Areas\Backend\assets\img\login-bg.jpg" />
     <Content Include="Areas\Backend\assets\img\logo-dark.png" />
