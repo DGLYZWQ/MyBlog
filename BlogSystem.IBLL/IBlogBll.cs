@@ -8,7 +8,9 @@ namespace BlogSystem.Dtos
     public interface IBlogBll
     {
         Task<int> AddBlogAsync(string title, string content, Guid categoryId, Guid userId, bool isAdmin = false);
-        Task<int> EditBlogAsync(Guid id, string title, Guid categoryId, string content);
+        Task<int> AddBlogAsync(string title, string content, Guid categoryId, Guid userId, string Labels, bool isPublic);
+        Task<int> EditBlogAsync(Guid id, string title, Guid categoryId, string content, string Labels, bool isPublic);
+        Task<int> EditBlogPublicAsync(Guid id);
         Task<int> EditAdminBlogAsync(Guid id, Guid categoryId, bool isPublic);
         Task<int> DeleteBlogAsync(Guid id);
         Task<List<BlogDto>> GetAllAsync();

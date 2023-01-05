@@ -70,6 +70,8 @@ namespace BlogSystem.MVCSite.Areas.Backend.Controllers
         public ActionResult Logout()
         {
             Session.Remove("admin");
+            Session.Remove("LoginOK");
+            Session.Remove("RolesId");
             return Redirect("/Backend/Login/SignIn");
         }
 

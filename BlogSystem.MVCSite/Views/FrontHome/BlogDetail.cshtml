@@ -1,79 +1,207 @@
 ﻿@model BlogSystem.Dtos.BlogDto
 @using PagedList.Mvc;
- 
 
-@{ 
-    ViewBag.Title = "My Blog";
+
+@{ ViewBag.Title = "My Blog";
     string search = ViewBag.Search;
     Layout = "~/Views/Share/FrontLayout.cshtml";
     var category = ViewBag.BlogCategroy as List<BlogSystem.Dtos.BlogCategoryDto>;
-    int fcount= ViewBag.fanscount;
+    int fcount = ViewBag.fanscount;
     int focount = ViewBag.focuscount;
     bool isfocus = ViewBag.isFocus;
+    bool isThump = ViewBag.isThump;
+    bool isCollect = ViewBag.isCollect;
     var blogUser = ViewBag.blogUser as BlogSystem.Dtos.UsersDto;
-    int commentcounts = ViewBag.comments;
-    }
- 
+    int commentcounts = ViewBag.comments; }
+
 <style>
     a {
         color: #808080;
         text-decoration: none;
     }
-    .content
-    {
-        text-indent:24px;
+
+    .content {
+        text-indent: 24px;
     }
-    .h1{
-        text-indent:24px;
+
+    .h1 {
+        text-indent: 24px;
     }
-    .content1
-    {
+
+    .content1 {
         font-size: 19px;
-        padding-left:24px;
+        padding-left: 24px;
         line-height: 1.75;
     }
-    
 </style>
 <div class="row" role="navigation">
     <div class="panel content1">
-        <a class="navbar-brand" href="javascript:history.go(-1)"><h2><</h2></a>
+        <a class="navbar-brand" href="/FrontHome/Index"><h2><</h2></a>
     </div>
 </div>
 <div class="row">
     <div class="col-md-9" style="padding:25px">
-         <h1 class="h1">@Model.Title</h1>
+        <h1 class="h1">@Model.Title</h1>
         <hr />
         <div class="content1">
-            @Html.Raw(Model.Content.Replace("\r\n","<br>").Replace("\r", "<br>").Replace("\n", "<br>"))
+            @Html.Raw(Model.Content.Replace("\r\n", "<br>").Replace("\r", "<br>").Replace("\n", "<br>"))
+        </div>
+        <div class="content1">
+            @{ if (!string.IsNullOrWhiteSpace(Model.Labels))
+                {
+                    foreach (string label in Model.Labels.Split(' '))
+                    {
+    <span class="label label-default">@label</span> }
+} }
+        </div>
+        <div style="text-align:center;padding-top:20px">
+            <div class="row">
+                <div class="col-md-5"></div>
+                <div class="col-md-1">
+                    @{ if (isThump)
+                                    {
+                                        <a href="/FrontHome/ThumpCollect?blogId=@Model.Id&optType=1"><h1><span class="glyphicon glyphicon-thumbs-up" style="color:rgb(255, 140, 60)"></span></h1>已点赞</a>
+                                                    }
+                                                    else
+                                                    {
+                                        <a href="/FrontHome/ThumpCollect?blogId=@Model.Id&optType=1"><h1><span class="glyphicon glyphicon-thumbs-up"></span></h1>点赞</a> } }
+                </div>
+                <div class="col-md-1">
+                    @{ if (isCollect)
+                                    {
+                                        <a href="/FrontHome/ThumpCollect?blogId=@Model.Id&optType=2"><h1><span class="glyphicon glyphicon-star-empty" style="color:rgb(255, 140, 60)"></span></h1>已收藏</a>
+                                    }
+                                    else
+                                    {
+                        <a href="/FrontHome/ThumpCollect?blogId=@Model.Id&optType=2"><h1><span class="glyphicon glyphicon-star-empty"></span></h1>收藏</a> } }
+                </div>
+
+            </div>
+
         </div>
         <h2 class="content1">
             <a href="/FrontHome/Comment?id=@Model.Id" style="font-size: 23px; "><span class="glyphicon glyphicon-comment" style="font-size: 20px;"></span>&nbsp;@commentcounts</a>
         </h2>
+        <div class="row">
+            <div class="col-md-9" style="padding:25px">
+                <h3 class="h3">评论列表</h3>
+                <hr />
+                @{ if (commentcounts > 0)
+                    {
+                        int i = 1;
+                        var commentList = ViewBag.CommentList as List<BlogSystem.Dtos.CommentsDto>;
+                        foreach (var item in commentList.Where(x => string.IsNullOrWhiteSpace(x.Pid)))
+                        {
+
+                            var replyList = commentList.Where(x => x.Pid == item.Id.ToString());
+        <div class="media">
+            <div class="media-left">
+
+            </div>
+
+            <div class="media-body">
+
+                <div class="page-header" style="margin-top:0px;">
+                    <h4><small>#@(i++)</small>&nbsp;&nbsp;<small>@item.UpdateTime</small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>@item.UserName</small></h4>
+                    <p style="padding-top:5px;padding-left:30px;">@System.Web.HttpUtility.UrlDecode(item.Content)</p>
+                    <p style="text-align:right"><button type="button" class="btn  btn-sm btn-success" data-id="@item.Id" data-toggle="modal" data-target="#myModal">评论</button></p>
+                    @{ if (replyList.Any())
+                                            {
+                        <div style="margin-left:60px;padding-right:60px;background-color:#efefef;">
+                            <div class="panel-heading">回复内容</div>
+                            <div class="media-body">
+
+                                @{ int j = 1;
+                                                            foreach (var r in replyList)
+                                                            {
+                                    <div style="margin-top:0px;">
+                                        <h4>
+                                            <small>&nbsp;&nbsp;#@(j++)</small>&nbsp;<small>@r.UpdateTime &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>@r.UserName</span></small><small>
+
+                                            </small>
+                                        </h4>
+                                        <p style="padding-top:5px;padding-left:30px;">@System.Web.HttpUtility.UrlDecode(r.Content)</p>
+                                    </div> } }
+
+
+                            </div>
+                        </div> } }
+                </div>
+
+
+
+            </div>
+
+
+        </div> }
+} }
+                <form role="form" action="/FrontHome/CommentPost" method="post">
+                    <input type="hidden" name="blogId" value="@Request.QueryString["id"]" />
+                    <div class="form-group">
+                        <label for="name">发表评论</label>
+                        <textarea class="form-control" placeholder="请输入你要评论的内容..." id="msg" name="msg" rows="10" cols="10" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-info">提交回复</button>
+                </form>
+            </div>
+
+        </div>
+        <div id="msg2" style="cursor:pointer"><img src="~/Contents/images/bq.png" /></div>
+        <div id="emoji" style="display:none"></div>
+
+        <!-- 模态框 -->
+        <form method="post" action="/FrontHome/CommentPost1">
+            <div class="modal fade" id="myModal">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <input type="hidden" name="blogId" value="@Request.QueryString["id"]" />
+                        <!-- 模态框头部 -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">评论回复</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <!-- 模态框主体 -->
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <input type="hidden" id="pid" name="pid" />
+                                <textarea class="form-control" placeholder="请输入你要回复的内容..." name="msg" id="replyMsg" required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-xs btn-info">提交评论</button>
+                            <br />
+                            <div id="msg1" style="cursor:pointer"><img src="~/Contents/images/bq.png" /></div>
+                            <div id="emoji1" style="display:none"></div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </form>
     </div>
     <div class="col-md-3">
-        
+
         <div class="panel panel-group">
             <div class="panel-body">
                 <h3 id="fh5co-logo" style="font-weight:100;font-size:15px;text-align:center">
                     <p><img src="~/Upload/Users/@blogUser.Image" class="img-circle" width="50" height="50" /></p>
-                    <a href="/FrontHome/UserCenter?id=@blogUser.Id"><h3>@blogUser.NickName</h3></a>
+                    <a href="/FrontHome/UserCenter?UserId=@blogUser.Id"><h3>@blogUser.NickName</h3></a>
                 </h3>
             </div>
             <ul class="list-group">
                 <li class="list-group-item" style="border-width:0px;text-align:center;margin-top:0px">
-                    @{ 
-                        if(isfocus)
+                    @{ if (isfocus)
                         {
-                            <a href="#" class="btn btn-info">已关注</a>
-                        }
-                        else
-                        {
-                            <a href="/FrontHome/Focus?uid=@blogUser.Id&bid=@Model.Id" class="btn btn-info">+关注</a>
-                        }
-                    }
-                    
+            <a href="#" class="btn btn-info">已关注</a> }
+        else
+        {
+<a href="/FrontHome/Focus?uid=@blogUser.Id&bid=@Model.Id" class="btn btn-info">+关注</a> } }
+
                 </li>
-                <li  class="list-group-item" style="border-width:0px;text-align:center;margin-top:0px">
+                <li class="list-group-item" style="border-width:0px;text-align:center;margin-top:0px">
                     <h5>粉丝：@fcount</h5>
                     <h5>关注：@focount</h5>
                 </li>
@@ -82,14 +210,99 @@
         <div class="panel panel-group">
             <div class="panel-body">
                 <h3>博客分类</h3>
-               
+
             </div>
             <ul class="list-group">
                 @{ foreach (var item in category)
                     {
-            <li class="list-group-item" style="border-width:0px" ><a  href="/FrontHome/UserCenter?id=@blogUser.Id&cid=@item.CategoryId">@item.CategoryName (@(item.Count))</a></li>
+        <li class="list-group-item" style="border-width:0px"><a href="/FrontHome/UserCenter?UserId=@blogUser.Id&cid=@item.CategoryId">@item.CategoryName (@(item.Count))</a></li>
  } }
             </ul>
         </div>
     </div>
 </div>
+@section css
+{
+
+    <link href="~/Contents/emotion/master/css/jquery-sinaEmotion-2.1.0.min.css" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #emoji {
+            width: 600px;
+        }
+
+            #emoji > div {
+                cursor: pointer;
+                display: inline-block;
+            }
+        #emoji1 {
+            width: 280px;
+            padding-top: 15px
+        }
+
+            #emoji1 > div {
+                cursor: pointer;
+                display: inline-block;
+            }
+    </style>
+ 
+}
+@section js
+{
+
+   
+     
+    <script>
+        // 网页加载时，产生 （表情）
+        $(window).load(function () {
+            // 表情格式就是&#128512;循环是多少到多少，我这只是列举了一点表情。
+            for (var i = 128512; i < 128590; i++) {
+                // Jquery创建div(已表情的二进制作为id)，到后面用于获取指定表情。
+                var div = "<div id='" + i + "'>&#" + i + ";</div>";
+                // 将创建好的节点追加到指定的节点。
+                $("#emoji").append(div);
+                $("#emoji1").append(div);
+            }
+            // 获取指定的表情
+            // 为什么要使用live，因为是自动生成动态节点，使用静态获取不到id，只有使用了动态才能节点。
+            $("#emoji>div").on('click', function () {
+                // 将选择的表情追加到指定节点。
+                var emo = $(this).text();
+                console.log(emo)
+                $("#msg").val($("#msg").val()+emo);
+            });
+            $("#emoji1>div").on('click', function () {
+                // 将选择的表情追加到指定节点。
+                var emo = $(this).text();
+                console.log(emo)
+                $("#replyMsg").val($("#replyMsg").val()+emo);
+            });
+        })
+        // 打开添加、编辑模态框
+        $('#myModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var modal = $(this);
+            //获取要操作的ID
+            var id = button.data('id');
+            $('#pid').val(id);
+        });
+        $("#msg1").click(function () {
+            if ($("#emoji1").is(":hidden"))
+                $("#emoji1").show();
+            else
+                $("#emoji1").hide();
+        })
+        $("#msg2").click(function () {
+            if ($("#emoji").is(":hidden"))
+                $("#emoji").show();
+            else
+                $("#emoji").hide();
+        })
+    </script>
+
+
+}

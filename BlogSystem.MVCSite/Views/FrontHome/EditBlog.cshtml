@@ -5,7 +5,13 @@
 }
 <link href="/Contents/font-awesome.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="~/Contents/css/bootstrap.css">
-<link href="~/Contents/summernote/summernote.css" rel="stylesheet" />
+@*<link href="~/Contents/summernote/summernote.css" rel="stylesheet" />*@
+<script src="~/ckeditor5/ckeditor.js"></script>
+<style>
+    .ck-editor__editable {
+        min-height: 300px;
+    }
+</style>
 <div class="container">
     <h2>@(string.IsNullOrWhiteSpace(Request["id"])?"添加博客": "编辑博客")</h2>
 
@@ -15,12 +21,33 @@
 
             <div class="form-group">
                 <div><label for="name">博客标题</label></div>
-                <input type="text" class="form-control" name="Title" style="width:360px" placeholder="请输入博客标题" value="@Model.Title" required>
+                <input type="text" class="form-control" name="Title" id="Title" style="width:360px" placeholder="请输入博客标题" value="@Model.Title" required>
             </div>
             <div class="form-group" style="padding-left:200px;">
                 <div> <label for="name">博客分类</label></div>
-                <input type="hidden" id="Content" name="Content" />
+
                 @Html.DropDownList("CategoryId", ViewBag.SelectList as IEnumerable<SelectListItem>, new { @class = "form-control", @style = "width:200px" })
+            </div>
+
+
+
+        </div>
+        <div class="form-inline" style="margin-top:25px;">
+
+            <div class="form-group">
+                <div><label for="name">标签</label></div>
+                <input type="text" class="form-control" name="Labels" id="Labels" style="width:360px" placeholder="输入标签，多个标签用空格隔开" value="@Model.Labels">
+            </div>
+            <div class="form-group" style="padding-left:200px;">
+                <div> <label for="name">是否公开</label></div>
+                <label class="radio-inline">
+                    <input name="IsPublic" id="Public" value="true" type="radio" @(Model.IsPublic ? "checked" : "")>
+                    <span><i></i>是</span>
+                </label>
+                <label class="radio-inline">
+                    <input name="IsPublic" value="false" id="NoPublic" type="radio" @(!Model.IsPublic ? "checked" : "")>
+                    <span><i></i>否</span>
+                </label>
             </div>
 
 
@@ -28,19 +55,46 @@
         </div>
         <div class="form-group" style="margin-top:15px;">
             <label for="name">正文内容</label>
-            
-            <div class="summernote">@Html.Raw(Model.Content)</div>
+            <textarea class="form-control-erbi col-lg-5" name="Content" id="editor">@Html.Raw(Model.Content)</textarea>
+            @*<div class="summernote">@Html.Raw(Model.Content)</div>*@
         </div>
 
-        <button type="submit" class="btn btn-info">发布博客</button>
+        <button type="button" class="btn btn-info" id="btnSave">保存草稿</button>&nbsp;&nbsp;&nbsp;&nbsp;<span id="spanmsg"></span>
+        <button type="submit" class="btn btn-info" style="float:right">发布博客</button>
     </form>
 </div>
-<!-- jQuery -->
 <script src="~/Contents/js/jquery.min.js"></script>
+<!-- jQuery -->
+<!--<script src="~/Contents/js/jquery.min.js"></script>
 <script src="~/Contents/js/bootstrap.min.js"></script>
 <script src="~/Contents/summernote/summernote.min.js"></script>
-<script src="~/Contents/summernote/summernote-zh-CN.js"></script>
+<script src="~/Contents/summernote/summernote-zh-CN.js"></script>-->
 <script>
+    ClassicEditor
+        .create(document.querySelector('#editor'), {
+            // toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+            ckfinder: {
+                uploadUrl:"/FrontHome/Upload"
+            }
+        })
+        .then(editor => {
+            window.editor = editor;
+            
+        })
+        .catch(err => {
+            console.error(err.stack);
+        });
+
+    $("#btnSave").click(function () {
+        $.post("/FrontHome/SaveDraft", {
+            Title: $("#Title").val(), CategoryId: $("#CategoryId").val(), Labels: $("#Labels").val(),
+            IsPublic: $('input:radio:checked').val(), Content: window.editor.getData()
+        }, function (result) {
+            $("#spanmsg").html(result.msg);
+        });
+    })
+</script>
+@*<script>
     $(function () {
         $('.summernote').summernote({
             toolbar: [//定制工具栏，格式:['自定义分组名',['规定组内元素列表',]],
@@ -72,4 +126,4 @@
             return true;
         })
     })
-</script>
+</script>*@

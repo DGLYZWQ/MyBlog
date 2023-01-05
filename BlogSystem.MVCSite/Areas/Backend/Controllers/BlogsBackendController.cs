@@ -59,7 +59,7 @@ namespace BlogSystem.MVCSite.Areas.Backend.Controllers
         {
             // await BindCategory(Guid.Empty);
             var clist = await _category_bll.GetAllAsync();
-            ViewBag.Category = new SelectList(clist.ToList(), "Id", "Title");
+            ViewBag.Category = new SelectList(clist.Where(x => x.Title == "公告").ToList(), "Id", "Title");
             return View(new AddNoticeViewModel());
         }
 
@@ -92,7 +92,7 @@ namespace BlogSystem.MVCSite.Areas.Backend.Controllers
                 }
             }
             var clist = await _category_bll.GetAllAsync();
-            ViewBag.Category = new SelectList(clist.ToList(), "Id", "Title",model.CategoryId);
+            ViewBag.Category = new SelectList(clist.Where(x => x.Title == "公告").ToList(), "Id", "Title",model.CategoryId);
 
             return View(model);
         }
@@ -127,7 +127,23 @@ namespace BlogSystem.MVCSite.Areas.Backend.Controllers
 
             return View(model);
         }
-
+        [HttpGet]
+        public async Task<ActionResult> Delete(Guid id)
+        {
+            var rs = await _blog_bll.DeleteBlogAsync(id);
+            if (rs > 0)
+            {
+                return Content("<script>alert('删除成功');location.href='/Backend/BlogsBackend/List'</script>");
+            }
+            else if (rs == -2)
+            {
+                return Content("<script>alert('数据传输丢失，请稍后再试');location.href='/Backend/BlogsBackend/List'</script>");
+            }
+            else
+            {
+                return Content("<script>alert('删除失败');location.href='/Backend/BlogsBackend/List'</script>");
+            }
+        }
 
     }
 }

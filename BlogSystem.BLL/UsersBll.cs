@@ -16,10 +16,12 @@ namespace BlogSystem.BLL
     public class UsersBll : IUsersBll
     {
         private IUsersDal _dal;
+        private IBlogBll _blogBll;
 
-        public UsersBll(IUsersDal dal)
+        public UsersBll(IUsersDal dal, IBlogBll blogBll)
         {
             _dal = dal;
+            _blogBll = blogBll;
         }
 
         public async Task<int> AddUsersAsync(string email, string password, string nickname, string avatar, string image, Guid rolesId)
@@ -83,7 +85,18 @@ namespace BlogSystem.BLL
         {
             var data = await _dal.QueryAsync(id);
             if (data != null)
+            {
+                var blogList =await _blogBll.GetMyBlogListAsync(data.Id, "", "");
+                if(blogList.Any())
+                {
+                    foreach(var item in blogList)
+                    {
+                        await _blogBll.DeleteBlogAsync(item.Id);
+                    }
+                }
                 return await _dal.DeleteAsync(data);
+            }
+                
             return -2;
         }
 

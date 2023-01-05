@@ -44,8 +44,10 @@
     <Compile Include="IBlogBll.cs" />
     <Compile Include="ICategoryBll.cs" />
     <Compile Include="ICommentsBll.cs" />
+    <Compile Include="IDraftBll.cs" />
     <Compile Include="IMessagesBll.cs" />
     <Compile Include="IRolesBll.cs" />
+    <Compile Include="IThumbCollectBll.cs" />
     <Compile Include="IUserFocusBll.cs" />
     <Compile Include="IUserMsgBll.cs" />
     <Compile Include="IUsersBll.cs" />

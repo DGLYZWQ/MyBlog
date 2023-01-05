@@ -50,9 +50,11 @@
     <Compile Include="BlogBll.cs" />
     <Compile Include="CategoryBll.cs" />
     <Compile Include="CommentsBll.cs" />
+    <Compile Include="DraftBll.cs" />
     <Compile Include="MessagesBll.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RolesBll.cs" />
+    <Compile Include="ThumbCollectBll.cs" />
     <Compile Include="UserFocusBll.cs" />
     <Compile Include="UserMsgBll.cs" />
     <Compile Include="UsersBll.cs" />

@@ -48,12 +48,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseDAL.cs" />
+    <Compile Include="DrafDal.cs" />
     <Compile Include="BlogDal.cs" />
     <Compile Include="CategoryDal.cs" />
     <Compile Include="CommentsDal.cs" />
     <Compile Include="MessagesDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RolesDal.cs" />
+    <Compile Include="ThumbCollectDal.cs" />
     <Compile Include="UsersDal.cs" />
     <Compile Include="UserFocusDal.cs" />
     <Compile Include="UserMsgDal.cs" />

@@ -20,6 +20,8 @@ namespace BlogSystem.Models
 
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<Blog> Blog { get; set; }
+        public virtual DbSet<Draft> Drafts { get; set; }
+        public virtual DbSet<ThumbCollect> ThumbCollects { get; set; }
         public virtual DbSet<Comments> Comments { get; set; }
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<Messages> Messages { get; set; }

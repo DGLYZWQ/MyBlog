@@ -18,37 +18,52 @@
 </nav>
 <div class="row">
     <div class="col-md-9" style="padding:25px">
-        @{ 
-            foreach(var item in Model)
-            {
-                 <div class="media">
-            <div class="media-left">
+        <ul class="nav nav-pills">
+            <li class="nav-item" style="background-color:#efefef">
+                <a class="nav-link " href="/FrontHome/MyBlog" style="font-weight:bolder;color:black">已发布</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/FrontHome/MyDraft" style="font-weight:bolder;color:gray">草稿箱</a>
+            </li>
 
-            </div>
-           
-            <div class="media-body">
-                <a href="/FrontHome/BlogDetail?id=@item.Id">
-                    <h2 class="media-heading" style="color:#377f7f">@item.Title</h2>
-                    <p style="padding-top:5px; color: #808080;">@item.Content</p>
-                    <div class="page-header" style="margin-top:0px;">
-                        <h4><small>@item.UserName</small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>@item.UpdateTime</small>
-                        
-                        <span style="float:right">
-                            <a href="/FrontHome/DelBlog?id=@item.Id" onclick="return confirm('确定要删除吗？')" title="删除" style="float: right; margin-left: 15px; color: #808080 "><span class="glyphicon glyphicon-trash"></span> </a>
-                           <a href="/FrontHome/EditBlog?id=@item.Id" title="编辑" style="float: right; margin-left: 15px; color: #808080 "><span class="glyphicon glyphicon-edit"></span> </a>
-                        </span>
-                        </h4>
-                    </div>
-                      </a>
-            </div>
-          
+        </ul>
+        @{ foreach (var item in Model)
+                        {
+            <div class="media">
+                <div class="media-left">
+
+                </div>
+
+                <div class="media-body">
+                    <a href="/FrontHome/BlogDetail?id=@item.Id"  target="_blank">
+                        <h2 class="media-heading" style="color:#377f7f">@item.Title</h2>
+                        <p style="padding-top:5px; color: #808080;">@item.Content</p>
+                        <div class="page-header" style="margin-top:0px;">
+                            <h4 style="font-size: 23px;">
+                                <small>@item.UserName</small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>@item.UpdateTime</small>
+                                &nbsp;&nbsp;
+                                <small><span class="glyphicon glyphicon-eye-open" style="font-size: 10px;"></span>&nbsp;&nbsp;@item.Views</small>
+                                &nbsp;&nbsp;
+                                <small><span class="glyphicon glyphicon-thumbs-up" style="font-size: 10px;"></span>&nbsp;&nbsp;@item.Thumps</small>
+                                &nbsp;&nbsp;
+                                <small><span class="glyphicon glyphicon-comment" style="font-size: 10px;"></span>&nbsp;&nbsp;@item.Comments</small>
+
+
+                                <span style="float:right">
+                                    <a href="/FrontHome/DelBlog?id=@item.Id" onclick="return confirm('确定要删除吗？')" title="删除" style="float: right; margin-left: 15px; color: #808080 "><span class="glyphicon glyphicon-trash"></span> </a>
+                                    <a href="/FrontHome/EditBlog?id=@item.Id" title="编辑" style="float: right; margin-left: 15px; color: #808080 "><span class="glyphicon glyphicon-edit"></span> </a>
+                                    <a href="/FrontHome/EditBlogPublic?id=@item.Id" title="@(item.IsPublic?"不公开":"公开")" style="float: right; margin-left: 15px; color: #808080 "><span class="@(!item.IsPublic?"glyphicon glyphicon-eye-open":"glyphicon glyphicon-eye-close")"></span> </a>
+                                </span>
+                            </h4>
+                        </div>
+                    </a>
+                </div>
+
+            </div> } }
+
+        <div class="pagination">
+            @Html.PagedListPager(Model, page => Url.Action("MyBlog", new { page }))
         </div>
-            }
-        }
-       
-    <div class="pagination">
-        @Html.PagedListPager(Model, page => Url.Action("MyBlog", new { page }))
-    </div>
 
     </div>
      @Html.Partial("_Right")

@@ -36,6 +36,7 @@
     <!-- Modernizr JS -->
     <script src="~/Contents/js/modernizr-2.6.2.min.js"></script>
     <link rel="stylesheet" href="~/Contents/css/bootstrap.css">
+    @RenderSection("css", false)
 </head>
 <body>
     <div id="fh5co-page">
@@ -46,15 +47,15 @@
 
                 if (u == null)
                 {
-                    <h1 id="fh5co-logo" style="font-weight:400"><a href="/FrontHome/Index">My Blog</a></h1>
+                    <h1 id="fh5co-logo" style="font-weight:400;text-transform:uppercase;"><a href="/FrontHome/Index">My Blog</a></h1>
                 }
                 else
                 {
                     var userBll = System.Web.Mvc.DependencyResolver.Current.GetService<BlogSystem.IBLL.IUsersBll>();
                     var user = userBll.GetUsers(u.Id);
                     <h3 id="fh5co-logo" style="font-weight:100;font-size:25px">
-                        <p><img src="~/Upload/Users/@user.Image" class="img-circle" width="70" height="70" /></p>
-                        <a href="/FrontHome/UserCenter?id=@u.Id">@user.NickName</a>
+                        <p><img src="~/Upload/Users/@user.Image" class="img-circle" style="height:64px;width:64px" /></p>
+                        <a href="/FrontHome/UserCenter?UserId=@u.Id">@user.NickName</a>
                     </h3>
                 }
             }
@@ -102,5 +103,6 @@
     <!-- MAIN JS -->
     <script src="~/Contents/js/main.js"></script>
     <script src="~/Contents/js/GetMenus.js"></script>
+    @RenderSection("js",false)
 </body>
 </html>

@@ -18,6 +18,8 @@ namespace BlogSystem.MVCSite.Areas.Backend.Data.Blogs
 
         public int Views { get; set; }
         public int Comments { get; set; }
+
+        public int Thumps { get; set; }
         [Display(Name = "是否公开")]
         public bool IsPublic { get; set; }
         [Display(Name = "修改时间")]

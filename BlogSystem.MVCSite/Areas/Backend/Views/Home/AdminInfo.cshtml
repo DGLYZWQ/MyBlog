@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "个人资料";
     Layout = "~/Areas/Backend/Views/Shared/BackendLayout.cshtml";
+    var user = Session["admin"] as BlogSystem.Dtos.UsersDto;
 }
 
 <head>
@@ -58,7 +59,7 @@
                             <h4 class="heading">About</h4>
                             <p>Interactively fashion excellent information after distinctive outsourcing.</p>
                         </div>
-                        <div class="text-center"><a href="../../Backend/UsersBackend/Edit/7fbf7df9-b724-454d-aba5-49cefb0d6eac" class="btn btn-primary">Edit Profile</a></div>
+                        <div class="text-center"><a href="/Backend/UsersBackend/Edit/@(user?.Id)" class="btn btn-primary">Edit Profile</a></div>
                     </div>
                     <!-- END PROFILE DETAIL -->
 

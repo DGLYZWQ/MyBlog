@@ -14,5 +14,6 @@ namespace BlogSystem.Dtos
         public bool IsRemoved { get; set; }
         public DateTime CreateTime { get; set; }
         public DateTime UpdateTime { get; set; }
+        public string Pid { get; set; }
     }
 }

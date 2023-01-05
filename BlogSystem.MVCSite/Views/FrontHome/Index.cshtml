@@ -6,6 +6,26 @@
     ViewBag.Title = "My Blog";
     string search = ViewBag.Search;
     Layout = "~/Views/Share/FrontLayout.cshtml";
+    var boolhot = false;
+    if(!string.IsNullOrWhiteSpace(Request["ishot"]))
+    {
+        boolhot = Request["ishot"].ToString() == "1";
+    }
+    string indexbg = "", hotbg = "", indexcolor = "", hotcolor = "";
+    if(boolhot)
+    {
+        indexbg = "#ffffff";
+        indexcolor = "gray";
+        hotbg = "#efefef";
+        hotcolor = "black";
+    }
+    else
+    {
+        hotbg = "#ffffff";
+        hotcolor = "gray";
+        indexbg = "#efefef";
+        indexcolor = "black";
+    }
     }
  
  
@@ -18,35 +38,50 @@
     </div>
 </nav>
 <div class="row">
-    <div class="col-md-9" style="padding:15px 20px 15px 30px">
-        @{ 
-            foreach(var item in Model)
+    
+    <div class="col-md-9" style="padding:0px 20px 15px 30px">
+        <ul class="nav nav-pills">
+            <li class="nav-item" style="background-color:@indexbg">
+                <a class="nav-link " href="/FrontHome/Index" style="font-weight:bolder;color:@indexcolor">最新</a>
+            </li>
+            <li class="nav-item" style="background-color:@hotbg">
+                <a class="nav-link" href="/FrontHome/Index?ishot=1" style="font-weight:bolder;color:@hotcolor">热门</a>
+            </li>
+             
+        </ul>
+        @{ foreach (var item in Model)
             {
-                 <div class="media">
-            <div class="media-left">
+    <div class="media">
+        <div class="media-left">
 
-            </div>
-           
-            <div class="media-body">
-                <a href="/FrontHome/BlogDetail?id=@item.Id">
-                    <h2 class="media-heading" style="color: #377f7f; font-size: 28px;">@item.Title</h2>
-                    <p class="blog-content" style="padding-top:5px; color: #808080; font-size: 18px;">@item.Content</p>
-                    <div class="page-header" style="margin-top: 0px;">
-                        <h4 style="font-size: 23px;"><small>@item.UserName</small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>@item.UpdateTime</small></h4>
-                    </div>
-                      </a>
-            </div>
-          
         </div>
-            }
-        }
-       
-    <div class="pagination">
-        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
-    </div>
+
+        <div class="media-body">
+            <a href="/FrontHome/BlogDetail?id=@item.Id" target="_blank">
+                <h2 class="media-heading" style="color: #377f7f; font-size: 28px;">@item.Title</h2>
+                <p class="blog-content" style="padding-top:5px; color: #808080; font-size: 18px;">@item.Content</p>
+                <div class="page-header" style="margin-top: 0px;">
+                    <h4 style="font-size: 23px;">
+                        <small>@item.UserName</small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>@item.UpdateTime</small>
+                        &nbsp;&nbsp;
+                        <small><span class="glyphicon glyphicon-eye-open" style="font-size: 10px;"></span>&nbsp;&nbsp;@item.Views</small>
+                        &nbsp;&nbsp;
+                        <small><span class="glyphicon glyphicon-thumbs-up" style="font-size: 10px;"></span>&nbsp;&nbsp;@item.Thumps</small>
+                        &nbsp;&nbsp;
+                        <small><span class="glyphicon glyphicon-comment" style="font-size: 10px;"></span>&nbsp;&nbsp;@item.Comments</small>
+                    </h4>
+                </div>
+            </a>
+        </div>
+
+    </div> } }
+
+        <div class="pagination">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, Search = Request["Search"],ishot=Request["ishot"] }))
+        </div>
 
     </div>
-     @Html.Partial("_Right")
+    @Html.Partial("_Right")
 </div>
 
 <style>

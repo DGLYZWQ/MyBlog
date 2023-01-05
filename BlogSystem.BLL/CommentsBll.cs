@@ -41,7 +41,24 @@ namespace BlogSystem.BLL
                UserId=userId
            });
         }
+        public async Task<int> AddCommentAsync(Guid blogId, Guid userId, string content,string pid)
+        {
+            var u = await _usersDal.QueryAsync(userId);
+            var blog = await _blogDal.QueryAsync(blogId);
 
+            await _msgdal.AddAsync(new UserMsg
+            {
+                UserId = blog.UsersId,
+                Contents = $"{u.Email}回复了你的评论《{blog.Title}》"
+            });
+            return await _dal.AddAsync(new Comments()
+            {
+                Content = content,
+                BlogId = blogId,
+                UserId = userId,
+                Pid=pid
+            });
+        }
         public async Task<int> EditCommentAsync(Guid id,string content)
         {
             var data = await _dal.QueryAsync(id);
@@ -84,7 +101,8 @@ namespace BlogSystem.BLL
                     Content = c.Content,
                     UpdateTime = c.UpdateTime,
                     IsChecked = c.IsChecked,
-                    UserId=c.UserId
+                    UserId=c.UserId,
+                    Pid=c.Pid
                 }).ToListAsync();
         }
 

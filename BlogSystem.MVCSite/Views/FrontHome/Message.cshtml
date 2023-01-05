@@ -1,13 +1,11 @@
 ﻿@model PagedList.IPagedList<BlogSystem.Dtos.UserMsgDto>
 @using PagedList.Mvc;
- 
 
-@{ 
-    ViewBag.Title = "My Blog";
-    string search = ViewBag.Search;
-    Layout = "~/Views/Share/FrontLayout.cshtml";
-    }
- 
+
+@{ ViewBag.Title = "My Blog";
+                string search = ViewBag.Search;
+                Layout = "~/Views/Share/FrontLayout.cshtml"; }
+
 <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -18,30 +16,66 @@
 </nav>
 <div class="row">
     <div class="col-md-9" style="padding:25px">
-        @{ 
-            foreach(var item in Model)
-            {
-                 <div class="media">
-            <div class="media-left">
+        @{ foreach (var item in Model)
+                        {
+            <div class="media">
+                <div class="media-left">
+
+                </div>
+
+                <div class="media-body">
+                    <div class="page-header" style="margin-top:0px;padding-bottom:15px;">
+                        <span style="padding-top:5px;">
+                            @item.Contents
+                        @{ if (!string.IsNullOrWhiteSpace(item.Notice))
+                                            {
+                            <button type="button" class="btn btn-sm btn-success" data-msg="@item.Notice" data-toggle="modal" data-target="#myModal">详情</button> } }
+                    </span>
+                    <h4 style="float:right"><small>@item.CreateTime.ToString("yyyy-MM-dd")</small></h4>
+                </div>
 
             </div>
-           
-            <div class="media-body">
-                        <div class="page-header" style="margin-top:0px;padding-bottom:15px;">
-                            <span style="padding-top:5px;">@item.Contents</span>
-                            <h4 style="float:right"><small>@item.CreateTime.ToString("yyyy-MM-dd")</small></h4> 
-                        </div>
-                      
-            </div>
-          
+
+        </div> } }
+
+        <div class="pagination">
+            @Html.PagedListPager(Model, page => Url.Action("Message", new { page }))
         </div>
-            }
-        }
-       
-    <div class="pagination">
-        @Html.PagedListPager(Model, page => Url.Action("Message", new { page }))
-    </div>
 
     </div>
-     @Html.Partial("_Right")
+    @Html.Partial("_Right")
 </div>
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+
+            <!-- 模态框头部 -->
+            <div class="modal-header">
+                <h4 class="modal-title">详情</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- 模态框主体 -->
+            <div class="modal-body">
+                <div class="form-group" id="msg">
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+@section js{
+    <script>
+        // 打开添加、编辑模态框
+        $('#myModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var modal = $(this);
+            //获取要操作的ID
+            var msg = button.data('msg');
+            $('#msg').html(msg);
+        });
+    </script>
+    }

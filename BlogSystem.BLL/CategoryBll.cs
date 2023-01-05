@@ -105,5 +105,26 @@ namespace BlogSystem.BLL
                     UpdateTime = c.UpdateTime
                 }).Take(4).ToListAsync();
         }
+
+        public async Task<CategoryDto> GetNotice()
+        {
+            var entity= await _dal.Query(x => x.Title == "公告").FirstOrDefaultAsync();
+            if (entity == null) return null;
+            return new CategoryDto
+            {
+                Id = entity.Id,
+                Title = entity.Title
+            };
+        }
+        public CategoryDto GetNotice1()
+        {
+            var entity =  _dal.Query(x => x.Title == "公告").FirstOrDefault();
+            if (entity == null) return null;
+            return new CategoryDto
+            {
+                Id = entity.Id,
+                Title = entity.Title
+            };
+        }
     }
 }

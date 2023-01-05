@@ -29,11 +29,18 @@
             </div>
            
             <div class="media-body">
-                <a href="/FrontHome/BlogDetail?id=@item.Id">
+                <a href="/FrontHome/BlogDetail?id=@item.Id"  target="_blank">
                     <h2 class="media-heading" style="color:#377f7f">@item.Title</h2>
                     <p style="padding-top:5px; color: #808080;">@item.Content</p>
                     <div class="page-header" style="margin-top:0px;">
-                        <h4><small>@item.UserName</small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>@item.UpdateTime</small></h4>
+                        <h4>
+                            <small>@item.UserName</small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>@item.UpdateTime</small> &nbsp;&nbsp;
+                            <small><span class="glyphicon glyphicon-eye-open" style="font-size: 10px;"></span>&nbsp;&nbsp;@item.Views</small>
+                            &nbsp;&nbsp;
+                            <small><span class="glyphicon glyphicon-thumbs-up" style="font-size: 10px;"></span>&nbsp;&nbsp;@item.Thumps</small>
+                            &nbsp;&nbsp;
+                            <small><span class="glyphicon glyphicon-comment" style="font-size: 10px;"></span>&nbsp;&nbsp;@item.Comments</small>
+                        </h4>
                     </div>
                       </a>
             </div>

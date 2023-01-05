@@ -67,21 +67,30 @@ namespace BlogSystem.MVCSite.Areas.Backend.Controllers
         [HttpPost]
         public async Task<ActionResult> Add(AddUsersViewModel model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                //获取表单传递过来的数据，并且实现新增功能
-                var file = Request.Files["MyPhoto"];
-
-                var names = UploadFiles(file, @"../../Upload/Users/"); //得到上传图片的名称
-
-                var rs = await _users_bll.AddUsersAsync(model.Email, GetMD5String(model.Password), model.NickName, names[0],
-                    names[1], model.RolesId);
-                if (rs > 0)
+                if (ModelState.IsValid)
                 {
-                    return Content("<script>alert('新增成功');location.href='../../../Backend/UsersBackend/List'</script>");
-                }
-            }
+                    //获取表单传递过来的数据，并且实现新增功能
+                    var file = Request.Files["MyPhoto"];
 
+                    var names = UploadFiles(file, @"../../Upload/Users/"); //得到上传图片的名称
+
+                    var rs = await _users_bll.AddUsersAsync(model.Email,Models.MD5Helper.GetMD5String(model.Password), model.NickName, names[0],
+                        names[1], model.RolesId);
+                    if (rs > 0)
+                    {
+                        return Content("<script>alert('新增成功');location.href='../../../Backend/UsersBackend/List'</script>");
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+         
             return View(model);
         }
 
@@ -169,7 +178,7 @@ namespace BlogSystem.MVCSite.Areas.Backend.Controllers
                 if (file.FileName != "" && file.FileName != null) //修改头像时
                 {
                     var names = UploadFiles(file, @"../../../Upload/Users/");
-                    rs = await _users_bll.EditUsersAsync(model.Id, model.Email, model.Password, model.NickName,
+                    rs = await _users_bll.EditUsersAsync(model.Id, model.Email, Models.MD5Helper.GetMD5String(model.Password), model.NickName,
                         names[0], names[1], model.RolesId);
                 }
                 else
@@ -193,39 +202,18 @@ namespace BlogSystem.MVCSite.Areas.Backend.Controllers
             var rs = await _users_bll.DeleteUsersAsync(id);
             if (rs > 0)
             {
-                return Content("<script>alert('删除成功');location.href='../../../Backend/UsersBackend/List'</script>");
+                return Content("<script>alert('删除成功');location.href='/Backend/UsersBackend/List'</script>");
             }
             else if(rs == -2)
             {
-                return Content("<script>alert('数据传输丢失，请稍后再试');location.href='../../../Backend/UsersBackend/List'</script>");
+                return Content("<script>alert('数据传输丢失，请稍后再试');location.href='/Backend/UsersBackend/List'</script>");
             }
             else
             {
-                return Content("<script>alert('删除失败');location.href='../../../Backend/UsersBackend/List'</script>");
+                return Content("<script>alert('删除失败');location.href='/Backend/UsersBackend/List'</script>");
             }
         }
-        /// <summary>
-        /// 密码加密（MD5)
-        /// </summary>
-        /// <param name="str"></param>
-        /// <returns></returns>
-        public string GetMD5String(string str)
-        {
-            //1.创建md5对象
-            MD5 md5 = MD5.Create();
-            //2.把要加密的字符转换为字节数组
-            byte[] buffer = Encoding.UTF8.GetBytes(str);
-            //3.把字节数组当中的所有字节进行加密，之后保存到新的字节数组当中
-            byte[] newBuffer = md5.ComputeHash(buffer);
-            //4.把加密后的字节数组转换为字符串
-            var substring = new StringBuilder();
-            foreach (var item in newBuffer)
-            {
-                substring.Append(item.ToString("x2"));
-            }
-
-            return substring.ToString();
-        }
+        
 
     }
 }

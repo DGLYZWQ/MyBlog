@@ -55,9 +55,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseEntity.cs" />
+    <Compile Include="Draft.cs" />
     <Compile Include="Blog.cs" />
     <Compile Include="BlogSystemContext.cs" />
     <Compile Include="Category.cs" />
+    <Compile Include="ThumbCollect.cs" />
     <Compile Include="UserFocus.cs" />
     <Compile Include="UserMsg.cs" />
     <Compile Include="Views.cs" />

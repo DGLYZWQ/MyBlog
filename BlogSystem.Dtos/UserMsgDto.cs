@@ -9,6 +9,7 @@ namespace BlogSystem.Dtos
     public class UserMsgDto
     {
         public string Contents { get; set; }
+        public string Notice { get; set; }
         public DateTime CreateTime { get; set; }
     }
 }

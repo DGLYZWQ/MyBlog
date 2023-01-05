@@ -10,7 +10,7 @@ namespace BlogSystem.Models
         public string NickName { get; set; }
         [Required, StringLength(100), Column(TypeName = "varchar")]
         public string Email { get; set; }
-        [Required, StringLength(30), Column(TypeName = "varchar")]
+        [Required, StringLength(50), Column(TypeName = "varchar")]
         public string Password { get; set; }
         [StringLength(255), Column(TypeName = "varchar")]
         public string Avatar { get; set; } //缩略图

@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IBaseDAL.cs" />
+    <Compile Include="IThumbCollectDal.cs" />
+    <Compile Include="IDraftDal.cs" />
     <Compile Include="IBlogDal.cs" />
     <Compile Include="ICategoryDal.cs" />
     <Compile Include="ICommentsDal.cs" />

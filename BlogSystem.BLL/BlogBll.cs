@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using BlogSystem.Dtos;
+using BlogSystem.IBLL;
 using BlogSystem.IDAL;
 using BlogSystem.Models;
 
@@ -17,13 +18,14 @@ namespace BlogSystem.BLL
         private ICommentsDal _commentsDal;
         private IViewsDal _viewsDal;
         private IUserFocusDal _focusDal;
-
-        public BlogBll(IBlogDal dal, ICommentsDal commentsDal, IViewsDal viewsDal, IUserFocusDal focusDal)
+        private ICategoryBll _categoryBLL;
+        public BlogBll(IBlogDal dal, ICommentsDal commentsDal, IViewsDal viewsDal, IUserFocusDal focusDal, ICategoryBll categoryBLL)
         {
             _dal = dal;
             _commentsDal = commentsDal;
             _viewsDal = viewsDal;
             _focusDal = focusDal;
+            _categoryBLL = categoryBLL;
         }
 
         public async Task<int> AddBlogAsync(string title, string content,Guid categoryId, Guid userId, bool isAdmin=false)
@@ -38,8 +40,20 @@ namespace BlogSystem.BLL
                 IsPublic=true
             });
         }
-
-        public async Task<int> EditBlogAsync(Guid id,string title, Guid categoryId, string content)
+        public async Task<int> AddBlogAsync(string title, string content, Guid categoryId, Guid userId, string Labels,bool isPublic)
+        {
+            return await _dal.AddAsync(new Blog()
+            {
+                Title = title,
+                Content = content,
+                CategoryId = categoryId,
+                IsAdmin = false,
+                UsersId = userId,
+                IsPublic = isPublic,
+                Labels=Labels
+            });
+        }
+        public async Task<int> EditBlogAsync(Guid id,string title, Guid categoryId, string content, string Labels, bool isPublic)
         {
             var data = await _dal.QueryAsync(id);
             if (data == null)
@@ -49,6 +63,17 @@ namespace BlogSystem.BLL
             data.Content = content;
             data.UpdateTime = DateTime.Now;
             data.CategoryId = categoryId;
+            data.Labels = Labels;
+            data.IsPublic = isPublic;
+            return await _dal.EditAsync(data);
+        }
+        public async Task<int> EditBlogPublicAsync(Guid id)
+        {
+            var data = await _dal.QueryAsync(id);
+            if (data == null)
+                return -1;
+
+            data.IsPublic = !data.IsPublic;
             return await _dal.EditAsync(data);
         }
 
@@ -66,9 +91,18 @@ namespace BlogSystem.BLL
 
         public async Task<int> DeleteBlogAsync(Guid id)
         {
+            
             var data = await _dal.QueryAsync(id);
             if (data == null)
                 return -1;
+            var commnetList = _commentsDal.Query(x => x.BlogId == id).ToList();
+            if (commnetList.Any())
+            {
+                foreach (var item in commnetList)
+                {
+                    await _commentsDal.DeleteAsync(item);
+                }
+            }
             return await _dal.DeleteAsync(data);
         }
 
@@ -139,8 +173,9 @@ namespace BlogSystem.BLL
         }
         public async Task<List<BlogDto>> GetDataByTitleAsync(string title)
         {
-            var list =await _dal.Query(c => c.Title.Contains(title)).OrderByDescending(x=>x.IsAdmin)
-                .ThenByDescending(c => c.UpdateTime)
+            var list =await _dal.Query(c => c.Title.Contains(title)).OrderByDescending(x=>x.UpdateTime)
+                //.OrderByDescending(x=>x.IsAdmin)
+                //.ThenByDescending(c => c.UpdateTime)
                 .Select(c => new BlogDto
                 {
                     Id = c.Id,
@@ -162,7 +197,7 @@ namespace BlogSystem.BLL
         }
         public async Task<List<BlogDto>> GetMyBlogListAsync(Guid userId,string cid,string title)
         {
-            var query = _dal.Query(x => x.IsPublic);
+            var query = _dal.Query();
             query = query.Where(x => x.UsersId == userId);
             if (!string.IsNullOrWhiteSpace(title))
             {
@@ -238,7 +273,7 @@ namespace BlogSystem.BLL
                     IsPublic=data.IsPublic,
                     CategoryId=data.CategoryId,
                     UsersId=data.UsersId,
-                    
+                    Labels=data.Labels
                 };
         }
 
@@ -250,7 +285,8 @@ namespace BlogSystem.BLL
 
         public async Task<List<BlogDto>> GetDataByTop4()
         {
-            return await _dal.Query()
+            var category = _categoryBLL.GetNotice1();
+            return await _dal.Query(x => x.CategoryId != category.Id&&x.IsPublic)
                 .OrderByDescending(b => b.UpdateTime)
                 .Select(b => new BlogDto
                 {
@@ -262,7 +298,8 @@ namespace BlogSystem.BLL
         }
         public async Task<List<BlogDto>> GetDataByRandom4()
         {
-            return await _dal.Query()
+            var category =_categoryBLL.GetNotice1();
+            return await _dal.Query(x=>x.CategoryId!=category.Id && x.IsPublic)
                 .OrderBy(a=>Guid.NewGuid()).Take(4)
                 .Select(b => new BlogDto
                 {

@@ -25,8 +25,8 @@ namespace BlogSystem.MVCSite.Filter
         /// <returns></returns>
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
-            bool rs = (httpContext.Session["LoginOK"] != null && httpContext.Session["RolesId"] != null)
-                || (httpContext.Request.Cookies["LoginOK"] != null && httpContext.Request.Cookies["RolesId"] != null);
+            bool rs = (httpContext.Session["LoginOK"] != null && httpContext.Session["RolesId"] != null);
+                //|| (httpContext.Request.Cookies["LoginOK"] != null && httpContext.Request.Cookies["RolesId"] != null);
             return rs;
         }
     }

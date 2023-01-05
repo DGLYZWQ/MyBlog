@@ -7,6 +7,7 @@ namespace BlogSystem.Dtos
     public interface ICommentsBll
     {
         Task<int> AddCommentAsync(Guid blogId, Guid userId, string content);
+        Task<int> AddCommentAsync(Guid blogId, Guid userId, string content, string pid);
         Task<int> EditCommentAsync(Guid id,string content);
         Task<int> DeleteCommentAsync(Guid id);
         Task<List<CommentsDto>> GetAllAsync();

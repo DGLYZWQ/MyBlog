@@ -40,7 +40,7 @@ namespace BlogSystem.MVCSite.Areas.Backend.Controllers
                     ModelState.AddModelError("Email", "电子邮箱已存在");
                     return View(model);
                 }
-                await _usersSvc.RegisterAsync(model.Email, model.Password ,model.RolesId);
+                await _usersSvc.RegisterAsync(model.Email, Models.MD5Helper.GetMD5String(model.Password) ,model.RolesId);
                 return Content("<script>alert('注册成功');location.href='/Backend/Login/SignIn'</script>");    
                 //return RedirectToAction("SignIn", "Login");
             }
@@ -66,7 +66,13 @@ namespace BlogSystem.MVCSite.Areas.Backend.Controllers
         [HttpGet]
         public ActionResult SignIn()
         {
-            return View(new LoginViewModel());
+            var entity = new LoginViewModel();
+            if (Request.Cookies["Email"]!=null&&Request.Cookies["Password"]!=null)
+            {
+                entity.Email = Request.Cookies["Email"].Value;
+                entity.Password = Request.Cookies["Password"].Value;
+            }
+            return View(entity);
         }
 
         [HttpPost]
@@ -74,7 +80,7 @@ namespace BlogSystem.MVCSite.Areas.Backend.Controllers
         {
             if (ModelState.IsValid)
             {
-                var data = await _usersSvc.LoginAsync(model.Email, model.Password);
+                var data = await _usersSvc.LoginAsync(model.Email, Models.MD5Helper.GetMD5String(model.Password));
                 if (data != null)
                 {
                     var rolesList = await _rolesBll.GetRolesListByPageAsync(1, 1, "管理员", true);
@@ -87,8 +93,8 @@ namespace BlogSystem.MVCSite.Areas.Backend.Controllers
                     //帐号密码正确，需要判断是否记住这个帐号密码
                     if (model.RememberMe)
                     {
-                        HttpCookie u_cookie = new HttpCookie("LoginOK",data.Email);
-                        HttpCookie r_cookie = new HttpCookie("RolesId", data.RolesId.ToString());
+                        HttpCookie u_cookie = new HttpCookie("Email",data.Email);
+                        HttpCookie r_cookie = new HttpCookie("Password", model.Password);
                         u_cookie.Expires = DateTime.Now.AddDays(7);
                         r_cookie.Expires = DateTime.Now.AddDays(7);
                         Response.Cookies.Add(u_cookie);
@@ -96,10 +102,19 @@ namespace BlogSystem.MVCSite.Areas.Backend.Controllers
                     }
                     else
                     {
-                        Session["LoginOK"] = data.Email;
-                        Session["RolesId"] = data.RolesId;
-                        Session["admin"] = data;
+                        if (Request.Cookies["Email"] != null && Request.Cookies["Password"] != null)
+                        {
+                            var cookie1 = Request.Cookies["Email"];
+                            cookie1.Expires = DateTime.Now.AddMinutes(-1);
+                            Response.Cookies.Add(cookie1);
+                            var cookie2 = Request.Cookies["Password"];
+                            cookie2.Expires = DateTime.Now.AddMinutes(-1);
+                            Response.Cookies.Add(cookie2);
+                        }
                     }
+                    Session["LoginOK"] = data.Email;
+                    Session["RolesId"] = data.RolesId;
+                    Session["admin"] = data;
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -124,7 +139,7 @@ namespace BlogSystem.MVCSite.Areas.Backend.Controllers
         {
             if (ModelState.IsValid)
             {
-                var data = await _usersSvc.ResetPwd(model.Email, model.Password);
+                var data = await _usersSvc.ResetPwd(model.Email, Models.MD5Helper.GetMD5String(model.Password));
                 if (data > 0) {
 
 

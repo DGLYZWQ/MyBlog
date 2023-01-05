@@ -18,6 +18,8 @@ namespace BlogSystem.Dtos
         public DateTime CreateTime { get; set; }
         public DateTime UpdateTime { get; set; }
 
+        public string Labels { get; set; }
+
     }
 
     public class BlogCategoryDto

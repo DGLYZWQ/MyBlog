@@ -52,7 +52,25 @@ namespace BlogSystem.BLL
         {
             return await _dal.GetCountsAsync(x => x.UserId == userId);
         }
+        public async Task<List<UsersDto>> GetFocusList(Guid userId)
+        {
+            var list = _dal.Query(x => x.UserId == userId);
+            if(list.Any())
+            {
+                var userList = from t in list.ToList()
+                               join u in _usersDal.Query().ToList() on t.BeUserId equals u.Id
+                               select new UsersDto
+                               {
+                                   Id = u.Id,
+                                   NickName = u.NickName,
+                                   Image = u.Image,
+                                   Intro = u.Intro
+                               };
+                return await Task.FromResult(userList.ToList());
+            }
+            return await Task.FromResult(new List<UsersDto>());
 
+        }
         public async Task<bool> IsFocus(Guid userId, Guid beUserId)
         {
             return await _dal.IsExistsAsync(x => x.UserId == userId && x.BeUserId == beUserId);

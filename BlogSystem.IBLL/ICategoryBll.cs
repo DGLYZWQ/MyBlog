@@ -15,5 +15,7 @@ namespace BlogSystem.IBLL
         Task<CategoryDto> GetCategoryByIdAsync(Guid id);
         Task<bool> IsExistsAsync(string title);
         Task<List<CategoryDto>> GetDataByTop4();
+        Task<CategoryDto> GetNotice();
+        CategoryDto GetNotice1();
     }
 }

@@ -103,7 +103,7 @@ figure figcaption {
   bottom: 0;
   top: 0;
   left: 0;
-  overflow-y: scroll;
+  overflow-y:hidden;
   z-index: 1001;
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
@@ -129,7 +129,7 @@ figure figcaption {
   font-family: "SimHei", Arial, sans-serif;
   font-weight: 700;
   margin-bottom: 2em;
-  text-transform: uppercase;
+
   font-size: 38px;
 }
 @media screen and (max-width: 768px) {
