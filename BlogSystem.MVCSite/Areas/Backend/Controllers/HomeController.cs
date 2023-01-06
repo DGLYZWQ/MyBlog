@@ -75,17 +75,17 @@ namespace BlogSystem.MVCSite.Areas.Backend.Controllers
             return Redirect("/Backend/Login/SignIn");
         }
 
-        public async Task<ActionResult> AdminInfo()
+        public ActionResult AdminInfo()
         {
             return View();
         }
 
-        public async Task<ActionResult> HowToUse()
+        public ActionResult HowToUse()
         {
             return View();
         }
 
-        public async Task<ActionResult> FAQ()
+        public ActionResult FAQ()
         {
             return View();
         }

@@ -12,30 +12,32 @@
             <div class="box">
                 <h1>My Blog</h1>
                 <span class="text-danger" style="float:right">@Html.ValidationMessage("Email")</span>
-                @Html.TextBoxFor(r => r.Email,new { @placeholder = "请输入邮箱地址" })
+                @Html.TextBoxFor(r => r.Email, new { @placeholder = "请输入邮箱地址" })
                 <span class="text-danger" style="float:right">@Html.ValidationMessage("Password")</span>
                 <input type="password" placeholder="密码" name="Password" />
                 <button style="background-color: #1BC47D">登录</button>
                 <button style="background-color: #1C90ED; margin-top: -10px;"><a href="/FrontHome/Index">游客登录</a></button>
                 <p>
-                    <span><a href="/FrontHome/register" >创建账号</a>&emsp;&emsp;&emsp;&emsp;&emsp;</span>
-                    <span>&emsp;&emsp;&emsp;&emsp;&emsp;<a href="/FrontHome/ForgetPassword" >忘记密码</a></span>
+                    <span><a href="/FrontHome/register">创建账号</a>&emsp;&emsp;&emsp;&emsp;&emsp;</span>
+                    <span>&emsp;&emsp;&emsp;&emsp;&emsp;<a href="/FrontHome/ForgetPassword">忘记密码</a></span>
                 </p>
             </div>
-            </form>
+        </form>
     </div>
 </div>
-<script src="~/Areas/Backend/assets/vendor/jquery/jquery.min.js"></script>
+
+<script src = "~/Areas/Backend/assets/vendor/jquery/jquery.min.js"></script>
 <script src="~/Areas/Backend/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
-
-
 <script src="https://cdn.bootcdn.net/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
 <script src="https://cdn.bootcdn.net/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.js"></script>
+
+
 <style>
     a {
         color: white;
         text-decoration: none
     }
+
     body {
         padding: 0;
         margin: 0;
