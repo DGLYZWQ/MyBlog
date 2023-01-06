@@ -51,39 +51,36 @@
                 {
                     foreach (string label in Model.Labels.Split(' '))
                     {
-                       
-                            <span class="label label-primary" style="margin-top: 50px;font-size: 20px;">@label</span> 
-                        }
-} }
+
+    <span class="label label-primary" style="margin-top: 50px;font-size: 20px;">@label</span> }
+                } }
         </div>
         <div style="text-align:center;padding-top:20px">
             <div class="row">
                 <div class="col-md-5"></div>
                 <div class="col-md-1">
                     @{ if (isThump)
-                                    {
-                                        <a href="/FrontHome/ThumpCollect?blogId=@Model.Id&optType=1"><h1><span class="glyphicon glyphicon-thumbs-up" style="color:rgb(255, 140, 60)"></span></h1>已点赞</a>
-                                                    }
-                                                    else
-                                                    {
-                                        <a href="/FrontHome/ThumpCollect?blogId=@Model.Id&optType=1"><h1><span class="glyphicon glyphicon-thumbs-up"></span></h1>点赞</a> } }
+                        {
+            <a href="/FrontHome/ThumpCollect?blogId=@Model.Id&optType=1"><h1><span class="glyphicon glyphicon-thumbs-up" style="color:rgb(255, 140, 60)"></span></h1>已点赞</a> }
+                        else
+                        {
+            <a href="/FrontHome/ThumpCollect?blogId=@Model.Id&optType=1"><h1><span class="glyphicon glyphicon-thumbs-up"></span></h1>点赞</a> } }
                 </div>
                 <div class="col-md-1">
                     @{ if (isCollect)
-                                    {
-                                        <a href="/FrontHome/ThumpCollect?blogId=@Model.Id&optType=2"><h1><span class="glyphicon glyphicon-star-empty" style="color:rgb(255, 140, 60)"></span></h1>已收藏</a>
-                                    }
-                                    else
-                                    {
-                        <a href="/FrontHome/ThumpCollect?blogId=@Model.Id&optType=2"><h1><span class="glyphicon glyphicon-star-empty"></span></h1>收藏</a> } }
+                        {
+            <a href="/FrontHome/ThumpCollect?blogId=@Model.Id&optType=2"><h1><span class="glyphicon glyphicon-star-empty" style="color:rgb(255, 140, 60)"></span></h1>已收藏</a> }
+                        else
+                        {
+            <a href="/FrontHome/ThumpCollect?blogId=@Model.Id&optType=2"><h1><span class="glyphicon glyphicon-star-empty"></span></h1>收藏</a> } }
                 </div>
 
             </div>
 
         </div>
         @*<h2 class="content1">
-            <a href="/FrontHome/Comment?id=@Model.Id" style="font-size: 23px; "><span class="glyphicon glyphicon-comment" style="font-size: 20px;"></span>&nbsp;@commentcounts</a>
-        </h2>*@
+                <a href="/FrontHome/Comment?id=@Model.Id" style="font-size: 23px; "><span class="glyphicon glyphicon-comment" style="font-size: 20px;"></span>&nbsp;@commentcounts</a>
+            </h2>*@
         <div class="row">
             <div class="col-md-9" style="padding:25px">
                 <h3 class="h3">评论列表</h3>
@@ -108,26 +105,26 @@
                     <p style="padding-top:5px;padding-left:30px;">@System.Web.HttpUtility.UrlDecode(item.Content)</p>
                     <p style="text-align:right"><button type="button" class="btn  btn-sm btn-success" data-id="@item.Id" data-toggle="modal" data-target="#myModal">评论</button></p>
                     @{ if (replyList.Any())
-                                            {
-                        <div style="margin-left:60px;padding-right:60px;background-color:#efefef;">
-                            <div class="panel-heading">回复内容</div>
-                            <div class="media-body">
+                        {
+    <div style="margin-left:60px;padding-right:60px;background-color:#efefef;">
+        <div class="panel-heading">回复内容</div>
+        <div class="media-body">
 
-                                @{ int j = 1;
-                                                            foreach (var r in replyList)
-                                                            {
-                                    <div style="margin-top:0px;">
-                                        <h4>
-                                            <small>&nbsp;&nbsp;#@(j++)</small>&nbsp;<small>@r.UpdateTime &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>@r.UserName</span></small><small>
+            @{ int j = 1;
+                foreach (var r in replyList)
+                {
+<div style="margin-top:0px;">
+    <h4>
+        <small>&nbsp;&nbsp;#@(j++)</small>&nbsp;<small>@r.UpdateTime &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>@r.UserName</span></small><small>
 
-                                            </small>
-                                        </h4>
-                                        <p style="padding-top:5px;padding-left:30px;">@System.Web.HttpUtility.UrlDecode(r.Content)</p>
-                                    </div> } }
+        </small>
+    </h4>
+    <p style="padding-top:5px;padding-left:30px;">@System.Web.HttpUtility.UrlDecode(r.Content)</p>
+</div> } }
 
 
-                            </div>
-                        </div> } }
+        </div>
+    </div> } }
                 </div>
 
 
@@ -217,8 +214,7 @@
             <ul class="list-group">
                 @{ foreach (var item in category)
                     {
-        <li class="list-group-item" style="border-width:0px"><a href="/FrontHome/UserCenter?UserId=@blogUser.Id&cid=@item.CategoryId">@item.CategoryName (@(item.Count))</a></li>
- } }
+        <li class="list-group-item" style="border-width:0px"><a href="/FrontHome/UserCenter?UserId=@blogUser.Id&cid=@item.CategoryId">@item.CategoryName (@(item.Count))</a></li> } }
             </ul>
         </div>
     </div>
@@ -237,27 +233,28 @@
             width: 600px;
         }
 
-        #emoji > div {
-            cursor: pointer;
-            display: inline-block;
-        }
+            #emoji > div {
+                cursor: pointer;
+                display: inline-block;
+            }
+
         #emoji1 {
             width: 280px;
             padding-top: 15px
         }
 
-        #emoji1 > div {
-            cursor: pointer;
-            display: inline-block;
-        }
+            #emoji1 > div {
+                cursor: pointer;
+                display: inline-block;
+            }
     </style>
- 
+
 }
 @section js
 {
 
-   
-     
+
+
     <script>
         // 网页加载时，产生 （表情）
         $(window).load(function () {
@@ -275,13 +272,13 @@
                 // 将选择的表情追加到指定节点。
                 var emo = $(this).text();
                 console.log(emo)
-                $("#msg").val($("#msg").val()+emo);
+                $("#msg").val($("#msg").val() + emo);
             });
             $("#emoji1>div").on('click', function () {
                 // 将选择的表情追加到指定节点。
                 var emo = $(this).text();
                 console.log(emo)
-                $("#replyMsg").val($("#replyMsg").val()+emo);
+                $("#replyMsg").val($("#replyMsg").val() + emo);
             });
         })
         // 打开添加、编辑模态框
@@ -306,7 +303,7 @@
         })
     </script>
 
-    
+
     <style>
         .tag {
             display: block;

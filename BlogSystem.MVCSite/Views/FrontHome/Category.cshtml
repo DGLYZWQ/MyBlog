@@ -1,74 +1,68 @@
 ﻿@model List<BlogSystem.Dtos.CategoryDto>
-@{
-    ViewBag.Title = "分类";
-    Layout = "~/Views/Share/FrontLayout.cshtml";
-    List<string> strList = new List<string>
-    {
+@{ ViewBag.Title = "分类";
+                Layout = "~/Views/Share/FrontLayout.cshtml";
+                List<string> strList = new List<string>
+        {
         "后端开发","前端开发","数据库","其他"
-    };
-}
- 
+    }; }
+
 <style>
     .c {
-        padding-left:35px;
+        padding-left: 35px;
     }
-    .c a{
-        color:#808080;
-        font-weight:bolder;
-    }
-    .c h3 {
+
+        .c a {
+            color: #808080;
+            font-weight: bolder;
+        }
+
+        .c h3 {
             color: #808080;
             font-size: 20px;
         }
-    .c h3:hover {
-        text-decoration: none;
-        outline: none;
-        color: #228896;
-    }
+
+            .c h3:hover {
+                text-decoration: none;
+                outline: none;
+                color: #228896;
+            }
 </style>
 <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="/FrontHome/Index">主页</a> <span class="navbar-brand">></span><span class="navbar-brand">分类</span>
-</div>
+        </div>
         @Html.Partial("_Top")
     </div>
 </nav>
 <div class="row">
     <div class="col-md-9">
-    @{
-        foreach (var item in strList)
-        {
+        @{ foreach (var item in strList)
+                        {
             <div class="col-md-3">
-                    <div class="c">
-                        <span class="c">
-                            <a href="#">
-                                <h2 style="font-size: 23px;">@item</h2>
-                            </a>
-                        </span>
+                <div class="c">
+                    <span class="c">
+                        <a href="#">
+                            <h2 style="font-size: 23px;">@item</h2>
+                        </a>
+                    </span>
 
 
 
-                        <ul class="list-group" style="padding-top: 3px">
-                            @{
-                                var list = Model.Where(x => x.Description == item);
-                                foreach (var c in list)
-                                {
-                                    <li class="list-group-item" style="border-width: 0px; padding: 1px 2px;">
-                                        <a href="/FrontHome/CategoryBlogList?cid=@c.Id">
-                                            <h3 style="font-size: 18px;">@c.Title</h3>
-                                        </a>
-                                    </li>
-
-                                }
-                            }
-                        </ul>
-                    </div>
-            </div>
-        }
-    }
+                    <ul class="list-group" style="padding-top: 3px">
+                        @{ var list = Model.Where(x => x.Description == item);
+                                            foreach (var c in list)
+                                            {
+                            <li class="list-group-item" style="border-width: 0px; padding: 1px 2px;">
+                                <a href="/FrontHome/CategoryBlogList?cid=@c.Id">
+                                    <h3 style="font-size: 18px;">@c.Title</h3>
+                                </a>
+                            </li> } }
+                    </ul>
+                </div>
+            </div> } }
     </div>
-        @Html.Partial("_Right")
+    @Html.Partial("_Right")
 </div>
 
 

@@ -9,15 +9,15 @@
     var category = ViewBag.Category as BlogSystem.Dtos.CategoryDto;
     }
  
-<nav class="navbar navbar-default" role="navigation">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/FrontHome/Index">主页</a> <span class="navbar-brand">></span><span class="navbar-brand">分类</span>
-            <span class="navbar-brand">></span><span class="navbar-brand">@(category?.Description)</span><span class="navbar-brand">></span><span class="navbar-brand">@(category?.Title)</span>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/FrontHome/Index">主页</a> <span class="navbar-brand">></span><span class="navbar-brand">分类</span>
+                <span class="navbar-brand">></span><span class="navbar-brand">@(category?.Description)</span><span class="navbar-brand">></span><span class="navbar-brand">@(category?.Title)</span>
+            </div>
+            @Html.Partial("_Top")
         </div>
-        @Html.Partial("_Top")
-    </div>
-</nav>
+    </nav>
 <div class="row">
     <div class="col-md-9" style="padding:25px">
         @{ 

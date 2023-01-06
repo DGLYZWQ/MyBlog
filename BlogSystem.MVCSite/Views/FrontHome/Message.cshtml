@@ -17,26 +17,26 @@
 <div class="row">
     <div class="col-md-9" style="padding:25px">
         @{ foreach (var item in Model)
-                        {
-            <div class="media">
-                <div class="media-left">
+            {
+<div class="media">
+    <div class="media-left">
 
-                </div>
+    </div>
 
-                <div class="media-body">
-                    <div class="page-header" style="margin-top:0px;padding-bottom:15px;">
-                        <span style="padding-top:5px;">
-                            @item.Contents
-                        @{ if (!string.IsNullOrWhiteSpace(item.Notice))
-                                            {
-                            <button type="button" class="btn btn-sm btn-success" data-msg="@item.Notice" data-toggle="modal" data-target="#myModal">详情</button> } }
-                    </span>
-                    <h4 style="float:right"><small>@item.CreateTime.ToString("yyyy-MM-dd")</small></h4>
-                </div>
+    <div class="media-body">
+        <div class="page-header" style="margin-top:0px;padding-bottom:15px;">
+            <span style="padding-top:5px;">
+                @item.Contents
+                @{ if (!string.IsNullOrWhiteSpace(item.Notice))
+                    {
+    <button type="button" class="btn btn-sm btn-success" data-msg="@item.Notice" data-toggle="modal" data-target="#myModal">详情</button> } }
+            </span>
+            <h4 style="float:right"><small>@item.CreateTime.ToString("yyyy-MM-dd")</small></h4>
+        </div>
 
-            </div>
+    </div>
 
-        </div> } }
+</div> } }
 
         <div class="pagination">
             @Html.PagedListPager(Model, page => Url.Action("Message", new { page }))

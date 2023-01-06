@@ -1,13 +1,11 @@
 ﻿@model PagedList.IPagedList<BlogSystem.MVCSite.Areas.Backend.Data.Blogs.BlogsListViewModel>
 @using PagedList.Mvc;
- 
 
-@{ 
-    ViewBag.Title = "My Blog";
-    string search = ViewBag.Search;
-    Layout = "~/Views/Share/FrontLayout.cshtml";
-    }
- 
+
+@{ ViewBag.Title = "My Blog";
+                string search = ViewBag.Search;
+                Layout = "~/Views/Share/FrontLayout.cshtml"; }
+
 <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -19,7 +17,7 @@
 <div class="row">
     <div class="col-md-9" style="padding:25px">
         <ul class="nav nav-pills">
-            <li class="nav-item" >
+            <li class="nav-item">
                 <a class="nav-link " href="/FrontHome/MyBlog" style="font-weight: bolder; font-size: 16px; color: gray">已发布</a>
             </li>
             <li class="nav-item" style="background-color:#efefef">
@@ -28,36 +26,36 @@
 
         </ul>
         @{ foreach (var item in Model)
-                        {
-            <div class="media">
-                <div class="media-left">
+            {
+<div class="media">
+    <div class="media-left">
 
-                </div>
+    </div>
 
-                <div class="media-body">
-                    <a href="/FrontHome/BlogDetail?id=@item.Id"  target="_blank">
-                        <h2 class="media-heading" style="color:#377f7f">@item.Title</h2>
-                        <p style="padding-top:5px; color: #808080;">@item.Content</p>
-                        <div class="page-header" style="margin-top:0px;">
-                            <h4 style="font-size: 23px;">
-                                <small>@item.UserName</small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>@item.UpdateTime</small>
-                               
+    <div class="media-body">
+        <a href="/FrontHome/BlogDetail?id=@item.Id" target="_blank">
+            <h2 class="media-heading" style="color:#377f7f">@item.Title</h2>
+            <p style="padding-top:5px; color: #808080;">@item.Content</p>
+            <div class="page-header" style="margin-top:0px;">
+                <h4 style="font-size: 23px;">
+                    <small>@item.UserName</small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>@item.UpdateTime</small>
 
-                                <span style="float:right">
-                                    <a href="/FrontHome/DelDraft?id=@item.Id" onclick="return confirm('确定要删除吗？')" title="删除" style="float: right; margin-left: 15px; color: #808080 "><span class="glyphicon glyphicon-trash"></span> </a>
-                                    <a href="/FrontHome/EditBlog" title="编辑" style="float: right; margin-left: 15px; color: #808080 "><span class="glyphicon glyphicon-edit"></span> </a>
-                                   </span>
-                            </h4>
-                        </div>
-                    </a>
-                </div>
 
-            </div> } }
+                    <span style="float:right">
+                        <a href="/FrontHome/DelDraft?id=@item.Id" onclick="return confirm('确定要删除吗？')" title="删除" style="float: right; margin-left: 15px; color: #808080 "><span class="glyphicon glyphicon-trash"></span> </a>
+                        <a href="/FrontHome/EditBlog" title="编辑" style="float: right; margin-left: 15px; color: #808080 "><span class="glyphicon glyphicon-edit"></span> </a>
+                    </span>
+                </h4>
+            </div>
+        </a>
+    </div>
+
+</div> } }
 
         <div class="pagination">
             @Html.PagedListPager(Model, page => Url.Action("MyBlog", new { page }))
         </div>
 
     </div>
-     @Html.Partial("_Right")
+    @Html.Partial("_Right")
 </div>

@@ -1,11 +1,11 @@
 ﻿@model PagedList.IPagedList<BlogSystem.MVCSite.Areas.Backend.Data.Blogs.BlogsListViewModel>
 @using PagedList.Mvc;
 @{ Layout = null;
-                var category = ViewBag.BlogCategroy as List<BlogSystem.Dtos.BlogCategoryDto>;
+    var category = ViewBag.BlogCategroy as List<BlogSystem.Dtos.BlogCategoryDto>;
 
-                int focount = ViewBag.focuscount;
-                bool isfocus = ViewBag.isFocus;
-                var blogUser = ViewBag.blogUser as BlogSystem.Dtos.UsersDto; }
+    int focount = ViewBag.focuscount;
+    bool isfocus = ViewBag.isFocus;
+    var blogUser = ViewBag.blogUser as BlogSystem.Dtos.UsersDto; }
 
 <!DOCTYPE html>
 
@@ -38,7 +38,6 @@
         .sz {
             padding: 0px 30px 0px 0px;
         }
-
     </style>
 </head>
 <body>
@@ -77,7 +76,8 @@
                     <ul class="list-group">
                         @{ foreach (var item in category)
                             {
-                <li class="list-group-item" style="border-width:0px"><a href="/FrontHome/UserCenter?UserId=@blogUser.Id&cid=@item.CategoryId" style="text-decoration:none">@item.CategoryName (@(item.Count))</a></li> } }
+                <li class="list-group-item" style="border-width:0px"><a href="/FrontHome/UserCenter?UserId=@blogUser.Id&cid=@item.CategoryId" style="text-decoration:none">@item.CategoryName (@(item.Count))</a></li>
+ } }
                     </ul>
                 </div>
                 @{ var u = Context.Session["user"] as BlogSystem.Dtos.UsersDto;
@@ -96,15 +96,15 @@
                 <div class="panel" style=" background-color: #f6f6f6;">
                     @{ if (!string.IsNullOrWhiteSpace(blogUser.Avatar))
                         {
-                <div id="myCarousel" class="carousel slide" style="padding-bottom: 20px; border-radius: 10px;">
+            <div id="myCarousel" class="carousel slide" style="padding-bottom: 20px; border-radius: 10px;">
 
-                    <!-- 轮播（Carousel）项目 -->
-                    <div class="carousel-inner">
-                        <div class="item active">
-                            <img src="~/Upload/Users/@blogUser.Avatar" width="100%" style="height: 300px; border-radius: 10px;" alt="First slide">
-                        </div>
+                <!-- 轮播（Carousel）项目 -->
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <img src="~/Upload/Users/@blogUser.Avatar" width="100%" style="height: 300px; border-radius: 10px;" alt="First slide">
                     </div>
-                </div> } }
+                </div>
+            </div> } }
                     @{ if (u != null && u.Id.ToString() == Request["UserId"])
                         { <!-- Nav tabs -->
                                             <ul class="nav nav-tabs" role="tablist">
@@ -140,41 +140,18 @@
                                                                 </a>
                                                             </div>
 
-                                                        </div>
-                                                                           } }
+                                                        </div> } }
 
-                                                                <div class="pagination">
-                                                                    @Html.PagedListPager(Model, page => Url.Action("UserCenter", new { page, UserId = Request["UserId"],cid=Request["cid"] }))
+                                                                    <div class="pagination">
+                                                                        @Html.PagedListPager(Model, page => Url.Action("UserCenter", new { page, UserId = Request["UserId"], cid = Request["cid"] }))
 
-                                                                </div>
+                                                                    </div>
 
                                                                 </div>
                                                                 <div id="menu1" class="tab-pane fade">
-                                                                    @{
-                                                                        var collectList = ViewBag.CollectBlogList as List<BlogSystem.Dtos.ThumbCollectBlogDto>;
-                                                                        foreach (var item in collectList)
-                                                                        {
-                                                                <div class="media" style="padding: 15px 10px 10px 5px; background-color: #fff; border-radius: 10px;">
-                                                                    <div class="media-left">
-
-                                                                    </div>
-
-                                                                    <div class="media-body">
-                                                                        <a href="/FrontHome/BlogDetail?id=@item.Id" target="_blank" style="text-decoration: none;">
-                                                                            <h3 class="media-heading" style="color:#377f7f">@item.Title</h3>
-                                                                            <h4 style="color:#f6f6f6;"><small>时间：@item.UpdateTime</small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>分类：@item.CategoryName</small></h4>
-                                                                            <p style="padding-top:5px; color: #808080;">@item.Content</p>
-
-                                                                        </a>
-                                                                    </div>
-
-                                                                </div> } }
-                                                                </div>
-                                                                <div id="menu2" class="tab-pane fade">
-                                                                    @{ 
-                                                                            var thumpList = ViewBag.ThumpBlogList as List<BlogSystem.Dtos.ThumbCollectBlogDto>;
-                                                                            foreach (var item in thumpList)
-                                                                            {
+                                                                    @{ var collectList = ViewBag.CollectBlogList as List<BlogSystem.Dtos.ThumbCollectBlogDto>;
+                                                                                        foreach (var item in collectList)
+                                                                                        {
                                                                         <div class="media" style="padding: 15px 10px 10px 5px; background-color: #fff; border-radius: 10px;">
                                                                             <div class="media-left">
 
@@ -191,56 +168,73 @@
 
                                                                         </div> } }
                                                                 </div>
+                                                                <div id="menu2" class="tab-pane fade">
+                                                                    @{
+                                                                        var thumpList = ViewBag.ThumpBlogList as List<BlogSystem.Dtos.ThumbCollectBlogDto>;
+                                                                        foreach (var item in thumpList)
+                                                                        {
+                                                        <div class="media" style="padding: 15px 10px 10px 5px; background-color: #fff; border-radius: 10px;">
+                                                            <div class="media-left">
+
+                                                            </div>
+
+                                                            <div class="media-body">
+                                                                <a href="/FrontHome/BlogDetail?id=@item.Id" target="_blank" style="text-decoration: none;">
+                                                                    <h3 class="media-heading" style="color:#377f7f">@item.Title</h3>
+                                                                    <h4 style="color:#f6f6f6;"><small>时间：@item.UpdateTime</small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>分类：@item.CategoryName</small></h4>
+                                                                    <p style="padding-top:5px; color: #808080;">@item.Content</p>
+
+                                                                </a>
+                                                            </div>
+
+                                                        </div> } }
+                                                                </div>
                                                                 <div id="menu3" class="tab-pane fade">
-                                                                    @{ 
-                                                                        var focusUserList = ViewBag.FocusUserList as List<BlogSystem.Dtos.UsersDto>;
-                                                                        foreach(var item in focusUserList)
-                                                                        { 
-                                                                            <div class="media" style="padding: 15px 10px 10px 25px; background-color: #fff; border-radius: 10px;">
-                                                                        <div class="media-left">
-                                                                            <img src="~/Upload/Users/@item.Image" alt="John Doe" class="mr-3 mt-3 img-circle" style="width:64px;height:64px">
+                                                                    @{ var focusUserList = ViewBag.FocusUserList as List<BlogSystem.Dtos.UsersDto>;
+                                                                                        foreach (var item in focusUserList)
+                                                                                        {
+                                                                        <div class="media" style="padding: 15px 10px 10px 25px; background-color: #fff; border-radius: 10px;">
+                                                                            <div class="media-left">
+                                                                                <img src="~/Upload/Users/@item.Image" alt="John Doe" class="mr-3 mt-3 img-circle" style="width:64px;height:64px">
 
-                                                                        </div>
+                                                                            </div>
 
-                                                                        <div class="media-body">
-                                                                            <a href="/FrontHome/UserCenter?UserId=@item.Id" target="_blank" style="text-decoration: none;">
-                                                                                <h4>@item.NickName</h4>
-                                                                                <p>@item.Intro</p>
+                                                                            <div class="media-body">
+                                                                                <a href="/FrontHome/UserCenter?UserId=@item.Id" target="_blank" style="text-decoration: none;">
+                                                                                    <h4>@item.NickName</h4>
+                                                                                    <p>@item.Intro</p>
                                                                                 </a>
-                                                                        </div>
+                                                                            </div>
 
-                                                                    </div>
-                                                                        }
-                                                                    }
-                                                                    
-                                                                    
+                                                                        </div> } }
+
+
 
                                                                 </div>
                                                             </div> }
                                                         else
                                                         {
-                                          foreach (var item in Model)
-                                                {
-                                <div class="media" style="padding: 15px 10px 10px 5px; background-color: #fff; border-radius: 10px;">
-                                    <div class="media-left">
+                                                            foreach (var item in Model)
+                                                            {
+                                            <div class="media" style="padding: 15px 10px 10px 5px; background-color: #fff; border-radius: 10px;">
+                                                <div class="media-left">
 
-                                    </div>
+                                                </div>
 
-                                    <div class="media-body">
-                                        <a href="/FrontHome/BlogDetail?id=@item.Id" target="_blank" style="text-decoration: none;">
-                                            <h3 class="media-heading" style="color:#377f7f">@item.Title</h3>
-                                            <h4 style="color:#f6f6f6;"><small>时间：@item.UpdateTime</small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>分类：@item.CategoryName</small></h4>
-                                            <p style="padding-top:5px; color: #808080;">@item.Content</p>
+                                                <div class="media-body">
+                                                    <a href="/FrontHome/BlogDetail?id=@item.Id" target="_blank" style="text-decoration: none;">
+                                                        <h3 class="media-heading" style="color:#377f7f">@item.Title</h3>
+                                                        <h4 style="color:#f6f6f6;"><small>时间：@item.UpdateTime</small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>分类：@item.CategoryName</small></h4>
+                                                        <p style="padding-top:5px; color: #808080;">@item.Content</p>
 
-                                        </a>
-                                    </div>
+                                                    </a>
+                                                </div>
 
-                                </div>
-                                                     } 
+                                            </div> }
 
-                <div class="pagination">
-                    @Html.PagedListPager(Model, page => Url.Action("UserCenter", new { page, UserId = Request["UserId"], cid = Request["cid"] }))
-                </div> } }
+                                            <div class="pagination">
+                                                @Html.PagedListPager(Model, page => Url.Action("UserCenter", new { page, UserId = Request["UserId"], cid = Request["cid"] }))
+                                            </div> } }
 
 
 
