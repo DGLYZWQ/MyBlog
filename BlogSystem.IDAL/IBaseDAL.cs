@@ -9,7 +9,7 @@ namespace BlogSystem.IDAL
     public interface IBaseDAL<T> :IDisposable where T:BaseEntity,new()
     {
         Task<int> AddAsync(T model);
-
+        int Add(T model);
         Task<int> EditAsync(T model);
 
         Task<int> DeleteAsync(T model);

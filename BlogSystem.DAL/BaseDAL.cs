@@ -28,7 +28,11 @@ namespace BlogSystem.DAL
             _db.Entry<T>(model).State = EntityState.Added;
             return await _db.SaveChangesAsync();
         }
-
+        public int Add(T model)
+        {
+            _db.Entry<T>(model).State = EntityState.Added;
+            return  _db.SaveChanges();
+        }
         public async Task<int> EditAsync(T model)
         {
             _db.Entry<T>(model).State = EntityState.Modified;
@@ -65,7 +69,7 @@ namespace BlogSystem.DAL
         {
             return await _db.Set<T>().Where(whereLambda).CountAsync();
         }
-        public  int GetCounts(Expression<Func<T, bool>> whereLambda)
+        public int GetCounts(Expression<Func<T, bool>> whereLambda)
         {
             return _db.Set<T>().Where(whereLambda).Count();
         }

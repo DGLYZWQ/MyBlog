@@ -194,10 +194,10 @@
                 <li class="list-group-item" style="border-width:0px;text-align:center;margin-top:0px">
                     @{ if (isfocus)
                         {
-            <a href="#" class="btn btn-info">已关注</a> }
+            <a href="/FrontHome/CancelFocus?uid=@blogUser.Id&bid=@Model.Id" class="btn btn-info">已关注</a> }
         else
         {
-<a href="/FrontHome/Focus?uid=@blogUser.Id&bid=@Model.Id" class="btn btn-info">+关注</a> } }
+            <a href="/FrontHome/Focus?uid=@blogUser.Id&bid=@Model.Id" class="btn btn-info">+关注</a> } }
 
                 </li>
                 <li class="list-group-item" style="border-width:0px;text-align:center;margin-top:0px">

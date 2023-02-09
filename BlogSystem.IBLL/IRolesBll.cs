@@ -15,5 +15,6 @@ namespace BlogSystem.IBLL
         Task<List<RolesDto>> GetRolesListByPageAsync(int pageSize, int pageIndex, string title, bool isAsc);
         Task<RolesDto> GetRolesAsync(Guid id);
         Task<List<RolesDto>> GetRolesList(string title, bool isAsc); //这是带有分页插件的查询
+        RolesDto GetRolesByTitle(string title);
     }
 }

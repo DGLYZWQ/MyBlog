@@ -7,11 +7,13 @@ using CodeCarvings.Piczard;
 using PagedList;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BlogSystem.MVCSite.Controllers
 {
@@ -492,6 +494,19 @@ namespace BlogSystem.MVCSite.Controllers
 
             return View();
         }
+        public async Task<ActionResult> CancelFocus(Guid uid, Guid bid)
+        {
+            var user = Session["user"] as UsersDto;
+            if (user == null) return Redirect("/FrontHome/Login");
+
+            var res = await _userFocusBll.CancelFocus(user.Id, uid);
+            if (res > 0)
+            {
+                return Redirect("/FrontHome/BlogDetail?id=" + bid);
+            }
+
+            return View();
+        }
         public async Task<ActionResult> Message(int page=1)
         {
             var user = Session["user"] as UsersDto;
@@ -733,5 +748,7 @@ namespace BlogSystem.MVCSite.Controllers
 
             return View();
         }
+
+
     }
 }

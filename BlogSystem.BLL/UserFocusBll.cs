@@ -42,6 +42,24 @@ namespace BlogSystem.BLL
             });
             return r;
         }
+        public async Task<int> CancelFocus(Guid userId, Guid beUserId)
+        {
+            
+            var entity = _dal.Query(x => x.UserId == userId && x.BeUserId == beUserId).FirstOrDefault();
+            if(entity!=null)
+            {
+               var r= await _dal.DeleteAsync(entity);
+
+                var u = await _usersDal.QueryAsync(userId);
+                await _msgdal.AddAsync(new UserMsg
+                {
+                    UserId = beUserId,
+                    Contents = $"{u.Email}取消关注了你"
+                });
+                return r;
+            }
+            return -1;
+        }
 
         public async Task<int> GetBeFocusCount(Guid userId)
         {

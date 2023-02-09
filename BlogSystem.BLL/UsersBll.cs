@@ -134,8 +134,47 @@ namespace BlogSystem.BLL
                     UpdateTime = u.UpdateTime
                 }).FirstOrDefaultAsync();
         }
-
-
+        public UsersDto FindOne(string uuid, string fromto)
+        {
+            return _dal.Query(user => user.uuid.Equals(uuid) && user.fromto.Equals(fromto))
+                .Select(u => new UsersDto()
+                {
+                    Id = u.Id,
+                    Email = u.Email,
+                    Password = u.Password,
+                    NickName = u.NickName,
+                    RolesId = u.RolesId,
+                    Avatar = u.Avatar,
+                    Image = u.Image,
+                    UpdateTime = u.UpdateTime
+                }).FirstOrDefault();
+        }
+        public UsersDto RegisterAuto(string email, string password, string uuid, string fromto, Guid rolesId, string nickName)
+        {
+            var u = new Users()
+            {
+                Email = email,
+                Password = password,
+                NickName = nickName,
+                Avatar = "defaultbg.jpg",
+                Image = "default.jpg",
+                RolesId = rolesId,
+                uuid = uuid,
+                fromto = fromto
+            };
+             _dal.Add(u);
+            return new UsersDto()
+            {
+                Id = u.Id,
+                Email = u.Email,
+                Password = u.Password,
+                NickName = u.NickName,
+                RolesId = u.RolesId,
+                Avatar = u.Avatar,
+                Image = u.Image,
+                UpdateTime = u.UpdateTime
+            };
+        }
         public async Task<List<UsersDto>> GetAllUsersAsync()
         {
             return await _dal.Query().Select(u => new UsersDto()

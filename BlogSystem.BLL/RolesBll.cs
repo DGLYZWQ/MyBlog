@@ -77,7 +77,18 @@ namespace BlogSystem.BLL
                     }
                     ).ToListAsync();
         }
-
+        public RolesDto GetRolesByTitle(string title)
+        {
+            return  _dal.Query(r => r.Title.Contains(title))
+                .Select(
+                    r => new RolesDto()
+                    {
+                        Id = r.Id,
+                        Title = r.Title,
+                        UpdateTime = r.UpdateTime
+                    }
+                    ).FirstOrDefault();
+        }
         public async Task<RolesDto> GetRolesAsync(Guid id)
         {
             var data = await _dal.QueryAsync(id);

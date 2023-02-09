@@ -13,6 +13,7 @@ namespace BlogSystem.IBLL
         Task<bool> IsFocus(Guid userId, Guid beUserId);
 
         Task<int> Focus(Guid userId, Guid beUserId);
+        Task<int> CancelFocus(Guid userId, Guid beUserId);
         Task<List<UsersDto>> GetFocusList(Guid userId);
 
     }

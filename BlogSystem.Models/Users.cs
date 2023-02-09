@@ -27,5 +27,8 @@ namespace BlogSystem.Models
         public Roles Roles { get; set; }
         public string Intro { get; set; }
 
+        public string uuid { get; set; }
+        public string fromto { get; set; }
+
     }
 }

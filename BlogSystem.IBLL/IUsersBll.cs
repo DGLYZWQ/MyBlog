@@ -26,6 +26,7 @@ namespace BlogSystem.IBLL
         Task<List<UsersDto>> GetUsersByRolesId(Guid rid);
         Task<int> ResetPwd(string email, string password);
         UsersDto GetUsers(Guid id);
-
+        UsersDto FindOne(string uuid, string fromto);
+        UsersDto RegisterAuto(string email, string password, string uuid, string fromto, Guid rolesId, string nickName);
     }
 }

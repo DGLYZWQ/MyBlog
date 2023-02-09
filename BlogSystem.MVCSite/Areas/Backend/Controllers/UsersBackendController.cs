@@ -183,7 +183,7 @@ namespace BlogSystem.MVCSite.Areas.Backend.Controllers
                 }
                 else
                 {
-                    rs = await _users_bll.EditUsersAsync(model.Id, model.Email, model.Password, model.NickName,
+                    rs = await _users_bll.EditUsersAsync(model.Id, model.Email, Models.MD5Helper.GetMD5String(model.Password), model.NickName,
                         model.Avatar, model.Image, model.RolesId);
                 }
 

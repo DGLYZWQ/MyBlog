@@ -15,9 +15,24 @@
                 <input type="password" placeholder="密码" name="Password" />
                 <button style="background-color: #1BC47D">登录</button>
                 <button style="background-color: #1C90ED; margin-top: -10px;"><a href="/FrontHome/Index">游客登录</a></button>
+
                 <p>
                     <span><a href="/FrontHome/register">创建账号</a>&emsp;&emsp;&emsp;&emsp;&emsp;</span>
                     <span>&emsp;&emsp;&emsp;&emsp;&emsp;<a href="/FrontHome/ForgetPassword">忘记密码</a></span>
+                </p>
+                <p>
+                    <span>其他方式&emsp;</span>
+                    <span>
+                        <a href="@Url.Action("Authorization", "OAuth2", new {authSource = "GITEE"})" title="GITEE账号登录">
+                            <img src="~/Contents/images/gitee.png" style="width:20px;height:20px;" />
+                        </a>
+                    </span>
+                    <span>
+                        <a href="@Url.Action("Authorization", "OAuth2", new {authSource = "GITHUB"})" title="GITHUB账号登录">
+                            <img src="~/Contents/images/GitHub.png" style="width:20px;height:20px;" />&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                        </a>
+                    </span>
+
                 </p>
             </div>
         </form>
