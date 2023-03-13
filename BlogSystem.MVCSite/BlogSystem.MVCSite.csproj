@@ -2407,6 +2407,7 @@
     </Compile>
     <Compile Include="Models\dtos\RegisterViewModel.cs" />
     <Compile Include="Models\dtos\UpdateUsersDto.cs" />
+    <Compile Include="Models\KeywordsFilterHelper.cs" />
     <Compile Include="Models\MD5Helper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

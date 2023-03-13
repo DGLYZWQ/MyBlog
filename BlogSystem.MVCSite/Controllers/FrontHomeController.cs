@@ -13,6 +13,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using BlogSystem.MVCSite.Models;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BlogSystem.MVCSite.Controllers
@@ -322,6 +323,8 @@ namespace BlogSystem.MVCSite.Controllers
         {
             var user = Session["user"] as UsersDto;
             if (user == null) return Redirect("/FrontHome/Login");
+            model.Content = KeywordsFilterHelper.FilterString(model.Content);
+            model.Title = KeywordsFilterHelper.FilterString(model.Title);
             if (id != null)
             {
                 await _blog_bll.EditBlogAsync(id.Value, model.Title, model.CategoryId, model.Content,model.Labels,model.IsPublic);
